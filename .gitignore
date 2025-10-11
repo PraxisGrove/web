@@ -292,6 +292,8 @@ generated-docs/
 # 本地开发数据
 local-data/
 mock-data/
+# 但保留源码中的 mock 数据
+!src/lib/mock-data/
 
 # ===================================
 # 注意事项

@@ -1,0 +1,179 @@
+/**
+ * 课程 Mock 数据
+ */
+
+import type { Course, CourseCard } from '@/types/course';
+
+export const mockCourseCards: CourseCard[] = [
+  {
+    id: '1',
+    title: 'React 18 完全指南',
+    thumbnail: '/images/courses/react.jpg',
+    category: 'frontend',
+    level: 'intermediate',
+    rating: 4.8,
+    studentCount: 5823,
+    price: 299,
+    originalPrice: 499,
+    totalDuration: 1440,
+    totalLessons: 48,
+    instructor: {
+      name: '张伟',
+      avatar: '/images/instructors/zhang.jpg'
+    },
+    updatedAt: '2024-01-15',
+    isBestseller: true,
+    isNew: false
+  },
+  {
+    id: '2',
+    title: 'TypeScript 高级进阶',
+    thumbnail: '/images/courses/typescript.jpg',
+    category: 'frontend',
+    level: 'advanced',
+    rating: 4.9,
+    studentCount: 3421,
+    price: 399,
+    originalPrice: 599,
+    totalDuration: 1080,
+    totalLessons: 36,
+    instructor: {
+      name: '李娜',
+      avatar: '/images/instructors/li.jpg'
+    },
+    updatedAt: '2024-01-20',
+    isBestseller: true,
+    isNew: true
+  },
+  {
+    id: '3',
+    title: 'Node.js 后端开发',
+    thumbnail: '/images/courses/nodejs.jpg',
+    category: 'backend',
+    level: 'intermediate',
+    rating: 4.7,
+    studentCount: 2834,
+    price: 349,
+    originalPrice: 549,
+    totalDuration: 1200,
+    totalLessons: 40,
+    instructor: {
+      name: '王强',
+      avatar: '/images/instructors/wang.jpg'
+    },
+    updatedAt: '2024-01-10',
+    isBestseller: false,
+    isNew: false
+  },
+  {
+    id: '4',
+    title: 'Next.js 全栈开发',
+    thumbnail: '/images/courses/nextjs.jpg',
+    category: 'fullstack',
+    level: 'advanced',
+    rating: 4.9,
+    studentCount: 4567,
+    price: 449,
+    originalPrice: 699,
+    totalDuration: 1680,
+    totalLessons: 56,
+    instructor: {
+      name: '张伟',
+      avatar: '/images/instructors/zhang.jpg'
+    },
+    updatedAt: '2024-01-22',
+    isBestseller: true,
+    isNew: true
+  },
+  {
+    id: '5',
+    title: 'Python 数据分析',
+    thumbnail: '/images/courses/python.jpg',
+    category: 'data-science',
+    level: 'beginner',
+    rating: 4.6,
+    studentCount: 3245,
+    price: 249,
+    originalPrice: 449,
+    totalDuration: 960,
+    totalLessons: 32,
+    instructor: {
+      name: '赵敏',
+      avatar: '/images/instructors/zhao.jpg'
+    },
+    updatedAt: '2024-01-12',
+    isBestseller: false,
+    isNew: false
+  },
+  {
+    id: '6',
+    title: '机器学习基础',
+    thumbnail: '/images/courses/ml.jpg',
+    category: 'ai-ml',
+    level: 'intermediate',
+    rating: 4.8,
+    studentCount: 3890,
+    price: 399,
+    originalPrice: 599,
+    totalDuration: 1320,
+    totalLessons: 44,
+    instructor: {
+      name: '赵敏',
+      avatar: '/images/instructors/zhao.jpg'
+    },
+    updatedAt: '2024-01-18',
+    isBestseller: true,
+    isNew: false
+  }
+];
+
+// 将 CourseCard 扩展为完整的 Course 类型
+export const allMockCourses: Course[] = mockCourseCards.map(card => ({
+  ...card,
+  subtitle: `${card.title}的副标题`,
+  description: `这是关于${card.title}的详细描述。本课程将系统地教授相关知识和技能。`,
+  previewVideo: undefined,
+  tags: ['编程', '开发'],
+  reviewCount: Math.floor(card.studentCount * 0.2),
+  instructor: {
+    id: `instructor-${card.id}`,
+    name: card.instructor.name,
+    avatar: card.instructor.avatar,
+    title: '资深讲师',
+    bio: `${card.instructor.name}是一位经验丰富的讲师`,
+    rating: 4.8,
+    studentCount: 10000,
+    courseCount: 15,
+    specialties: ['编程', '开发']
+  },
+  chapters: [],
+  totalLessons: card.totalLessons,
+  currency: 'CNY',
+  stats: {
+    totalStudents: card.studentCount,
+    totalReviews: Math.floor(card.studentCount * 0.2),
+    averageRating: card.rating,
+    completionRate: 0.75,
+    ratingDistribution: {
+      1: 10,
+      2: 20,
+      3: 50,
+      4: 150,
+      5: 300
+    }
+  },
+  learningOutcomes: [
+    '掌握核心概念',
+    '完成实战项目',
+    '获得实践经验'
+  ],
+  requirements: ['基础编程知识'],
+  targetAudience: ['初学者', '开发者'],
+  status: 'published' as const,
+  createdAt: card.updatedAt,
+  publishedAt: card.updatedAt,
+  language: 'zh-CN',
+  subtitles: ['中文'],
+  certificate: true,
+  lifetime: true
+}));

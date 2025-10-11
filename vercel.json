@@ -4,7 +4,6 @@
   "framework": "nextjs",
   "installCommand": "pnpm install --frozen-lockfile",
   "devCommand": "pnpm dev",
-  "regions": ["hkg1", "sin1", "hnd1"],
   "git": {
     "deploymentEnabled": {
       "main": true

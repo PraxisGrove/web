@@ -22,6 +22,7 @@ import {
   AnimatedContainer,
   PageLayout,
 } from '@/components/unified';
+import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
 import {
   Heart,
   MessageCircle,
@@ -261,8 +262,12 @@ export default function CommunityPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-100 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900">
-        <div className="container mx-auto space-y-8 px-4 py-20">
+      <div className="bg-background min-h-screen">
+        <AdaptiveParticles className="fixed inset-0 z-0">
+          <div />
+        </AdaptiveParticles>
+        
+        <div className="relative z-10 container mx-auto space-y-8 px-4 py-20">
           <div className="h-8 w-48 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
             <div className="lg:col-span-1">
@@ -285,12 +290,18 @@ export default function CommunityPage() {
   }
 
   return (
-    <PageLayout
-      title="学习社区"
-      subtitle="与全球学习者一起交流、分享、成长"
-      backgroundClass="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-100 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900"
-    >
-      {/* 主要内容区域 */}
+    <div className="bg-background min-h-screen">
+      <AdaptiveParticles className="fixed inset-0 z-0">
+        <div />
+      </AdaptiveParticles>
+      
+      <main className="relative z-10">
+        <PageLayout
+          title="学习社区"
+          subtitle="与全球学习者一起交流、分享、成长"
+          backgroundClass=""
+        >
+          {/* 主要内容区域 */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
         {/* 左侧边栏 - 分类和统计 */}
         <div className="lg:col-span-1">
@@ -540,8 +551,10 @@ export default function CommunityPage() {
               </Tabs>
             </EnhancedCard>
           </div>
+          </div>
         </div>
-      </div>
-    </PageLayout>
+      </PageLayout>
+    </main>
+  </div>
   );
 }

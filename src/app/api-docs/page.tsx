@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ExternalLink, FileText, Code, Database, Home } from 'lucide-react';
+import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
 
 // 动态导入 SwaggerUI 以避免 SSR 问题
 const SwaggerUI = dynamic(() => import('swagger-ui-react'), {
@@ -48,19 +49,30 @@ export default function ApiDocsPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white">
-        <div className="text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
-          <p className="text-gray-600">Loading API Documentation...</p>
+      <div className="bg-background min-h-screen">
+        <AdaptiveParticles className="fixed inset-0 z-0">
+          <div />
+        </AdaptiveParticles>
+        
+        <div className="relative z-10 flex min-h-screen items-center justify-center">
+          <div className="text-center">
+            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-blue-600"></div>
+            <p className="text-gray-600">Loading API Documentation...</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* 简单的顶部导航 */}
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
+    <div className="bg-background min-h-screen">
+      <AdaptiveParticles className="fixed inset-0 z-0">
+        <div />
+      </AdaptiveParticles>
+      
+      <main className="relative z-10">
+        {/* 简单的顶部导航 */}
+        <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -91,11 +103,11 @@ export default function ApiDocsPage() {
               </Link>
             </div>
           </div>
-        </div>
-      </header>
+          </div>
+        </header>
 
-      {/* 主要内容 */}
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        {/* 主要内容 */}
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* 简介部分 */}
         <div className="mb-8">
           <div className="rounded-lg border border-blue-200 bg-blue-50 p-6">
@@ -256,8 +268,9 @@ export default function ApiDocsPage() {
                 GitHub
               </a>
             </div>
-          </div>
-        </footer>
+            </div>
+          </footer>
+        </div>
       </main>
     </div>
   );

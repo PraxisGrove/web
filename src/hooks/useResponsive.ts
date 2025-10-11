@@ -141,7 +141,7 @@ export function useDeviceType() {
 
 // 性能检测
 export function usePerformance() {
-  const [performance, setPerformance] = useState<'low' | 'medium' | 'high'>(
+  const [performanceLevel, setPerformanceLevel] = useState<'low' | 'medium' | 'high'>(
     'medium'
   );
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -149,7 +149,7 @@ export function usePerformance() {
   // 简单的性能检测函数
   const detectPerformance = React.useCallback(() => {
     const connection = (navigator as any).connection;
-    const memory = (performance as any).memory;
+    const memory = (window.performance as any).memory;
 
     let score = 0;
 
@@ -180,9 +180,15 @@ export function usePerformance() {
     else score -= 1;
 
     // 根据分数确定性能等级
-    if (score >= 5) setPerformance('high');
-    else if (score >= 3) setPerformance('medium');
-    else setPerformance('low');
+    let newLevel: 'low' | 'medium' | 'high';
+    if (score >= 5) newLevel = 'high';
+    else if (score >= 3) newLevel = 'medium';
+    else newLevel = 'low';
+    
+    // 只在性能等级真正改变时才更新，避免不必要的重渲染
+    setPerformanceLevel((prev) => {
+      return prev !== newLevel ? newLevel : prev;
+    });
   }, []);
 
   useEffect(() => {
@@ -200,11 +206,11 @@ export function usePerformance() {
   }, [detectPerformance]);
 
   return {
-    performance,
+    performance: performanceLevel,
     reducedMotion,
-    shouldReduceAnimations: reducedMotion || performance === 'low',
-    shouldOptimizeImages: performance === 'low',
-    shouldLimitParticles: performance !== 'high',
+    shouldReduceAnimations: reducedMotion || performanceLevel === 'low',
+    shouldOptimizeImages: performanceLevel === 'low',
+    shouldLimitParticles: performanceLevel !== 'high',
   };
 }
 

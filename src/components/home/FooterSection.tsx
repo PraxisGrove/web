@@ -74,8 +74,7 @@ export function FooterSection({ className }: FooterSectionProps) {
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 处理邮件订阅逻辑
-    console.log('Newsletter subscription:', email);
+    // TODO: 实现邮件订阅逻辑
     setEmail('');
   };
 

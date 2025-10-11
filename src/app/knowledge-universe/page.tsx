@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useState, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { FloatingNav } from '@/components/aceternity/floating-navbar';
 import { globalNavItems } from '@/lib/navigation';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
@@ -10,28 +11,38 @@ import {
   CardHeader,
   CardTitle,
   EnhancedCard,
-  AceternityGlassCard,
   Badge,
+  Button,
 } from '@/components/unified';
 import { motion } from 'framer-motion';
+import { KnowledgeNode, KnowledgeConnection } from '@/types/api';
+import { DynamicKnowledgeUniverse as KnowledgeUniverse } from '@/components/3d/dynamic';
+import { ThreeJSDebugPanel } from '@/components/3d/debug-panel';
+import { mockKnowledgeNodes, mockKnowledgeConnections } from '@/lib/mock-data/knowledge-graph';
+import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
 
 /**
  * 3D知识宇宙页面
  */
 export default function KnowledgeUniversePage() {
-  // 使用统一的导航配置
+  const [showDemo, setShowDemo] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900">
-      {/* 浮动导航栏 */}
-      <FloatingNav navItems={globalNavItems} />
+    <div className="bg-background min-h-screen">
+      <AdaptiveParticles className="fixed inset-0 z-0">
+        <div />
+      </AdaptiveParticles>
+      
+      <main className="relative z-10">
+        {/* 浮动导航栏 */}
+        <FloatingNav navItems={globalNavItems} />
 
-      {/* 主题切换按钮 */}
-      <div className="fixed right-4 top-4 z-40">
-        <ThemeToggle />
-      </div>
+        {/* 主题切换按钮 */}
+        <div className="fixed right-4 top-4 z-40">
+          <ThemeToggle />
+        </div>
 
-      <div className="container mx-auto space-y-8 px-4 py-20">
+        <div className="container mx-auto space-y-8 px-4 py-20">
         {/* 页面标题 */}
         <motion.div
           className="text-center"
@@ -97,181 +108,82 @@ export default function KnowledgeUniversePage() {
         </EnhancedCard>
 
         {/* 3D 渲染区域 */}
-        <EnhancedCard variant="glow" className="mb-8 p-8">
+        <EnhancedCard variant="glow" className="mb-8">
+          <div className="flex items-center justify-between p-4 border-b border-white/10">
+            <h2 className="text-xl font-semibold text-white">3D 知识图谱</h2>
+            <Button
+              onClick={() => setShowDemo(!showDemo)}
+              variant={showDemo ? "default" : "outline"}
+              className={showDemo ? "bg-blue-600 hover:bg-blue-700" : "border-white/20 text-white hover:bg-white/10"}
+            >
+              {showDemo ? '隐藏演示' : '启动演示'}
+            </Button>
+          </div>
+
           <div
-            className="relative overflow-hidden rounded-lg bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"
+            className="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"
             style={{ height: '600px' }}
           >
-            {/* 3D Canvas 占位符 */}
-            <div className="flex h-full w-full items-center justify-center text-white">
-              <motion.div
-                className="text-center"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
+            {showDemo ? (
+              <KnowledgeUniverse
+                initialNodes={mockKnowledgeNodes}
+                initialConnections={mockKnowledgeConnections}
+                onNodeUpdate={(nodes) => {/* TODO: 处理节点更新 */}}
+                onConnectionUpdate={(connections) => {/* TODO: 处理连接更新 */}}
+              />
+            ) : (
+              /* 占位符内容 */
+              <div className="flex h-full w-full items-center justify-center text-white">
                 <motion.div
-                  className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm"
-                  animate={{
-                    rotate: 360,
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    rotate: { duration: 8, repeat: Infinity, ease: 'linear' },
-                    scale: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                >
-                  <svg
-                    className="h-12 w-12"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </motion.div>
-                <motion.h3
-                  className="mb-2 text-xl font-semibold"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  3D知识图谱加载中...
-                </motion.h3>
-                <motion.p
-                  className="text-white/70"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  正在构建您的个性化知识宇宙
-                </motion.p>
-                <motion.div
-                  className="mx-auto mt-4 h-2 w-48 overflow-hidden rounded-full bg-white/20"
-                  initial={{ width: 0 }}
-                  animate={{ width: 192 }}
-                  transition={{ delay: 0.8, duration: 0.5 }}
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
                 >
                   <motion.div
-                    className="h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400"
-                    initial={{ width: '0%' }}
-                    animate={{ width: '60%' }}
-                    transition={{ delay: 1, duration: 2, ease: 'easeInOut' }}
-                  />
+                    className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm"
+                    animate={{
+                      rotate: 360,
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      rotate: { duration: 8, repeat: Infinity, ease: 'linear' },
+                      scale: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+                    }}
+                  >
+                    <svg
+                      className="h-12 w-12"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </motion.div>
+                  <motion.h3
+                    className="mb-2 text-xl font-semibold"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    点击&quot;启动演示&quot;体验 3D 知识图谱
+                  </motion.h3>
+                  <motion.p
+                    className="text-white/70"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    探索知识节点之间的关联，可视化学习路径
+                  </motion.p>
                 </motion.div>
-              </motion.div>
-            </div>
-
-            {/* 浮动控制器 */}
-            <motion.div
-              className="absolute right-4 top-4 rounded-lg border border-white/10 bg-black/30 p-3 backdrop-blur-md"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.2 }}
-            >
-              <div className="space-y-2">
-                <motion.button
-                  className="flex h-8 w-8 items-center justify-center rounded bg-white/20 text-white transition-all hover:scale-110 hover:bg-white/30"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
-                </motion.button>
-                <motion.button
-                  className="flex h-8 w-8 items-center justify-center rounded bg-white/20 text-white transition-all hover:scale-110 hover:bg-white/30"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M20 12H4"
-                    />
-                  </svg>
-                </motion.button>
-                <motion.button
-                  className="flex h-8 w-8 items-center justify-center rounded bg-white/20 text-white transition-all hover:scale-110 hover:bg-white/30"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                    />
-                  </svg>
-                </motion.button>
               </div>
-            </motion.div>
-
-            {/* 信息面板 */}
-            <motion.div
-              className="absolute bottom-4 left-4 max-w-sm rounded-lg border border-white/10 bg-black/30 p-4 backdrop-blur-md"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4 }}
-            >
-              <motion.h4
-                className="mb-2 font-semibold text-white"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.6 }}
-              >
-                JavaScript 核心概念
-              </motion.h4>
-              <motion.p
-                className="mb-3 text-sm text-white/80"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.8 }}
-              >
-                探索 JavaScript 的核心概念，包括变量、函数、对象等基础知识点。
-              </motion.p>
-              <motion.div
-                className="flex items-center space-x-2"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2 }}
-              >
-                <span className="rounded border border-blue-500/20 bg-blue-500/30 px-2 py-1 text-xs text-blue-200">
-                  初级
-                </span>
-                <span className="rounded border border-green-500/20 bg-green-500/30 px-2 py-1 text-xs text-green-200">
-                  已学习
-                </span>
-              </motion.div>
-            </motion.div>
+            )}
           </div>
         </EnhancedCard>
 
@@ -763,7 +675,11 @@ export default function KnowledgeUniversePage() {
             </motion.div>
           </div>
         </EnhancedCard>
-      </div>
+        </div>
+
+        {/* 3D 诊断面板 */}
+        <ThreeJSDebugPanel />
+      </main>
     </div>
   );
 }

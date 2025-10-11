@@ -35,14 +35,14 @@ const quickActions: QuickAction[] = [
     label: 'AI 助手',
     icon: Brain,
     color: 'from-purple-500 to-pink-500',
-    onClick: () => console.log('打开 AI 助手'),
+    href: '/ai',
   },
   {
     id: 'search',
     label: '课程搜索',
     icon: Search,
     color: 'from-blue-500 to-cyan-500',
-    onClick: () => console.log('打开课程搜索'),
+    href: '/search',
   },
   {
     id: 'login',

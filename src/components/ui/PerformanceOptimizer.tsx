@@ -54,7 +54,7 @@ export function PerformanceProvider({
   const { isSlowConnection } = useNetworkStatus();
 
   // 稳定 defaultConfig 以避免无限循环
-  const stableDefaultConfig = React.useMemo(() => defaultConfig, []);
+  const stableDefaultConfig = React.useMemo(() => defaultConfig, [defaultConfig]);
 
   const getOptimalConfig = React.useCallback((): PerformanceConfig => {
     const baseConfig: PerformanceConfig = {
@@ -120,7 +120,12 @@ export function PerformanceProvider({
   // 在性能检测完成后更新配置
   useEffect(() => {
     const newConfig = getOptimalConfig();
-    setConfig(newConfig);
+    
+    // 只在配置真正改变时才更新，避免无限循环
+    setConfig((prevConfig) => {
+      const hasChanged = JSON.stringify(prevConfig) !== JSON.stringify(newConfig);
+      return hasChanged ? newConfig : prevConfig;
+    });
   }, [getOptimalConfig]);
 
   const updateConfig = React.useCallback(

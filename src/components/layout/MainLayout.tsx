@@ -17,18 +17,15 @@ export function MainLayout({ children, showHeader = true }: MainLayoutProps) {
   };
 
   const handleSearch = (query: string) => {
-    console.log('搜索:', query);
-    // 这里可以实现搜索逻辑
+    // TODO: 实现搜索逻辑
   };
 
   const handleNotificationClick = () => {
-    console.log('通知点击');
-    // 这里可以实现通知逻辑
+    // TODO: 实现通知逻辑
   };
 
   const handleUserMenuClick = (action: string) => {
-    console.log('用户菜单操作:', action);
-    // 这里可以实现用户菜单逻辑
+    // TODO: 实现用户菜单逻辑
   };
 
   return (
@@ -41,11 +38,6 @@ export function MainLayout({ children, showHeader = true }: MainLayoutProps) {
           onUserMenuClick={handleUserMenuClick}
           isDarkMode={theme === 'dark'}
           notifications={3}
-          // user={{
-          //   name: '用户名',
-          //   email: 'user@example.com',
-          //   avatar: '/avatars/user.jpg'
-          // }}
         />
       )}
       <main className={showHeader ? 'pt-0' : ''}>{children}</main>

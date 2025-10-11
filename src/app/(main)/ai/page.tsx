@@ -23,6 +23,7 @@ import {
   Progress,
   PageLayout,
 } from '@/components/unified';
+import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
 import {
   Bot,
   Send,
@@ -296,8 +297,12 @@ export default function AIPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-blue-100 dark:from-gray-900 dark:via-purple-900 dark:to-blue-900">
-        <div className="container mx-auto space-y-8 px-4 py-20">
+      <div className="bg-background min-h-screen">
+        <AdaptiveParticles className="fixed inset-0 z-0">
+          <div />
+        </AdaptiveParticles>
+        
+        <div className="relative z-10 container mx-auto space-y-8 px-4 py-20">
           <div className="h-8 w-48 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             <div className="lg:col-span-2">
@@ -313,8 +318,18 @@ export default function AIPage() {
   }
 
   return (
-    <PageLayout title="AI 智能助手" subtitle="让 AI 成为你学习和创作的最佳伙伴">
-      {/* 主要内容区域 */}
+    <div className="bg-background min-h-screen">
+      <AdaptiveParticles className="fixed inset-0 z-0">
+        <div />
+      </AdaptiveParticles>
+      
+      <main className="relative z-10">
+        <PageLayout
+          title="AI 智能助手"
+          subtitle="让 AI 成为你学习和创作的最佳伙伴"
+          backgroundClass=""
+        >
+          {/* 主要内容区域 */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* 主要内容区域 */}
         <div className="lg:col-span-2">
@@ -677,7 +692,9 @@ export default function AIPage() {
             </EnhancedCard>
           </div>
         </div>
-      </div>
-    </PageLayout>
+        </div>
+      </PageLayout>
+    </main>
+  </div>
   );
 }

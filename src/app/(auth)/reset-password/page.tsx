@@ -18,7 +18,7 @@ function ResetPasswordContent() {
   };
 
   const handleError = (error: string) => {
-    console.error('Reset password error:', error);
+    // 错误处理已在组件内部完成
   };
 
   // 如果没有token，重定向到忘记密码页面

@@ -128,11 +128,9 @@ export function ResetPassword({
   const onForgotPasswordSubmit = async (data: ForgotPasswordFormData) => {
     try {
       clearError();
-      const message = await forgotPassword(data.email);
+      await forgotPassword(data.email);
       setEmailSent(true);
       onSuccess?.();
-      // 可以使用返回的消息，但这里我们只是设置状态
-      console.log('Reset email sent:', message);
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : '发送重置邮件失败，请重试';

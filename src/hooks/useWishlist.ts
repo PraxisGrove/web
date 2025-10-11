@@ -63,35 +63,33 @@ export function useWishlist(): UseWishlistReturn {
 
   // TODO: 临时 mock 操作方法
   const addToWishlist = async (courseId: string) => {
-    console.log('Mock addToWishlist:', courseId);
+    // Mock implementation
   };
   const removeFromWishlist = (courseId: string) => {
-    console.log('Mock removeFromWishlist:', courseId);
+    // Mock implementation
   };
   const clearWishlist = () => {
-    console.log('Mock clearWishlist');
+    // Mock implementation
   };
   const isInWishlist = (courseId: string) => {
-    console.log('Mock isInWishlist:', courseId);
     return false;
   };
   const clearError = () => {
-    console.log('Mock clearError');
+    // Mock implementation
   };
   const addMultipleToWishlist = async (courseIds: string[]) => {
-    console.log('Mock addMultipleToWishlist:', courseIds);
+    // Mock implementation
   };
   const removeMultipleFromWishlist = (courseIds: string[]) => {
-    console.log('Mock removeMultipleFromWishlist:', courseIds);
+    // Mock implementation
   };
   const sortWishlist = (sortBy: 'addedAt' | 'title' | 'price' | 'rating') => {
-    console.log('Mock sortWishlist:', sortBy);
+    // Mock implementation
   };
   const filterWishlist = (filter: {
     level?: string;
     priceRange?: [number, number];
   }) => {
-    console.log('Mock filterWishlist:', filter);
     return [];
   };
 

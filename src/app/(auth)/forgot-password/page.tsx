@@ -11,11 +11,10 @@ export default function ForgotPasswordPage() {
 
   const handleSuccess = () => {
     // 成功发送重置邮件后的处理
-    console.log('Password reset email sent successfully');
   };
 
   const handleError = (error: string) => {
-    console.error('Forgot password error:', error);
+    // 错误处理已在组件内部完成
   };
 
   return (

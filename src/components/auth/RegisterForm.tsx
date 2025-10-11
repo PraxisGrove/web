@@ -107,10 +107,8 @@ export function RegisterForm({
   const registerUser = async (userData: any) => {
     setIsLoading(true);
     try {
-      // 模拟注册逻辑
-      console.log('Register attempt:', userData);
+      // TODO: 调用实际的注册API
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      // 这里应该调用实际的注册API
     } catch (err) {
       setError(err instanceof Error ? err.message : '注册失败');
     } finally {
@@ -421,7 +419,6 @@ export function RegisterForm({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              console.log('立即登录按钮被点击');
               router.push('/login');
             }}
             className="cursor-pointer border-none bg-transparent p-0 font-medium text-blue-600 underline transition-colors hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"

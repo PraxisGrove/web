@@ -16,7 +16,6 @@ export default function RegisterPage() {
   };
 
   const handleRegisterError = (error: string) => {
-    console.error('Register error:', error);
     // 错误处理已在组件内部完成
   };
 

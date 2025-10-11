@@ -114,6 +114,9 @@ export {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
+
+  // 滑块组件
+  Slider,
 } from '@/components/ui';
 
 // ===== 动画和特效组件 (优先使用 Aceternity UI) =====
@@ -219,6 +222,10 @@ export {
   updateReactBitConfig,
   resetReactBitConfig,
 } from '@/components/reactbit';
+
+// ===== 3D 组件 =====
+// 注意：3D 组件不在统一导出中，以避免 SSR 问题
+// 请直接从 '@/components/3d' 导入或使用动态导入
 
 // ===== 类型导出 =====
 // 注意：ButtonProps 和 InputProps 在 shadcn/ui 中不存在，已移除导出

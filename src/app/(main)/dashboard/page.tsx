@@ -458,7 +458,7 @@ export default function DashboardPage() {
                   <LearningCalendar
                     data={learningCalendarData}
                     currentDate={new Date()}
-                    onDateSelect={(date) => console.log('Selected date:', date)}
+                    onDateSelect={(date) => {/* TODO: 处理日期选择 */}}
                   />
                 </CardContent>
               </Card>

@@ -6,6 +6,7 @@ import {
   EnhancedLoginForm,
   EnhancedSocialLogin,
 } from '@/components/auth/EnhancedLoginForm';
+import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
 
 /**
  * 用户登录页面
@@ -22,27 +23,34 @@ export default function LoginPage() {
   };
 
   const handleLoginError = (error: string) => {
-    console.error('Login error:', error);
     // 错误处理已在组件内部完成
   };
 
   return (
-    <AuthLayout
-      title="欢迎回来"
-      subtitle="登录您的账户，继续探索知识的无限可能"
-      type="login"
-    >
-      <EnhancedLoginForm
-        onSuccess={handleLoginSuccess}
-        onError={handleLoginError}
-      />
+    <div className="bg-background min-h-screen">
+      <AdaptiveParticles className="fixed inset-0 z-0">
+        <div />
+      </AdaptiveParticles>
+      
+      <main className="relative z-10">
+        <AuthLayout
+          title="欢迎回来"
+          subtitle="登录您的账户，继续探索知识的无限可能"
+          type="login"
+        >
+          <EnhancedLoginForm
+            onSuccess={handleLoginSuccess}
+            onError={handleLoginError}
+          />
 
-      <EnhancedSocialLogin
-        providers={['google', 'github', 'feishu']}
-        onSuccess={handleLoginSuccess}
-        onError={handleLoginError}
-        className="mt-6"
-      />
-    </AuthLayout>
+          <EnhancedSocialLogin
+            providers={['google', 'github', 'feishu']}
+            onSuccess={handleLoginSuccess}
+            onError={handleLoginError}
+            className="mt-6"
+          />
+        </AuthLayout>
+      </main>
+    </div>
   );
 }

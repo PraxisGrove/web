@@ -61,10 +61,8 @@ export function EnhancedLoginForm({
   const login = async (email: string, password: string, remember?: boolean) => {
     setIsLoading(true);
     try {
-      // 模拟登录逻辑
-      console.log('Login attempt:', { email, password, remember });
+      // TODO: 调用实际的登录API
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      // 这里应该调用实际的登录API
     } catch (err) {
       setError(err instanceof Error ? err.message : '登录失败');
     } finally {
@@ -215,10 +213,7 @@ export function EnhancedLoginForm({
 
             <button
               type="button"
-              onClick={() => {
-                console.log('忘记密码按钮被点击');
-                router.push('/forgot-password');
-              }}
+              onClick={() => router.push('/forgot-password')}
               className="cursor-pointer border-none bg-transparent p-0 text-sm text-blue-600 transition-colors hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
             >
               忘记密码？
@@ -265,7 +260,6 @@ export function EnhancedLoginForm({
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('立即注册按钮被点击');
             router.push('/register');
           }}
           className="cursor-pointer border-none bg-transparent p-0 text-sm font-medium text-blue-600 underline transition-colors hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
@@ -295,8 +289,7 @@ export function EnhancedSocialLogin({
 }) {
   const handleSocialLogin = async (provider: string) => {
     try {
-      // 这里实现社交登录逻辑
-      console.log(`Social login with ${provider}`);
+      // TODO: 实现社交登录逻辑
       onSuccess?.();
     } catch (error) {
       onError?.(error instanceof Error ? error.message : '社交登录失败');

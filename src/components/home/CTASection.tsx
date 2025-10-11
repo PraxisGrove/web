@@ -25,8 +25,7 @@ export function CTASection({ className }: CTASectionProps) {
     // 模拟提交过程
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // 这里可以添加实际的提交逻辑
-    console.log('提交数据:', { name, email });
+    // TODO: 添加实际的提交逻辑
 
     setIsSubmitting(false);
     setEmail('');

@@ -69,12 +69,10 @@ export function KnowledgeGraph3D({
     let mounted = true;
 
     async function loadThreeJS() {
-      let gl: WebGLRenderingContext | null = null;
-
       try {
         // 检查 WebGL 支持
         const canvas = document.createElement('canvas');
-        gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl') as WebGLRenderingContext | null;
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
         if (!gl) {
           throw new Error('WebGL not supported');
         }
@@ -97,14 +95,8 @@ export function KnowledgeGraph3D({
         }
       } catch (err) {
         console.error('Failed to load Three.js:', err);
-        console.error('Error details:', {
-          message: err instanceof Error ? err.message : String(err),
-          stack: err instanceof Error ? err.stack : undefined,
-          userAgent: navigator.userAgent,
-          webglSupported: !!gl,
-        });
         if (mounted) {
-          setError(`3D 渲染不可用: ${err instanceof Error ? err.message : String(err)}`);
+          setError('3D 渲染不可用');
         }
       }
     }

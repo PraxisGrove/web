@@ -59,29 +59,28 @@ export function useCart(): UseCartReturn {
 
   // TODO: 临时 mock 操作方法
   const addToCart = async (courseId: string) => {
-    console.log('Mock addToCart:', courseId);
+    // Mock implementation
   };
   const removeFromCart = (courseId: string) => {
-    console.log('Mock removeFromCart:', courseId);
+    // Mock implementation
   };
   const clearCart = () => {
-    console.log('Mock clearCart');
+    // Mock implementation
   };
   const updateQuantity = (courseId: string, quantity: number) => {
-    console.log('Mock updateQuantity:', courseId, quantity);
+    // Mock implementation
   };
   const isInCart = (courseId: string) => {
-    console.log('Mock isInCart:', courseId);
     return false;
   };
   const clearError = () => {
-    console.log('Mock clearError');
+    // Mock implementation
   };
   const addMultipleToCart = async (courseIds: string[]) => {
-    console.log('Mock addMultipleToCart:', courseIds);
+    // Mock implementation
   };
   const removeMultipleFromCart = (courseIds: string[]) => {
-    console.log('Mock removeMultipleFromCart:', courseIds);
+    // Mock implementation
   };
 
   /**

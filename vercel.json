@@ -1,13 +1,19 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "pnpm build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "installCommand": "npm install",
-  "devCommand": "npm run dev",
-  "regions": ["hkg1", "sin1", "nrt1"],
+  "installCommand": "pnpm install --frozen-lockfile",
+  "devCommand": "pnpm dev",
+  "regions": ["hkg1", "sin1", "hnd1"],
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
   "functions": {
     "app/**/*.{js,ts,tsx}": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "memory": 1024
     }
   },
   "headers": [
@@ -33,6 +39,14 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';"
         }
       ]
     },
@@ -54,7 +68,34 @@
       ]
     },
     {
-      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))",
+      "source": "/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(woff|woff2|ttf|eot|otf))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(png|jpg|jpeg|gif|webp|avif|svg|ico))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(js|css))",
       "headers": [
         {
           "key": "Cache-Control",

@@ -18,10 +18,7 @@
     "dev:full": "npm run mock-api & npm run dev",
     "test:e2e": "playwright test --config=config/playwright.config.ts",
     "prepare": "husky install",
-    "optimize": "node tools/optimization/quick-optimize.js",
-    "logs:start": "bash scripts/start-logging.sh",
-    "logs:stop": "bash scripts/stop-logging.sh",
-    "logs:view": "docker-compose -f docker-compose.logging.yml logs -f"
+    "optimize": "node tools/optimization/quick-optimize.js"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^9.0.3",

@@ -110,6 +110,9 @@ dependencies:
   '@tanstack/react-query-devtools':
     specifier: ^5.83.0
     version: 5.83.0(@tanstack/react-query@5.83.0)(react@18.3.1)
+  '@vercel/speed-insights':
+    specifier: ^1.2.0
+    version: 1.2.0(next@15.4.2)(react@18.3.1)
   axios:
     specifier: ^1.10.0
     version: 1.10.0
@@ -5004,6 +5007,34 @@ packages:
       react: '>= 16.8.0'
     dependencies:
       '@use-gesture/core': 10.3.1
+      react: 18.3.1
+    dev: false
+
+  /@vercel/speed-insights@1.2.0(next@15.4.2)(react@18.3.1):
+    resolution: {integrity: sha512-y9GVzrUJ2xmgtQlzFP2KhVRoCglwfRQgjyfY607aU0hh0Un6d0OUyrJkjuAlsV18qR4zfoFPs/BiIj9YDS6Wzw==}
+    requiresBuild: true
+    peerDependencies:
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
+    dependencies:
+      next: 15.4.2(@babel/core@7.28.0)(@opentelemetry/api@1.9.0)(@playwright/test@1.54.1)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
 

@@ -3,6 +3,7 @@ import { DM_Sans, Space_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import '@/styles/swagger.css';
 import { AppProviders } from '@/contexts/providers';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -59,6 +60,7 @@ export default function RootLayout({
         <AppProviders>
           <div id="root">{children}</div>
         </AppProviders>
+        <SpeedInsights />
       </body>
     </html>
   );

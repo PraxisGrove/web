@@ -4,6 +4,7 @@ import '@/styles/globals.css';
 import '@/styles/swagger.css';
 import { AppProviders } from '@/contexts/providers';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from '@vercel/analytics/react';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -61,6 +62,7 @@ export default function RootLayout({
           <div id="root">{children}</div>
         </AppProviders>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

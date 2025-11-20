@@ -40,7 +40,7 @@ export function KnowledgeGraph({
   useEffect(() => {
     const flowNodes = transformNodes(initialNodes);
     const flowEdges = transformEdges(initialConnections);
-    
+
     const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
       flowNodes,
       flowEdges,
@@ -58,11 +58,8 @@ export function KnowledgeGraph({
 
   const onLayout = useCallback(
     (direction: string) => {
-      const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-        nodes,
-        edges,
-        direction
-      );
+      const { nodes: layoutedNodes, edges: layoutedEdges } =
+        getLayoutedElements(nodes, edges, direction);
 
       setNodes([...layoutedNodes]);
       setEdges([...layoutedEdges]);
@@ -85,19 +82,19 @@ export function KnowledgeGraph({
         <Controls />
         <MiniMap zoomable pannable />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-        
+
         <Panel position="top-right" className="flex gap-2">
-          <Button 
-            size="sm" 
-            variant="outline" 
+          <Button
+            size="sm"
+            variant="outline"
             onClick={() => onLayout('TB')}
             className="bg-white/80 backdrop-blur-sm dark:bg-black/50"
           >
             垂直布局
           </Button>
-          <Button 
-            size="sm" 
-            variant="outline" 
+          <Button
+            size="sm"
+            variant="outline"
             onClick={() => onLayout('LR')}
             className="bg-white/80 backdrop-blur-sm dark:bg-black/50"
           >

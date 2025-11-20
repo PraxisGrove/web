@@ -42,12 +42,22 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   // Webpack 配置 (用于 next build)
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     // SVG 支持
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        encoding: false,
+        path: false,
+        crypto: false,
+      };
+    }
 
     return config;
   },

@@ -8,10 +8,10 @@ export const transformNodes = (nodes: KnowledgeNode[]): Node[] => {
   return nodes.map((node) => ({
     id: node.id,
     type: 'default', // 可以根据 node.type 自定义节点类型
-    data: { 
+    data: {
       label: node.title,
       description: node.description,
-      original: node 
+      original: node,
     },
     position: { x: node.position.x * 100, y: node.position.y * 100 }, // 简单的坐标转换，后续会由 dagre 覆盖
     className: getNodeClassName(node),
@@ -38,8 +38,9 @@ export const transformEdges = (connections: KnowledgeConnection[]): Edge[] => {
  * 根据节点类型获取样式类名
  */
 const getNodeClassName = (node: KnowledgeNode): string => {
-  const baseClass = 'rounded-lg border-2 p-4 shadow-md min-w-[150px] text-center';
-  
+  const baseClass =
+    'rounded-lg border-2 p-4 shadow-md min-w-[150px] text-center';
+
   switch (node.type) {
     case 'concept':
       return `${baseClass} bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-700`;

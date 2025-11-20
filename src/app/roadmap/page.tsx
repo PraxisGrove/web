@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { FloatingNav } from '@/components/aceternity/floating-navbar';
 import { globalNavItems } from '@/lib/navigation';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
@@ -11,7 +11,6 @@ import {
   CardTitle,
   EnhancedCard,
   Badge,
-  Button,
 } from '@/components/unified';
 import { motion } from 'framer-motion';
 import { KnowledgeGraph } from '@/components/knowledge-graph/KnowledgeGraph';
@@ -25,8 +24,6 @@ import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
  * 知识宇宙页面
  */
 export default function RoadmapPage() {
-  const [showDemo, setShowDemo] = useState(false);
-
   return (
     <div className="bg-background min-h-screen">
       <AdaptiveParticles className="fixed inset-0 z-0">
@@ -615,7 +612,6 @@ export default function RoadmapPage() {
             </div>
           </EnhancedCard>
         </div>
-
       </main>
     </div>
   );

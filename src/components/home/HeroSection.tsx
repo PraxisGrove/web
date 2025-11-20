@@ -87,12 +87,12 @@ export function HeroSection({ className }: HeroSectionProps) {
           </h1>
           <TextGenerateEffect
             text="PraxisGrove"
-            className="text-white mb-4 text-4xl font-bold md:text-6xl lg:text-7xl"
+            className="mb-4 text-4xl font-bold text-white md:text-6xl lg:text-7xl"
           />
           <AnimatedText
             text="一所无需许可的学校"
             variant="typewriter"
-            className="text-indigo-400 text-2xl font-light md:text-4xl lg:text-5xl"
+            className="text-2xl font-light text-indigo-400 md:text-4xl lg:text-5xl"
             speed={100}
             delay={1000}
           />
@@ -102,7 +102,7 @@ export function HeroSection({ className }: HeroSectionProps) {
         <motion.p
           variants={itemVariants}
           transition={itemTransition}
-          className="text-gray-300 mx-auto mb-8 max-w-3xl text-lg leading-relaxed md:text-xl"
+          className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-300 md:text-xl"
         >
           通过人工智能和区块链技术，为您提供个性化学习体验。
           探索知识的无限可能，开启智慧学习新时代。
@@ -138,7 +138,6 @@ export function HeroSection({ className }: HeroSectionProps) {
             探索知识宇宙
           </Button>
         </motion.div>
-
       </motion.div>
     </div>
   );

@@ -34,7 +34,7 @@ export const getLayoutedElements = (
 
   const layoutedNodes = nodes.map((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
-    
+
     // 微调位置，使节点中心对齐
     const x = nodeWithPosition.x - nodeWidth / 2;
     const y = nodeWithPosition.y - nodeHeight / 2;

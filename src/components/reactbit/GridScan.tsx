@@ -24,6 +24,7 @@ type GridScanProps = {
   noiseIntensity?: number;
 
   scanColor?: string;
+  colors?: string[];
   scanOpacity?: number;
   scanDirection?: 'forward' | 'backward' | 'pingpong';
   scanSoftness?: number;
@@ -56,6 +57,8 @@ uniform float uYaw;
 uniform float uLineThickness;
 uniform vec3 uLinesColor;
 uniform vec3 uScanColor;
+uniform vec3 uColors[3];
+uniform float uUseColors;
 uniform float uGridScale;
 uniform float uLineStyle;
 uniform float uLineJitter;
@@ -280,8 +283,20 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
 
   float lineVis = lineMask;
   vec3 gridCol = uLinesColor * lineVis * fade;
-  vec3 scanCol = uScanColor * combinedPulse;
-  vec3 scanAura = uScanColor * combinedAura;
+
+  vec3 activeScanColor = uScanColor;
+  if (uUseColors > 0.5) {
+    float cycleDur = 2.0 * max(0.05, uScanDuration);
+    float timeOffset = max(0.0, iTime - uScanDelay);
+    float cycleIdx = floor(timeOffset / cycleDur);
+    float colorIdx = mod(cycleIdx, 3.0);
+    if (colorIdx < 0.5) activeScanColor = uColors[0];
+    else if (colorIdx < 1.5) activeScanColor = uColors[1];
+    else activeScanColor = uColors[2];
+  }
+
+  vec3 scanCol = activeScanColor * combinedPulse;
+  vec3 scanAura = activeScanColor * combinedAura;
 
     color = gridCol + scanCol + scanAura;
 
@@ -311,6 +326,7 @@ export const GridScan: React.FC<GridScanProps> = ({
   lineThickness = 1,
   linesColor = '#392e4e',
   scanColor = '#FF9FFC',
+  colors,
   scanOpacity = 0.4,
   gridScale = 0.1,
   lineStyle = 'solid',
@@ -474,6 +490,8 @@ export const GridScan: React.FC<GridScanProps> = ({
       uLineThickness: { value: lineThickness },
       uLinesColor: { value: srgbColor(linesColor) },
       uScanColor: { value: srgbColor(scanColor) },
+      uColors: { value: [new THREE.Color(0, 0, 0), new THREE.Color(0, 0, 0), new THREE.Color(0, 0, 0)] },
+      uUseColors: { value: 0 },
       uGridScale: { value: gridScale },
       uLineStyle: { value: lineStyle === 'dashed' ? 1 : lineStyle === 'dotted' ? 2 : 0 },
       uLineJitter: { value: Math.max(0, Math.min(1, lineJitter || 0)) },
@@ -619,6 +637,12 @@ export const GridScan: React.FC<GridScanProps> = ({
       u.uLineThickness.value = lineThickness;
       (u.uLinesColor.value as THREE.Color).copy(srgbColor(linesColor));
       (u.uScanColor.value as THREE.Color).copy(srgbColor(scanColor));
+      if (colors && colors.length >= 3) {
+        u.uColors.value = [srgbColor(colors[0]), srgbColor(colors[1]), srgbColor(colors[2])];
+        u.uUseColors.value = 1;
+      } else {
+        u.uUseColors.value = 0;
+      }
       u.uGridScale.value = gridScale;
       u.uLineStyle.value = lineStyle === 'dashed' ? 1 : lineStyle === 'dotted' ? 2 : 0;
       u.uLineJitter.value = Math.max(0, Math.min(1, lineJitter || 0));
@@ -644,6 +668,7 @@ export const GridScan: React.FC<GridScanProps> = ({
     lineThickness,
     linesColor,
     scanColor,
+    colors,
     gridScale,
     lineStyle,
     lineJitter,

@@ -53,10 +53,14 @@ export function HeroSection({ className }: HeroSectionProps) {
         <GridScan
           sensitivity={0.55}
           lineThickness={1}
-          linesColor="#392e4e"
+          linesColor="#2a2a4a"
           gridScale={0.1}
-          scanColor="#FF9FFC"
-          scanOpacity={0.4}
+          colors={[
+            '#6366f1', // Advanced Blue (Indigo)
+            '#ef4444', // Advanced Red
+            '#FFE600', // Bright Yellow
+          ]}
+          scanOpacity={0.5}
           enablePost
           bloomIntensity={0.6}
           chromaticAberration={0.002}
@@ -83,12 +87,12 @@ export function HeroSection({ className }: HeroSectionProps) {
           </h1>
           <TextGenerateEffect
             text="PraxisGrove"
-            className="text-foreground mb-4 text-4xl font-bold md:text-6xl lg:text-7xl"
+            className="text-white mb-4 text-4xl font-bold md:text-6xl lg:text-7xl"
           />
           <AnimatedText
             text="一所无需许可的学校"
             variant="typewriter"
-            className="text-primary text-2xl font-light md:text-4xl lg:text-5xl"
+            className="text-indigo-400 text-2xl font-light md:text-4xl lg:text-5xl"
             speed={100}
             delay={1000}
           />
@@ -98,7 +102,7 @@ export function HeroSection({ className }: HeroSectionProps) {
         <motion.p
           variants={itemVariants}
           transition={itemTransition}
-          className="text-muted-foreground mx-auto mb-8 max-w-3xl text-lg leading-relaxed md:text-xl"
+          className="text-gray-300 mx-auto mb-8 max-w-3xl text-lg leading-relaxed md:text-xl"
         >
           通过人工智能和区块链技术，为您提供个性化学习体验。
           探索知识的无限可能，开启智慧学习新时代。

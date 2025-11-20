@@ -9,7 +9,6 @@ import {
   EducationalOrganizationStructuredData,
 } from '@/components/seo/SEOHead';
 import { DevTools } from '@/components/dev/DevTools';
-import { FloatingThemeToggle } from '@/components/ui/theme-toggle';
 
 export default function HomePage() {
   return (
@@ -20,7 +19,7 @@ export default function HomePage() {
         keywords={[
           '在线教育',
           'AI学习',
-          '3D知识宇宙',
+          'Roadmap',
           '个性化学习',
           '人工智能教育',
           'PraxisGrove',
@@ -44,7 +43,6 @@ export default function HomePage() {
         </main>
 
         <QuickActions />
-        <FloatingThemeToggle />
         <DevTools />
       </div>
     </>

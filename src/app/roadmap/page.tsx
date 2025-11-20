@@ -24,7 +24,7 @@ import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
 /**
  * 知识宇宙页面
  */
-export default function KnowledgeUniversePage() {
+export default function RoadmapPage() {
   const [showDemo, setShowDemo] = useState(false);
 
   return (

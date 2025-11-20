@@ -482,7 +482,7 @@ function UserForm() {
 ```typescript
 import { KnowledgeGraph } from '@/components/3d';
 
-function KnowledgeUniversePage() {
+function RoadmapPage() {
   return (
     <div className="h-screen">
       <KnowledgeGraph />

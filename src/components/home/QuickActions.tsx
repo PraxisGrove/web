@@ -45,7 +45,7 @@ const quickActions: QuickAction[] = [
     label: '3D 宇宙',
     icon: Globe,
     color: 'from-orange-500 to-red-500',
-    href: '/knowledge-universe',
+    href: '/roadmap',
   },
 ];
 

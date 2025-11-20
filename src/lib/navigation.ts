@@ -19,7 +19,7 @@ export const globalNavItems: NavItem[] = [
   },
   {
     name: '知识宇宙',
-    link: '/knowledge-universe',
+    link: '/roadmap',
   },
   {
     name: '社区',

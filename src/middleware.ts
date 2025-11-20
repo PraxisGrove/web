@@ -63,7 +63,7 @@ const publicPaths = [
   '/privacy',
   '/courses',
   '/api',
-  '/knowledge-universe',
+  '/roadmap',
   '/community',
   '/ai',
 ];

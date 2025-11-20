@@ -43,7 +43,6 @@ export function LoginForm({
   onSuccess,
   onError,
   className = '',
-  showSocialLogin = true,
 }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLoading, error, clearError } = useAuth();

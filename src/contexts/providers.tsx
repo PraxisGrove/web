@@ -70,7 +70,6 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
  */
 export function SSRProvider({
   children,
-  dehydratedState,
 }: {
   children: React.ReactNode;
   dehydratedState?: any;

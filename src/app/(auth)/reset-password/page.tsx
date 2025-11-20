@@ -17,7 +17,7 @@ function ResetPasswordContent() {
     router.push('/login?reset=true');
   };
 
-  const handleError = (error: string) => {
+  const handleError = () => {
     // 错误处理已在组件内部完成
   };
 

@@ -34,10 +34,12 @@ export default function CourseDetailPage() {
   const courseId = params.id as string;
   const { course, loading, error } = useCourse(courseId);
   const { courses: relatedCourses } = useRelatedCourses(courseId, 4);
-  const [expandedChapters, setExpandedChapters] = useState<Set<string>>(new Set());
+  const [expandedChapters, setExpandedChapters] = useState<Set<string>>(
+    new Set()
+  );
 
   const toggleChapter = (chapterId: string) => {
-    setExpandedChapters(prev => {
+    setExpandedChapters((prev) => {
       const next = new Set(prev);
       if (next.has(chapterId)) {
         next.delete(chapterId);
@@ -56,7 +58,11 @@ export default function CourseDetailPage() {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
         <p className="text-destructive">课程加载失败</p>
-        <Button variant="outline" className="mt-4" onClick={() => window.location.reload()}>
+        <Button
+          variant="outline"
+          className="mt-4"
+          onClick={() => window.location.reload()}
+        >
           重试
         </Button>
       </div>
@@ -81,37 +87,45 @@ export default function CourseDetailPage() {
   };
 
   const discount = course.originalPrice
-    ? Math.round(((course.originalPrice - course.price) / course.originalPrice) * 100)
+    ? Math.round(
+        ((course.originalPrice - course.price) / course.originalPrice) * 100
+      )
     : 0;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* 课程头部 */}
-      <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-background border-b">
+      <div className="from-primary/10 via-primary/5 to-background border-b bg-gradient-to-r">
         <div className="container mx-auto px-4 py-12">
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid gap-8 lg:grid-cols-3">
             {/* 左侧信息 */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="space-y-6 lg:col-span-2">
               <div className="space-y-4">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <Badge variant="outline">{categoryNames[course.category]}</Badge>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge variant="outline">
+                    {categoryNames[course.category]}
+                  </Badge>
                   <Badge variant="secondary">{levelNames[course.level]}</Badge>
                   {course.stats.totalStudents > 10000 && (
                     <Badge className="bg-amber-500">畅销课程</Badge>
                   )}
                 </div>
 
-                <h1 className="text-3xl md:text-4xl font-bold">{course.title}</h1>
-                <p className="text-lg text-muted-foreground">{course.subtitle}</p>
+                <h1 className="text-3xl font-bold md:text-4xl">
+                  {course.title}
+                </h1>
+                <p className="text-muted-foreground text-lg">
+                  {course.subtitle}
+                </p>
 
                 {/* 评分和统计 */}
-                <div className="flex items-center gap-6 flex-wrap">
+                <div className="flex flex-wrap items-center gap-6">
                   <div className="flex items-center gap-2">
                     <div className="flex items-center gap-1">
                       {Array.from({ length: 5 }).map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-5 h-5 ${
+                          className={`h-5 w-5 ${
                             i < Math.floor(course.rating)
                               ? 'fill-amber-400 text-amber-400'
                               : 'text-gray-300'
@@ -119,20 +133,26 @@ export default function CourseDetailPage() {
                         />
                       ))}
                     </div>
-                    <span className="font-semibold">{course.rating.toFixed(1)}</span>
+                    <span className="font-semibold">
+                      {course.rating.toFixed(1)}
+                    </span>
                     <span className="text-muted-foreground">
                       ({course.reviewCount.toLocaleString()} 评价)
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Users className="w-5 h-5" />
-                    <span>{course.stats.totalStudents.toLocaleString()} 学生</span>
+                  <div className="text-muted-foreground flex items-center gap-2">
+                    <Users className="h-5 w-5" />
+                    <span>
+                      {course.stats.totalStudents.toLocaleString()} 学生
+                    </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Clock className="w-5 h-5" />
-                    <span>{Math.floor(course.totalDuration / 60)} 小时课程</span>
+                  <div className="text-muted-foreground flex items-center gap-2">
+                    <Clock className="h-5 w-5" />
+                    <span>
+                      {Math.floor(course.totalDuration / 60)} 小时课程
+                    </span>
                   </div>
                 </div>
 
@@ -146,7 +166,7 @@ export default function CourseDetailPage() {
                     className="rounded-full"
                   />
                   <div>
-                    <p className="text-sm text-muted-foreground">授课讲师</p>
+                    <p className="text-muted-foreground text-sm">授课讲师</p>
                     <p className="font-semibold">{course.instructor.name}</p>
                   </div>
                 </div>
@@ -156,9 +176,9 @@ export default function CourseDetailPage() {
             {/* 右侧购买卡片 */}
             <div className="lg:col-span-1">
               <Card className="sticky top-24">
-                <CardContent className="p-6 space-y-6">
+                <CardContent className="space-y-6 p-6">
                   {/* 预览图 */}
-                  <div className="relative aspect-video rounded-lg overflow-hidden">
+                  <div className="relative aspect-video overflow-hidden rounded-lg">
                     <Image
                       src={course.thumbnail}
                       alt={course.title}
@@ -166,8 +186,8 @@ export default function CourseDetailPage() {
                       className="object-cover"
                     />
                     {course.previewVideo && (
-                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center cursor-pointer hover:bg-black/40 transition-colors">
-                        <PlayCircle className="w-16 h-16 text-white" />
+                      <div className="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/50 transition-colors hover:bg-black/40">
+                        <PlayCircle className="h-16 w-16 text-white" />
                       </div>
                     )}
                   </div>
@@ -175,10 +195,12 @@ export default function CourseDetailPage() {
                   {/* 价格 */}
                   <div className="space-y-2">
                     <div className="flex items-baseline gap-3">
-                      <span className="text-3xl font-bold">¥{course.price}</span>
+                      <span className="text-3xl font-bold">
+                        ¥{course.price}
+                      </span>
                       {course.originalPrice && (
                         <>
-                          <span className="text-lg text-muted-foreground line-through">
+                          <span className="text-muted-foreground text-lg line-through">
                             ¥{course.originalPrice}
                           </span>
                           <Badge variant="destructive">-{discount}%</Badge>
@@ -186,18 +208,20 @@ export default function CourseDetailPage() {
                       )}
                     </div>
                     {discount > 0 && (
-                      <p className="text-sm text-destructive">限时优惠，即将恢复原价</p>
+                      <p className="text-destructive text-sm">
+                        限时优惠，即将恢复原价
+                      </p>
                     )}
                   </div>
 
                   {/* 操作按钮 */}
                   <div className="space-y-3">
-                    <Button className="w-full h-12 text-lg" size="lg">
-                      <ShoppingCart className="w-5 h-5 mr-2" />
+                    <Button className="h-12 w-full text-lg" size="lg">
+                      <ShoppingCart className="mr-2 h-5 w-5" />
                       加入购物车
                     </Button>
                     <Button variant="outline" className="w-full" size="lg">
-                      <Heart className="w-5 h-5 mr-2" />
+                      <Heart className="mr-2 h-5 w-5" />
                       收藏课程
                     </Button>
                   </div>
@@ -207,27 +231,29 @@ export default function CourseDetailPage() {
                     <p className="font-semibold">本课程包含：</p>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-muted-foreground" />
-                        <span>{Math.floor(course.totalDuration / 60)} 小时点播视频</span>
+                        <Clock className="text-muted-foreground h-4 w-4" />
+                        <span>
+                          {Math.floor(course.totalDuration / 60)} 小时点播视频
+                        </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <BookOpen className="w-4 h-4 text-muted-foreground" />
+                        <BookOpen className="text-muted-foreground h-4 w-4" />
                         <span>{course.totalLessons} 个课时</span>
                       </div>
                       {course.certificate && (
                         <div className="flex items-center gap-2">
-                          <Award className="w-4 h-4 text-muted-foreground" />
+                          <Award className="text-muted-foreground h-4 w-4" />
                           <span>完成证书</span>
                         </div>
                       )}
                       {course.lifetime && (
                         <div className="flex items-center gap-2">
-                          <Infinity className="w-4 h-4 text-muted-foreground" />
+                          <Infinity className="text-muted-foreground h-4 w-4" />
                           <span>终身访问权限</span>
                         </div>
                       )}
                       <div className="flex items-center gap-2">
-                        <Globe className="w-4 h-4 text-muted-foreground" />
+                        <Globe className="text-muted-foreground h-4 w-4" />
                         <span>{course.subtitles.join(', ')} 字幕</span>
                       </div>
                     </div>
@@ -235,7 +261,7 @@ export default function CourseDetailPage() {
 
                   {/* 分享 */}
                   <Button variant="ghost" className="w-full">
-                    <Share2 className="w-4 h-4 mr-2" />
+                    <Share2 className="mr-2 h-4 w-4" />
                     分享课程
                   </Button>
                 </CardContent>
@@ -247,9 +273,9 @@ export default function CourseDetailPage() {
 
       {/* 课程内容 */}
       <div className="container mx-auto px-4 py-12">
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid gap-8 lg:grid-cols-3">
           {/* 主要内容 */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="space-y-8 lg:col-span-2">
             <Tabs defaultValue="overview" className="w-full">
               <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="overview">概述</TabsTrigger>
@@ -259,16 +285,16 @@ export default function CourseDetailPage() {
               </TabsList>
 
               {/* 概述 */}
-              <TabsContent value="overview" className="space-y-6 mt-6">
+              <TabsContent value="overview" className="mt-6 space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">课程描述</h2>
+                  <h2 className="mb-4 text-2xl font-bold">课程描述</h2>
                   <p className="text-muted-foreground leading-relaxed">
                     {course.description}
                   </p>
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">学习成果</h2>
+                  <h2 className="mb-4 text-2xl font-bold">学习成果</h2>
                   <ul className="space-y-2">
                     {course.learningOutcomes.map((outcome, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -280,7 +306,7 @@ export default function CourseDetailPage() {
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">课程要求</h2>
+                  <h2 className="mb-4 text-2xl font-bold">课程要求</h2>
                   <ul className="space-y-2">
                     {course.requirements.map((req, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -292,7 +318,7 @@ export default function CourseDetailPage() {
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">适合人群</h2>
+                  <h2 className="mb-4 text-2xl font-bold">适合人群</h2>
                   <ul className="space-y-2">
                     {course.targetAudience.map((audience, index) => (
                       <li key={index} className="flex items-start gap-2">
@@ -307,7 +333,7 @@ export default function CourseDetailPage() {
               {/* 课程大纲 */}
               <TabsContent value="curriculum" className="mt-6">
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="mb-4 flex items-center justify-between">
                     <h2 className="text-2xl font-bold">课程大纲</h2>
                     <p className="text-muted-foreground">
                       {course.chapters.length} 章节 · {course.totalLessons} 课时
@@ -342,9 +368,9 @@ export default function CourseDetailPage() {
           <div className="space-y-8">
             {/* 标签 */}
             <div>
-              <h3 className="font-semibold mb-3">课程标签</h3>
+              <h3 className="mb-3 font-semibold">课程标签</h3>
               <div className="flex flex-wrap gap-2">
-                {course.tags.map(tag => (
+                {course.tags.map((tag) => (
                   <Badge key={tag} variant="secondary">
                     {tag}
                   </Badge>
@@ -355,9 +381,9 @@ export default function CourseDetailPage() {
             {/* 相关课程 */}
             {relatedCourses.length > 0 && (
               <div>
-                <h3 className="font-semibold mb-4">相关推荐</h3>
+                <h3 className="mb-4 font-semibold">相关推荐</h3>
                 <div className="space-y-4">
-                  {relatedCourses.map(course => (
+                  {relatedCourses.map((course) => (
                     <CourseCard key={course.id} course={course} layout="list" />
                   ))}
                 </div>
@@ -387,13 +413,13 @@ function ChapterItem({
       <CardContent className="p-0">
         <button
           onClick={onToggle}
-          className="w-full p-4 flex items-center justify-between hover:bg-accent/50 transition-colors"
+          className="hover:bg-accent/50 flex w-full items-center justify-between p-4 transition-colors"
         >
           <div className="flex items-center gap-3 text-left">
             <span className="font-semibold">第{chapterNumber}章</span>
             <span className="font-medium">{chapter.title}</span>
           </div>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex items-center gap-4 text-sm">
             <span>{chapter.lessonCount} 课时</span>
             <span>{Math.floor(chapter.duration / 60)} 分钟</span>
             <motion.div
@@ -412,14 +438,14 @@ function ChapterItem({
             exit={{ height: 0, opacity: 0 }}
             className="border-t"
           >
-            <div className="p-4 space-y-2">
-              {chapter.lessons.map((lesson, index) => (
+            <div className="space-y-2 p-4">
+              {chapter.lessons.map((lesson) => (
                 <div
                   key={lesson.id}
-                  className="flex items-center justify-between py-2 hover:bg-accent/30 rounded px-2 transition-colors"
+                  className="hover:bg-accent/30 flex items-center justify-between rounded px-2 py-2 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <PlayCircle className="w-4 h-4 text-muted-foreground" />
+                    <PlayCircle className="text-muted-foreground h-4 w-4" />
                     <span className="text-sm">{lesson.title}</span>
                     {lesson.isPreview && (
                       <Badge variant="outline" className="text-xs">
@@ -427,7 +453,7 @@ function ChapterItem({
                       </Badge>
                     )}
                   </div>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-muted-foreground text-sm">
                     {lesson.duration} 分钟
                   </span>
                 </div>
@@ -457,15 +483,15 @@ function InstructorSection({ instructor }: { instructor: any }) {
           <p className="text-muted-foreground">{instructor.title}</p>
           <div className="flex items-center gap-4 text-sm">
             <div className="flex items-center gap-1">
-              <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
               <span>{instructor.rating.toFixed(1)}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Users className="w-4 h-4" />
+              <Users className="h-4 w-4" />
               <span>{instructor.studentCount.toLocaleString()} 学生</span>
             </div>
             <div className="flex items-center gap-1">
-              <BookOpen className="w-4 h-4" />
+              <BookOpen className="h-4 w-4" />
               <span>{instructor.courseCount} 课程</span>
             </div>
           </div>
@@ -475,7 +501,7 @@ function InstructorSection({ instructor }: { instructor: any }) {
       <p className="text-muted-foreground leading-relaxed">{instructor.bio}</p>
 
       <div>
-        <h4 className="font-semibold mb-2">擅长领域</h4>
+        <h4 className="mb-2 font-semibold">擅长领域</h4>
         <div className="flex flex-wrap gap-2">
           {instructor.specialties.map((specialty: string) => (
             <Badge key={specialty} variant="secondary">
@@ -492,16 +518,18 @@ function InstructorSection({ instructor }: { instructor: any }) {
 function ReviewsSection({ stats }: { stats: any }) {
   return (
     <div className="space-y-6">
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* 评分概览 */}
         <div className="space-y-4">
           <div className="text-center">
-            <div className="text-5xl font-bold">{stats.averageRating.toFixed(1)}</div>
-            <div className="flex items-center justify-center gap-1 my-2">
+            <div className="text-5xl font-bold">
+              {stats.averageRating.toFixed(1)}
+            </div>
+            <div className="my-2 flex items-center justify-center gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-5 h-5 ${
+                  className={`h-5 w-5 ${
                     i < Math.floor(stats.averageRating)
                       ? 'fill-amber-400 text-amber-400'
                       : 'text-gray-300'
@@ -515,14 +543,14 @@ function ReviewsSection({ stats }: { stats: any }) {
 
         {/* 评分分布 */}
         <div className="space-y-2">
-          {[5, 4, 3, 2, 1].map(rating => {
+          {[5, 4, 3, 2, 1].map((rating) => {
             const count = stats.ratingDistribution[rating];
             const percentage = (count / stats.totalReviews) * 100;
             return (
               <div key={rating} className="flex items-center gap-2">
-                <span className="text-sm w-8">{rating}星</span>
+                <span className="w-8 text-sm">{rating}星</span>
                 <Progress value={percentage} className="flex-1" />
-                <span className="text-sm text-muted-foreground w-12 text-right">
+                <span className="text-muted-foreground w-12 text-right text-sm">
                   {percentage.toFixed(0)}%
                 </span>
               </div>
@@ -533,8 +561,8 @@ function ReviewsSection({ stats }: { stats: any }) {
 
       <Separator />
 
-      <div className="text-center text-muted-foreground py-8">
-        <MessageSquare className="w-12 h-12 mx-auto mb-2 opacity-50" />
+      <div className="text-muted-foreground py-8 text-center">
+        <MessageSquare className="mx-auto mb-2 h-12 w-12 opacity-50" />
         <p>暂无学生评价</p>
         <p className="text-sm">购买课程后可以留下您的评价</p>
       </div>
@@ -548,8 +576,8 @@ function CourseDetailSkeleton() {
     <div className="min-h-screen">
       <div className="bg-muted border-b">
         <div className="container mx-auto px-4 py-12">
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-4">
+          <div className="grid gap-8 lg:grid-cols-3">
+            <div className="space-y-4 lg:col-span-2">
               <Skeleton className="h-8 w-3/4" />
               <Skeleton className="h-6 w-1/2" />
               <Skeleton className="h-24 w-full" />

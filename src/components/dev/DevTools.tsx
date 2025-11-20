@@ -13,15 +13,10 @@ import {
   Zap,
   Bug,
   X,
-  RefreshCw,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { usePerformanceMonitor } from '@/utils/performance';
-import {
-  TestingUtils,
-  AutomatedTestRunner,
-  PerformanceBenchmark,
-} from '@/utils/testing';
+import { TestingUtils, PerformanceBenchmark } from '@/utils/testing';
 
 interface DevToolsProps {
   enabled?: boolean;
@@ -36,7 +31,7 @@ export function DevTools({ enabled }: DevToolsProps) {
   const [benchmarkResults, setBenchmarkResults] = useState<any>(null);
   const [isClient, setIsClient] = useState(false);
   const [isDev, setIsDev] = useState(false);
-  const { metrics, getScore, monitor } = usePerformanceMonitor();
+  const { metrics, getScore } = usePerformanceMonitor();
 
   // 确保只在客户端渲染
   useEffect(() => {
@@ -176,9 +171,7 @@ export function DevTools({ enabled }: DevToolsProps) {
                 {activeTab === 'testing' && (
                   <TestingTab results={testResults} onRunTests={runTests} />
                 )}
-                {activeTab === 'monitoring' && (
-                  <MonitoringTab monitor={monitor} />
-                )}
+                {activeTab === 'monitoring' && <MonitoringTab />}
                 {activeTab === 'benchmark' && (
                   <BenchmarkTab
                     results={benchmarkResults}
@@ -337,7 +330,7 @@ function TestingTab({ results, onRunTests }: any) {
 }
 
 // 监控标签页
-function MonitoringTab({ monitor }: any) {
+function MonitoringTab() {
   const [isMonitoring, setIsMonitoring] = useState(false);
 
   const startMonitoring = () => {

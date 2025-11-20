@@ -62,34 +62,31 @@ export function useWishlist(): UseWishlistReturn {
   const error: string | null = null;
 
   // TODO: 临时 mock 操作方法
-  const addToWishlist = async (courseId: string) => {
+  const addToWishlist = async () => {
     // Mock implementation
   };
-  const removeFromWishlist = (courseId: string) => {
+  const removeFromWishlist = () => {
     // Mock implementation
   };
   const clearWishlist = () => {
     // Mock implementation
   };
-  const isInWishlist = (courseId: string) => {
+  const isInWishlist = () => {
     return false;
   };
   const clearError = () => {
     // Mock implementation
   };
-  const addMultipleToWishlist = async (courseIds: string[]) => {
+  const addMultipleToWishlist = async () => {
     // Mock implementation
   };
-  const removeMultipleFromWishlist = (courseIds: string[]) => {
+  const removeMultipleFromWishlist = () => {
     // Mock implementation
   };
-  const sortWishlist = (sortBy: 'addedAt' | 'title' | 'price' | 'rating') => {
+  const sortWishlist = () => {
     // Mock implementation
   };
-  const filterWishlist = (filter: {
-    level?: string;
-    priceRange?: [number, number];
-  }) => {
+  const filterWishlist = () => {
     return [];
   };
 
@@ -108,11 +105,11 @@ export function useWishlist(): UseWishlistReturn {
   /**
    * 切换收藏状态（如果已收藏则移除，否则添加）
    */
-  const toggleWishlist = async (courseId: string): Promise<void> => {
-    if (isInWishlist(courseId)) {
-      removeFromWishlist(courseId);
+  const toggleWishlist = async (): Promise<void> => {
+    if (isInWishlist()) {
+      removeFromWishlist();
     } else {
-      await addToWishlist(courseId);
+      await addToWishlist();
     }
   };
 

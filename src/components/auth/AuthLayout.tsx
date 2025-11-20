@@ -3,13 +3,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  BackgroundBeams,
   AceternityGlassCard,
   GradientText,
   FloatingElement,
-  ParticleBackground,
   AceternityTypewriter,
-  MouseFollower,
   AnimatedContainer,
   InViewAnimation,
 } from '@/components/unified';
@@ -25,12 +22,7 @@ interface AuthLayoutProps {
  * 增强的认证页面布局组件
  * 集成了 Aceternity 和 ReactBit 的高级效果
  */
-export function AuthLayout({
-  children,
-  title,
-  subtitle,
-  type,
-}: AuthLayoutProps) {
+export function AuthLayout({ children, title, subtitle }: AuthLayoutProps) {
   const features = [
     {
       icon: '🤖',

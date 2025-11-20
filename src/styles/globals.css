@@ -231,7 +231,8 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-beam: beam var(--aceternity-beam-duration, 3s) ease-in-out infinite;
   --animate-float: float var(--aceternity-float-duration, 0.2s) ease-out;
-  --animate-pulse-glow: pulse-glow var(--aceternity-pulse-duration, 2s) ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow var(--aceternity-pulse-duration, 2s)
+    ease-in-out infinite;
 
   @keyframes gradient-shift {
     0%,
@@ -288,7 +289,8 @@
       box-shadow: 0 0 5px var(--aceternity-beam-glow, hsl(var(--primary)));
     }
     50% {
-      box-shadow: 0 0 20px var(--aceternity-beam-glow, hsl(var(--primary))),
+      box-shadow:
+        0 0 20px var(--aceternity-beam-glow, hsl(var(--primary))),
         0 0 30px var(--aceternity-beam-glow, hsl(var(--primary)));
     }
   }

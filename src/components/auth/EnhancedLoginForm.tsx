@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Loader2, Mail, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -12,7 +11,6 @@ import { motion } from 'framer-motion';
 import {
   ReactBitInput,
   Button,
-  AceternityMagnetic,
   HoverAnimation,
   InViewAnimation,
   GlowBorder,
@@ -58,7 +56,7 @@ export function EnhancedLoginForm({
   const router = useRouter();
 
   const clearError = () => setError(null);
-  const login = async (email: string, password: string, remember?: boolean) => {
+  const login = async () => {
     setIsLoading(true);
     try {
       // TODO: 调用实际的登录API
@@ -71,7 +69,6 @@ export function EnhancedLoginForm({
   };
 
   const {
-    register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
@@ -85,10 +82,10 @@ export function EnhancedLoginForm({
 
   const watchedValues = watch();
 
-  const onSubmit = async (data: LoginFormData) => {
+  const onSubmit = async () => {
     try {
       clearError();
-      await login(data.email, data.password, data.remember);
+      await login();
       onSuccess?.();
     } catch (err) {
       const errorMessage =
@@ -287,7 +284,7 @@ export function EnhancedSocialLogin({
   onError?: (error: string) => void;
   className?: string;
 }) {
-  const handleSocialLogin = async (provider: string) => {
+  const handleSocialLogin = async () => {
     try {
       // TODO: 实现社交登录逻辑
       onSuccess?.();
@@ -321,7 +318,7 @@ export function EnhancedSocialLogin({
           <InViewAnimation animation="slideInLeft" delay={0.7}>
             <Button
               variant="outline"
-              onClick={() => handleSocialLogin('google')}
+              onClick={() => handleSocialLogin()}
               className="w-full transition-transform hover:scale-105"
             >
               <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -351,7 +348,7 @@ export function EnhancedSocialLogin({
           <InViewAnimation animation="slideInRight" delay={0.8}>
             <Button
               variant="outline"
-              onClick={() => handleSocialLogin('github')}
+              onClick={() => handleSocialLogin()}
               className="w-full transition-transform hover:scale-105"
             >
               <svg
@@ -370,7 +367,7 @@ export function EnhancedSocialLogin({
           <InViewAnimation animation="slideInUp" delay={0.9}>
             <Button
               variant="outline"
-              onClick={() => handleSocialLogin('feishu')}
+              onClick={() => handleSocialLogin()}
               className="w-full transition-transform hover:scale-105"
             >
               <svg

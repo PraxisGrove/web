@@ -10,7 +10,6 @@ export function AnimatedBackground({
   speed = 1,
   density = 50,
   colors = ['#3b82f6', '#8b5cf6', '#ef4444'],
-  interactive = false,
   className,
   children,
   ...props

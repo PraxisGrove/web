@@ -2,18 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import {
-  MessageCircle,
-  Search,
-  User,
-  BookOpen,
-  Plus,
-  X,
-  Zap,
-  Globe,
-  Brain,
-} from 'lucide-react';
+import { Search, User, Plus, X, Globe, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface QuickActionsProps {

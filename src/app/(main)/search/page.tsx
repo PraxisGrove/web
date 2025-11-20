@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Search, X, TrendingUp, Clock, Filter } from 'lucide-react';
+import { Search, X, TrendingUp, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -18,7 +18,10 @@ import {
 import { CourseCard } from '@/components/courses/CourseCard';
 import { CourseFilters } from '@/components/courses/CourseFilters';
 import { useCourses } from '@/hooks/useCourses';
-import type { CourseFilters as CourseFiltersType, CourseSortBy } from '@/types/course';
+import type {
+  CourseFilters as CourseFiltersType,
+  CourseSortBy,
+} from '@/types/course';
 
 // 热门搜索关键词
 const TRENDING_SEARCHES = [
@@ -42,15 +45,14 @@ function SearchPageContent() {
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [filters, setFilters] = useState<CourseFiltersType>({});
   const [sortBy, setSortBy] = useState<CourseSortBy>('popular');
-  const [layout, setLayout] = useState<'grid' | 'list'>('grid');
-
-  const { courses, loading, error, total, page, totalPages, updateParams } = useCourses({
-    page: 1,
-    limit: 12,
-    search: activeQuery,
-    filters,
-    sortBy,
-  });
+  const { courses, loading, error, total, page, totalPages, updateParams } =
+    useCourses({
+      page: 1,
+      limit: 12,
+      search: activeQuery,
+      filters,
+      sortBy,
+    });
 
   // 从localStorage加载搜索历史
   useEffect(() => {
@@ -70,7 +72,7 @@ function SearchPageContent() {
 
     const updated = [
       searchQuery,
-      ...searchHistory.filter(h => h !== searchQuery),
+      ...searchHistory.filter((h) => h !== searchQuery),
     ].slice(0, 10); // 保留最近10条
 
     setSearchHistory(updated);
@@ -129,19 +131,19 @@ function SearchPageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* 搜索区域 */}
-      <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-background border-b">
+      <div className="from-primary/10 via-primary/5 to-background border-b bg-gradient-to-r">
         <div className="container mx-auto px-4 py-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-3xl mx-auto space-y-6"
+            className="mx-auto max-w-3xl space-y-6"
           >
             {/* 搜索框 */}
             <form onSubmit={handleSearch} className="relative">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Search className="text-muted-foreground absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2" />
                 <Input
                   type="search"
                   placeholder="搜索课程、讲师、技能..."
@@ -154,9 +156,9 @@ function SearchPageContent() {
                   <button
                     type="button"
                     onClick={() => setQuery('')}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground hover:text-foreground absolute right-4 top-1/2 -translate-y-1/2 transition-colors"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="h-5 w-5" />
                   </button>
                 )}
               </div>
@@ -164,19 +166,19 @@ function SearchPageContent() {
 
             {/* 搜索建议/历史 */}
             {!activeQuery && (
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid gap-6 md:grid-cols-2">
                 {/* 热门搜索 */}
                 <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                    <TrendingUp className="w-4 h-4" />
+                  <div className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
+                    <TrendingUp className="h-4 w-4" />
                     <span>热门搜索</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {TRENDING_SEARCHES.map(term => (
+                    {TRENDING_SEARCHES.map((term) => (
                       <Badge
                         key={term}
                         variant="secondary"
-                        className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                        className="hover:bg-primary hover:text-primary-foreground cursor-pointer transition-colors"
                         onClick={() => handleQuickSearch(term)}
                       >
                         {term}
@@ -189,8 +191,8 @@ function SearchPageContent() {
                 {searchHistory.length > 0 && (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                        <Clock className="w-4 h-4" />
+                      <div className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
+                        <Clock className="h-4 w-4" />
                         <span>最近搜索</span>
                       </div>
                       <Button
@@ -207,7 +209,7 @@ function SearchPageContent() {
                         <Badge
                           key={`${term}-${index}`}
                           variant="outline"
-                          className="cursor-pointer hover:bg-accent transition-colors"
+                          className="hover:bg-accent cursor-pointer transition-colors"
                           onClick={() => handleQuickSearch(term)}
                         >
                           {term}
@@ -225,9 +227,9 @@ function SearchPageContent() {
       {/* 搜索结果 */}
       {activeQuery && (
         <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col gap-8 lg:flex-row">
             {/* 筛选侧边栏 */}
-            <aside className="lg:w-64 flex-shrink-0">
+            <aside className="flex-shrink-0 lg:w-64">
               <CourseFilters
                 filters={filters}
                 onFiltersChange={handleFiltersChange}
@@ -239,13 +241,17 @@ function SearchPageContent() {
             <main className="flex-1 space-y-6">
               {/* 结果头部 */}
               <div className="space-y-4">
-                <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
                     <h1 className="text-2xl font-bold">
                       搜索结果: &ldquo;{activeQuery}&rdquo;
                     </h1>
                     <p className="text-muted-foreground mt-1">
-                      找到 <span className="font-semibold text-foreground">{total}</span> 个结果
+                      找到{' '}
+                      <span className="text-foreground font-semibold">
+                        {total}
+                      </span>{' '}
+                      个结果
                     </p>
                   </div>
 
@@ -255,7 +261,7 @@ function SearchPageContent() {
                       size="sm"
                       onClick={handleClearSearch}
                     >
-                      <X className="w-4 h-4 mr-2" />
+                      <X className="mr-2 h-4 w-4" />
                       清除搜索
                     </Button>
                   )}
@@ -280,7 +286,7 @@ function SearchPageContent() {
 
               {/* 课程列表 */}
               {loading ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                   {Array.from({ length: 6 }).map((_, i) => (
                     <div key={i} className="space-y-4">
                       <Skeleton className="aspect-video" />
@@ -292,7 +298,7 @@ function SearchPageContent() {
                   ))}
                 </div>
               ) : error ? (
-                <div className="text-center py-12">
+                <div className="py-12 text-center">
                   <p className="text-destructive">搜索失败：{error.message}</p>
                   <Button
                     variant="outline"
@@ -303,8 +309,8 @@ function SearchPageContent() {
                   </Button>
                 </div>
               ) : courses.length === 0 ? (
-                <div className="text-center py-12 space-y-4">
-                  <Search className="w-16 h-16 mx-auto text-muted-foreground opacity-50" />
+                <div className="space-y-4 py-12 text-center">
+                  <Search className="text-muted-foreground mx-auto h-16 w-16 opacity-50" />
                   <div>
                     <p className="text-lg font-medium">未找到相关课程</p>
                     <p className="text-muted-foreground mt-2">
@@ -312,29 +318,25 @@ function SearchPageContent() {
                     </p>
                   </div>
                   <div className="flex items-center justify-center gap-4">
-                    <Button
-                      variant="outline"
-                      onClick={handleClearSearch}
-                    >
+                    <Button variant="outline" onClick={handleClearSearch}>
                       清除搜索
                     </Button>
-                    <Button
-                      variant="outline"
-                      onClick={() => setFilters({})}
-                    >
+                    <Button variant="outline" onClick={() => setFilters({})}>
                       清除筛选
                     </Button>
                   </div>
-                  
+
                   {/* 推荐其他搜索 */}
                   <div className="mt-8">
-                    <p className="text-sm text-muted-foreground mb-3">试试这些热门搜索：</p>
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      {TRENDING_SEARCHES.map(term => (
+                    <p className="text-muted-foreground mb-3 text-sm">
+                      试试这些热门搜索：
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {TRENDING_SEARCHES.map((term) => (
                         <Badge
                           key={term}
                           variant="secondary"
-                          className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                          className="hover:bg-primary hover:text-primary-foreground cursor-pointer transition-colors"
                           onClick={() => handleQuickSearch(term)}
                         >
                           {term}
@@ -347,14 +349,10 @@ function SearchPageContent() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                  className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"
                 >
-                  {courses.map(course => (
-                    <CourseCard
-                      key={course.id}
-                      course={course}
-                      layout="grid"
-                    />
+                  {courses.map((course) => (
+                    <CourseCard key={course.id} course={course} layout="grid" />
                   ))}
                 </motion.div>
               )}
@@ -415,14 +413,16 @@ function SearchPageContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="text-muted-foreground">加载搜索页面...</p>
+    <Suspense
+      fallback={
+        <div className="bg-background flex min-h-screen items-center justify-center">
+          <div className="space-y-4 text-center">
+            <div className="border-primary mx-auto h-12 w-12 animate-spin rounded-full border-b-2"></div>
+            <p className="text-muted-foreground">加载搜索页面...</p>
+          </div>
         </div>
-      </div>
-    }>
+      }
+    >
       <SearchPageContent />
     </Suspense>
   );

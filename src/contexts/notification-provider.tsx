@@ -181,9 +181,9 @@ function NotificationItem({
   return (
     <div
       className={`
-      relative transform rounded-lg border p-4 shadow-lg
-      backdrop-blur-sm transition-all duration-300 ease-in-out
-      animate-in slide-in-from-right-full
+      animate-in slide-in-from-right-full relative transform rounded-lg border
+      p-4 shadow-lg backdrop-blur-sm transition-all
+      duration-300 ease-in-out
       ${getBgColor()}
     `}
     >

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useScroll, useTransform, MotionValue } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 
 interface ParallaxOptions {
   speed?: number;
@@ -125,7 +125,7 @@ export function useElementParallax(
   elementRef: React.RefObject<HTMLElement | null>,
   options: ParallaxOptions = {}
 ) {
-  const { speed = 0.5, direction = 'up', disabled = false } = options;
+  const { direction = 'up', disabled = false } = options;
   const { scrollY } = useScroll();
   const [elementTop, setElementTop] = useState(0);
   const [elementHeight, setElementHeight] = useState(0);
@@ -170,7 +170,6 @@ export function useOptimizedParallax(
     offset = 0,
     direction = 'up',
     disabled = false,
-    throttle = 16,
     reducedMotion = false,
   } = options;
 

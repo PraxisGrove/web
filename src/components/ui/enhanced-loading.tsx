@@ -4,7 +4,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Skeleton } from './skeleton';
-import { Loader2, RefreshCw, RotateCw } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 // 加载器类型
 export type LoaderType =

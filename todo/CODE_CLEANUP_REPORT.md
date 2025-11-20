@@ -13,12 +13,12 @@
 
 ### 🎯 清理成果概览
 
-| 清理类型 | 数量 | 说明 |
-|---------|------|------|
+| 清理类型             | 数量  | 说明                         |
+| -------------------- | ----- | ---------------------------- |
 | 临时调试 console.log | ~44个 | Mock函数和临时占位的调试日志 |
-| 注释代码块 | 1处 | 临时注释的配置对象 |
-| 修改文件数 | 16个 | 实际修改的源文件数量 |
-| 代码行数减少 | ~60行 | 删除的净代码行数 |
+| 注释代码块           | 1处   | 临时注释的配置对象           |
+| 修改文件数           | 16个  | 实际修改的源文件数量         |
+| 代码行数减少         | ~60行 | 删除的净代码行数             |
 
 ---
 
@@ -60,13 +60,16 @@ TypeScript/TSX文件： ~230个（不变）
 ### 1. Mock函数清理（高优先级）
 
 #### src/hooks/useWishlist.ts
+
 **清理内容**：移除 9 个 Mock 函数中的 console.log
+
 ```diff
 - console.log('Mock addToWishlist:', courseId);
 + // Mock implementation
 ```
 
 **清理函数**：
+
 - `addToWishlist`
 - `removeFromWishlist`
 - `clearWishlist`
@@ -78,19 +81,23 @@ TypeScript/TSX文件： ~230个（不变）
 - `filterWishlist`
 
 **保留内容**：
+
 - ✓ TODO 注释："临时 mock，等待 zustand store 正确加载"
 - ✓ 注释掉的 store 导入（计划功能）
 
 ---
 
 #### src/hooks/useCart.ts
+
 **清理内容**：移除 8 个 Mock 函数中的 console.log
+
 ```diff
 - console.log('Mock addToCart:', courseId);
 + // Mock implementation
 ```
 
 **清理函数**：
+
 - `addToCart`
 - `removeFromCart`
 - `clearCart`
@@ -101,6 +108,7 @@ TypeScript/TSX文件： ~230个（不变）
 - `removeMultipleFromCart`
 
 **保留内容**：
+
 - ✓ TODO 注释："临时 mock，等待 zustand store 正确加载"
 - ✓ 注释掉的 store 导入（计划功能）
 
@@ -109,7 +117,9 @@ TypeScript/TSX文件： ~230个（不变）
 ### 2. UI组件清理（高优先级）
 
 #### src/components/home/QuickActions.tsx
+
 **清理内容**：移除 2 个临时 console.log，改用实际路由
+
 ```diff
 - onClick: () => console.log('打开 AI 助手'),
 + href: '/ai',
@@ -123,7 +133,9 @@ TypeScript/TSX文件： ~230个（不变）
 ---
 
 #### src/components/layout/MainLayout.tsx
+
 **清理内容**：移除 3 个事件处理函数中的 console.log
+
 ```diff
 const handleSearch = (query: string) => {
 -  console.log('搜索:', query);
@@ -133,6 +145,7 @@ const handleSearch = (query: string) => {
 ```
 
 **清理函数**：
+
 - `handleSearch`
 - `handleNotificationClick`
 - `handleUserMenuClick`
@@ -142,7 +155,9 @@ const handleSearch = (query: string) => {
 ---
 
 #### src/components/home/FooterSection.tsx
+
 **清理内容**：移除邮件订阅的 console.log
+
 ```diff
 const handleNewsletterSubmit = (e: React.FormEvent) => {
   e.preventDefault();
@@ -155,7 +170,9 @@ const handleNewsletterSubmit = (e: React.FormEvent) => {
 ---
 
 #### src/components/home/CTASection.tsx
+
 **清理内容**：移除表单提交的 console.log
+
 ```diff
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -174,6 +191,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 ### 3. 认证组件清理（高优先级）
 
 #### src/app/(auth)/login/page.tsx
+
 ```diff
 const handleLoginError = (error: string) => {
 -  console.error('Login error:', error);
@@ -182,6 +200,7 @@ const handleLoginError = (error: string) => {
 ```
 
 #### src/app/(auth)/register/page.tsx
+
 ```diff
 const handleRegisterError = (error: string) => {
 -  console.error('Register error:', error);
@@ -190,6 +209,7 @@ const handleRegisterError = (error: string) => {
 ```
 
 #### src/app/(auth)/forgot-password/page.tsx
+
 ```diff
 const handleSuccess = () => {
 -  console.log('Password reset email sent successfully');
@@ -203,6 +223,7 @@ const handleError = (error: string) => {
 ```
 
 #### src/app/(auth)/reset-password/page.tsx
+
 ```diff
 const handleError = (error: string) => {
 -  console.error('Reset password error:', error);
@@ -213,7 +234,9 @@ const handleError = (error: string) => {
 ---
 
 #### src/components/auth/EnhancedLoginForm.tsx
+
 **清理内容**：移除 4 个 console.log
+
 ```diff
 const login = async (email: string, password: string, remember?: boolean) => {
   setIsLoading(true);
@@ -230,6 +253,7 @@ const login = async (email: string, password: string, remember?: boolean) => {
 ```
 
 **清理位置**：
+
 1. 模拟登录函数
 2. 忘记密码按钮点击事件
 3. 立即注册按钮点击事件
@@ -238,7 +262,9 @@ const login = async (email: string, password: string, remember?: boolean) => {
 ---
 
 #### src/components/auth/RegisterForm.tsx
+
 **清理内容**：移除 2 个 console.log
+
 ```diff
 const registerUser = async (userData: any) => {
   setIsLoading(true);
@@ -255,13 +281,16 @@ const registerUser = async (userData: any) => {
 ```
 
 **清理位置**：
+
 1. 模拟注册函数
 2. 立即登录按钮点击事件
 
 ---
 
 #### src/components/auth/ResetPassword.tsx
+
 **清理内容**：移除 1 个 console.log
+
 ```diff
 const onForgotPasswordSubmit = async (data: ForgotPasswordFormData) => {
   try {
@@ -283,7 +312,9 @@ const onForgotPasswordSubmit = async (data: ForgotPasswordFormData) => {
 ### 4. 3D组件清理（中优先级）
 
 #### src/components/3d/knowledge-universe.tsx
+
 **清理内容**：移除 5 个导航控制函数中的 console.log
+
 ```diff
 const handleHighlightPath = useCallback((nodeIds: string[]) => {
 -  console.log('Highlighting path:', nodeIds);
@@ -314,7 +345,9 @@ const handleViewPreset = useCallback((preset: 'top' | 'front' | 'side' | 'isomet
 ---
 
 #### src/app/knowledge-universe/page.tsx
+
 **清理内容**：移除 2 个回调函数中的 console.log
+
 ```diff
 <KnowledgeUniverse
   initialNodes={sampleNodes}
@@ -329,7 +362,9 @@ const handleViewPreset = useCallback((preset: 'top' | 'front' | 'side' | 'isomet
 ---
 
 #### src/app/(main)/dashboard/page.tsx
+
 **清理内容**：移除 1 个日期选择回调中的 console.log
+
 ```diff
 <LearningCalendar
   data={learningCalendarData}
@@ -344,7 +379,9 @@ const handleViewPreset = useCallback((preset: 'top' | 'front' | 'side' | 'isomet
 ### 5. 注释代码块清理
 
 #### src/components/layout/MainLayout.tsx
+
 **清理内容**：移除临时注释的 user 配置对象
+
 ```diff
 <Header
   onThemeToggle={handleThemeToggle}
@@ -372,6 +409,7 @@ const handleViewPreset = useCallback((preset: 'top' | 'front' | 'side' | 'isomet
 以下文件中的 console 语句被**保留**，因为它们是生产环境必需的：
 
 #### 错误日志（console.error）
+
 - `src/lib/api.ts` - API请求错误日志（4处）
 - `src/lib/logger.ts` - 日志传输错误（1处）
 - `src/lib/storage.ts` - 存储操作错误（7处）
@@ -385,6 +423,7 @@ const handleViewPreset = useCallback((preset: 'top' | 'front' | 'side' | 'isomet
 **保留原因**：这些错误日志对于生产环境的问题诊断至关重要
 
 #### 警告日志（console.warn）
+
 - `src/utils/performance.ts` - 性能监控警告（4处）
 - `src/lib/storage.ts` - 存储不可用警告（1处）
 - `src/lib/performance-monitor.ts` - 长任务检测警告（1处）
@@ -395,6 +434,7 @@ const handleViewPreset = useCallback((preset: 'top' | 'front' | 'side' | 'isomet
 **保留原因**：这些警告帮助开发者识别潜在性能问题
 
 #### 开发工具日志（console.log/table/group）
+
 - `src/utils/performance.ts` - 性能指标展示（3处，group/table/log）
 - `src/lib/performance-monitor.ts` - 性能报告展示（7处）
 - `src/lib/performance-config.ts` - 内存清理日志（1处）
@@ -408,12 +448,14 @@ const handleViewPreset = useCallback((preset: 'top' | 'front' | 'side' | 'isomet
 以下带有 TODO 标记的代码被**保留**：
 
 #### src/hooks/useWishlist.ts
+
 ```typescript
 // TODO: 临时 mock，等待 zustand store 正确加载
 // import { useWishlistStore, wishlistSelectors, type WishlistItem } from '@/store/wishlist';
 ```
 
 #### src/hooks/useCart.ts
+
 ```typescript
 // TODO: 临时 mock，等待 zustand store 正确加载
 // import { useCartStore, cartSelectors, type CartItem } from '@/store/cart';
@@ -424,7 +466,9 @@ const handleViewPreset = useCallback((preset: 'top' | 'front' | 'side' | 'isomet
 ### 3. 测试和工具日志
 
 #### src/utils/testing.ts
+
 **保留内容**：7 个 console.log/error
+
 ```typescript
 console.log('📱 Responsive Tests:', results.responsive);
 console.log('♿ Accessibility Tests:', results.accessibility);
@@ -433,7 +477,9 @@ console.log('🌐 Network Tests:', results.network);
 console.log('📊 Total Score:', Math.round(totalScore));
 console.log(`${status} ${result.name} (${result.duration.toFixed(2)}ms)`);
 console.error(`   Error: ${result.error}`);
-console.log(`\n📈 Test Summary: ${passed}/${total} passed (${passRate.toFixed(1)}%)`);
+console.log(
+  `\n📈 Test Summary: ${passed}/${total} passed (${passRate.toFixed(1)}%)`
+);
 ```
 
 **保留原因**：测试工具的输出日志，用于测试结果展示
@@ -445,21 +491,23 @@ console.log(`\n📈 Test Summary: ${passed}/${total} passed (${passRate.toFixed(
 ### 1. 未使用的图标导入（低优先级）
 
 #### src/components/home/QuickActions.tsx
+
 ```typescript
 import {
-  MessageCircle,  // 未使用
-  Search,         // ✓ 使用中
-  User,           // ✓ 使用中
-  BookOpen,       // 未使用
-  Plus,           // ✓ 使用中
-  X,              // ✓ 使用中
-  Zap,            // 未使用
-  Globe,          // ✓ 使用中
-  Brain,          // ✓ 使用中
+  MessageCircle, // 未使用
+  Search, // ✓ 使用中
+  User, // ✓ 使用中
+  BookOpen, // 未使用
+  Plus, // ✓ 使用中
+  X, // ✓ 使用中
+  Zap, // 未使用
+  Globe, // ✓ 使用中
+  Brain, // ✓ 使用中
 } from 'lucide-react';
 ```
 
 **建议**：这些未使用的图标（MessageCircle, BookOpen, Zap）可以删除，但考虑到：
+
 1. 它们可能用于未来的功能扩展
 2. 对bundle大小影响极小（tree-shaking会处理）
 3. 保持UI组件库的完整性
@@ -471,6 +519,7 @@ import {
 根据 package.json 分析，所有依赖包都有对应的使用场景：
 
 #### 核心依赖（全部使用中）
+
 - ✓ Next.js, React, TypeScript - 项目基础
 - ✓ Tailwind CSS, shadcn/ui, Radix UI - UI框架
 - ✓ Framer Motion - 动画效果
@@ -482,6 +531,7 @@ import {
 - ✓ next-themes - 主题系统
 
 #### 开发依赖（全部使用中）
+
 - ✓ ESLint, Prettier - 代码质量
 - ✓ TypeScript - 类型检查
 - ✓ Vitest, Playwright - 测试框架

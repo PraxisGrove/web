@@ -40,7 +40,7 @@ export function useCourses(initialParams: CourseQueryParams = {}) {
   }, [fetchCourses]);
 
   const updateParams = useCallback((newParams: Partial<CourseQueryParams>) => {
-    setParams(prev => ({ ...prev, ...newParams }));
+    setParams((prev) => ({ ...prev, ...newParams }));
   }, []);
 
   const refresh = useCallback(() => {

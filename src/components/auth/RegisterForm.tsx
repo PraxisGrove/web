@@ -94,7 +94,6 @@ export function RegisterForm({
   onSuccess,
   onError,
   className = '',
-  showSocialLogin = true,
 }: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -104,7 +103,7 @@ export function RegisterForm({
   const router = useRouter();
 
   const clearError = () => setError(null);
-  const registerUser = async (userData: any) => {
+  const registerUser = async () => {
     setIsLoading(true);
     try {
       // TODO: 调用实际的注册API
@@ -140,14 +139,10 @@ export function RegisterForm({
   /**
    * 处理表单提交
    */
-  const onSubmit = async (data: RegisterFormData) => {
+  const onSubmit = async () => {
     try {
       clearError();
-      await registerUser({
-        email: data.email,
-        password: data.password,
-        nickname: data.nickname,
-      });
+      await registerUser();
       onSuccess?.();
     } catch (err) {
       const errorMessage =

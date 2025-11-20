@@ -68,7 +68,7 @@ class PerformanceMonitor {
       try {
         longTaskObserver.observe({ entryTypes: ['longtask'] });
         this.observers.push(longTaskObserver);
-      } catch (e) {
+      } catch {
         // longtask 可能不被支持
       }
     }

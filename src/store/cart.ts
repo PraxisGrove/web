@@ -104,7 +104,7 @@ export const useCartStore = create<CartState>()(
               items: [...items, mockCourseData],
               isLoading: false,
             });
-          } catch (error) {
+          } catch {
             set({
               error: '添加到购物车失败',
               isLoading: false,
@@ -180,7 +180,7 @@ export const useCartStore = create<CartState>()(
               items: [...items, ...newItems],
               isLoading: false,
             });
-          } catch (error) {
+          } catch {
             set({
               error: '批量添加到购物车失败',
               isLoading: false,

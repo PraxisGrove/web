@@ -237,7 +237,7 @@ export const PermissionUtils = {
 /**
  * 权限装饰器工厂
  */
-export function requirePermission(permission: Permission) {
+export function requirePermission() {
   return function (
     target: any,
     propertyKey: string,

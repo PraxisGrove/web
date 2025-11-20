@@ -21,7 +21,6 @@ export const FloatingNav = ({
   loginText?: string;
 }) => {
   const [visible, setVisible] = useState(true);
-  const [activeSection, setActiveSection] = useState('');
 
   // 滚动检测
   useEffect(() => {
@@ -42,30 +41,6 @@ export const FloatingNav = ({
       }
 
       lastScrollY = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // 活跃区域检测（用于导航项高亮）
-  useEffect(() => {
-    // 检查是否在浏览器环境
-    if (typeof window === 'undefined') return;
-
-    const handleScroll = () => {
-      const sections = ['hero', 'features', 'product', 'roadmap', 'cta'];
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

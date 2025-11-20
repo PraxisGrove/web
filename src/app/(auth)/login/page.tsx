@@ -22,7 +22,7 @@ export default function LoginPage() {
     router.push(redirectTo);
   };
 
-  const handleLoginError = (error: string) => {
+  const handleLoginError = () => {
     // 错误处理已在组件内部完成
   };
 
@@ -31,7 +31,7 @@ export default function LoginPage() {
       <AdaptiveParticles className="fixed inset-0 z-0">
         <div />
       </AdaptiveParticles>
-      
+
       <main className="relative z-10">
         <AuthLayout
           title="欢迎回来"

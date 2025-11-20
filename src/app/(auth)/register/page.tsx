@@ -15,7 +15,7 @@ export default function RegisterPage() {
     router.push('/login?registered=true');
   };
 
-  const handleRegisterError = (error: string) => {
+  const handleRegisterError = () => {
     // 错误处理已在组件内部完成
   };
 

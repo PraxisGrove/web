@@ -95,8 +95,7 @@ export class ValidationUtils {
    */
   static validateField<T>(
     schema: z.ZodSchema<T>,
-    value: unknown,
-    fieldName?: string
+    value: unknown
   ): FieldValidationResult {
     try {
       schema.parse(value);
@@ -396,11 +395,7 @@ export function useRealtimeValidation<T extends Record<string, any>>(
     validateOnBlur?: boolean;
   } = {}
 ) {
-  const {
-    debounceMs = 300,
-    validateOnChange = true,
-    validateOnBlur = true,
-  } = options;
+  const { debounceMs = 300, validateOnChange = true } = options;
 
   const { validateField } = useFormValidation(schema, form);
 

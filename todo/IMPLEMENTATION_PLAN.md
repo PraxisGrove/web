@@ -27,15 +27,18 @@
 ### 阶段1：课程展示系统开发（Week 1-2）
 
 #### 目标
+
 构建完整的课程浏览和展示系统，包括列表、详情、搜索、筛选等功能。
 
 #### 1.1 课程数据模型设计（Day 1）
 
 **创建文件**：
+
 - `src/types/course.ts` - 课程类型定义
 - `src/lib/mock-data/courses.ts` - Mock课程数据
 
 **类型定义**：
+
 ```typescript
 interface Course {
   id: string;
@@ -76,6 +79,7 @@ interface Lesson {
 ```
 
 **Mock数据量**：
+
 - 50-100 个课程
 - 涵盖 5-8 个类别
 - 包含完整的章节和课时信息
@@ -83,12 +87,14 @@ interface Lesson {
 #### 1.2 课程列表页面（Day 2-3）
 
 **创建文件**：
+
 - `src/app/(main)/courses/page.tsx` - 课程列表页
 - `src/components/courses/CourseCard.tsx` - 课程卡片
 - `src/components/courses/CourseFilters.tsx` - 筛选组件
 - `src/components/courses/CourseSearch.tsx` - 搜索组件
 
 **功能实现**：
+
 - 网格/列表视图切换
 - 分类筛选（前端、后端、设计等）
 - 难度筛选
@@ -99,6 +105,7 @@ interface Lesson {
 - 分页/无限滚动
 
 **UI设计**：
+
 - 响应式网格布局（1/2/3/4列）
 - 卡片悬停动画
 - 骨架屏加载
@@ -107,6 +114,7 @@ interface Lesson {
 #### 1.3 课程详情页面（Day 4-5）
 
 **创建文件**：
+
 - `src/app/(main)/courses/[id]/page.tsx` - 课程详情
 - `src/components/courses/CourseHeader.tsx` - 课程头部
 - `src/components/courses/CourseCurriculum.tsx` - 课程大纲
@@ -115,6 +123,7 @@ interface Lesson {
 - `src/components/courses/RelatedCourses.tsx` - 相关课程
 
 **页面结构**：
+
 ```
 ┌─────────────────────────────────────┐
 │  课程标题 & 基本信息                 │
@@ -134,6 +143,7 @@ interface Lesson {
 ```
 
 **功能实现**：
+
 - 课程大纲展开/折叠
 - 预览课时标记
 - 加入购物车
@@ -145,12 +155,14 @@ interface Lesson {
 #### 1.4 课程搜索功能（Day 6）
 
 **创建文件**：
+
 - `src/app/(main)/search/page.tsx` - 搜索结果页
 - `src/components/search/SearchBar.tsx` - 增强搜索栏
 - `src/components/search/SearchSuggestions.tsx` - 搜索建议
 - `src/lib/utils/search.ts` - 搜索工具函数
 
 **功能实现**：
+
 - 实时搜索建议
 - 搜索历史
 - 热门搜索
@@ -161,11 +173,13 @@ interface Lesson {
 #### 1.5 课程API服务层（Day 7）
 
 **创建文件**：
+
 - `src/services/course.service.ts` - 课程服务
 - `src/hooks/useCourses.ts` - 课程Hooks
 - `src/store/course.ts` - 课程状态管理
 
 **API方法**：
+
 ```typescript
 // 获取课程列表
 getCourses(filters?: CourseFilters): Promise<Course[]>
@@ -188,17 +202,20 @@ getRecommendedCourses(): Promise<Course[]>
 ### 阶段2：3D知识宇宙基础版（Week 2-3）
 
 #### 目标
+
 实现可视化的3D知识图谱，展示课程之间的关联和学习路径。
 
 #### 2.1 3D场景基础搭建（Day 8-9）
 
 **更新文件**：
+
 - `src/app/knowledge-universe/page.tsx` - 完善页面
 - `src/components/3d/knowledge-graph.tsx` - 完善3D图谱
 - `src/components/3d/KnowledgeNode.tsx` - 知识节点组件
 - `src/components/3d/NodeConnection.tsx` - 连接线组件
 
 **技术实现**：
+
 ```typescript
 // 使用 React Three Fiber
 import { Canvas } from '@react-three/fiber';
@@ -220,6 +237,7 @@ const Scene = () => (
 ```
 
 **节点设计**：
+
 - 球体表示课程/主题
 - 大小表示重要性
 - 颜色表示类别
@@ -228,11 +246,13 @@ const Scene = () => (
 #### 2.2 数据模型与布局算法（Day 10）
 
 **创建文件**：
+
 - `src/types/knowledge-graph.ts` - 知识图谱类型
 - `src/lib/graph-layout.ts` - 布局算法
 - `src/lib/mock-data/knowledge-graph.ts` - Mock图谱数据
 
 **类型定义**：
+
 ```typescript
 interface KnowledgeNode {
   id: string;
@@ -260,6 +280,7 @@ interface Connection {
 ```
 
 **布局算法**：
+
 - 力导向布局（Force-directed layout）
 - 分层布局（Hierarchical layout）
 - 球形布局（Spherical layout）
@@ -267,11 +288,13 @@ interface Connection {
 #### 2.3 交互功能实现（Day 11-12）
 
 **创建文件**：
+
 - `src/components/3d/NodeTooltip.tsx` - 节点提示
 - `src/components/3d/NodePanel.tsx` - 节点详情面板
 - `src/components/3d/GraphControls.tsx` - 图谱控制器
 
 **交互功能**：
+
 - 点击节点查看详情
 - 悬停显示基本信息
 - 高亮学习路径
@@ -282,6 +305,7 @@ interface Connection {
 #### 2.4 性能优化（Day 13）
 
 **优化策略**：
+
 - 节点LOD（Level of Detail）
 - 视锥剔除
 - 实例化渲染
@@ -289,6 +313,7 @@ interface Connection {
 - WebGL性能监控
 
 **创建文件**：
+
 - `src/lib/3d-performance.ts` - 3D性能优化工具
 
 ---
@@ -296,11 +321,13 @@ interface Connection {
 ### 阶段3：AI助手界面实现（Week 3）
 
 #### 目标
+
 构建智能对话界面，实现AI助手的前端交互体验。
 
 #### 3.1 对话界面搭建（Day 14-15）
 
 **创建文件**：
+
 - `src/app/(main)/ai/page.tsx` - AI助手页面
 - `src/components/ai/ChatContainer.tsx` - 聊天容器
 - `src/components/ai/MessageList.tsx` - 消息列表
@@ -309,6 +336,7 @@ interface Connection {
 - `src/components/ai/QuickActions.tsx` - 快捷操作
 
 **页面布局**：
+
 ```
 ┌─────────────────────────────────────┐
 │  AI助手标题 & 状态                   │
@@ -332,6 +360,7 @@ interface Connection {
 ```
 
 **UI特性**：
+
 - 打字机效果
 - Markdown支持
 - 代码高亮
@@ -341,18 +370,20 @@ interface Connection {
 #### 3.2 AI响应模拟（Day 16）
 
 **创建文件**：
+
 - `src/services/ai.service.ts` - AI服务
 - `src/lib/mock-data/ai-responses.ts` - Mock响应数据
 - `src/hooks/useAI.ts` - AI Hooks
 
 **Mock响应策略**：
+
 ```typescript
 // 基于关键词的智能回复
 const responses = {
-  '推荐课程': generateCourseRecommendations(),
-  '学习路径': generateLearningPath(),
-  '问题': searchKnowledgeBase(),
-  '进度': getUserProgress(),
+  推荐课程: generateCourseRecommendations(),
+  学习路径: generateLearningPath(),
+  问题: searchKnowledgeBase(),
+  进度: getUserProgress(),
   // ...
 };
 
@@ -367,6 +398,7 @@ async function* streamResponse(message: string) {
 ```
 
 **AI功能**：
+
 - 课程推荐
 - 学习路径规划
 - 问题答疑
@@ -376,10 +408,12 @@ async function* streamResponse(message: string) {
 #### 3.3 上下文管理（Day 17）
 
 **创建文件**：
+
 - `src/store/chat.ts` - 聊天状态管理
 - `src/lib/context-manager.ts` - 上下文管理器
 
 **功能实现**：
+
 - 对话历史记录
 - 上下文关联
 - 会话持久化
@@ -391,17 +425,20 @@ async function* streamResponse(message: string) {
 ### 阶段4：社区页面框架（Week 4）
 
 #### 目标
+
 构建社区讨论区的基础UI框架。
 
 #### 4.1 社区首页（Day 18）
 
 **创建文件**：
+
 - `src/app/(main)/community/page.tsx` - 社区首页
 - `src/components/community/PostCard.tsx` - 帖子卡片
 - `src/components/community/CategoryFilter.tsx` - 分类筛选
 - `src/components/community/TrendingTopics.tsx` - 热门话题
 
 **页面结构**：
+
 ```
 ┌─────────────────────────────────────┐
 │  社区导航 & 搜索                     │
@@ -425,12 +462,14 @@ async function* streamResponse(message: string) {
 #### 4.2 帖子详情页（Day 19）
 
 **创建文件**：
+
 - `src/app/(main)/community/[id]/page.tsx` - 帖子详情
 - `src/components/community/PostContent.tsx` - 帖子内容
 - `src/components/community/CommentSection.tsx` - 评论区
 - `src/components/community/CommentItem.tsx` - 评论项
 
 **功能实现**：
+
 - Markdown渲染
 - 代码高亮
 - 点赞/收藏
@@ -440,10 +479,12 @@ async function* streamResponse(message: string) {
 #### 4.3 发帖编辑器（Day 20）
 
 **创建文件**：
+
 - `src/components/community/PostEditor.tsx` - 发帖编辑器
 - `src/components/community/EditorToolbar.tsx` - 工具栏
 
 **编辑器功能**：
+
 - Markdown编辑
 - 实时预览
 - 图片上传
@@ -457,11 +498,13 @@ async function* streamResponse(message: string) {
 #### 5.1 Mock数据服务（Day 21）
 
 **创建文件**：
+
 - `src/lib/mock-data/index.ts` - 统一导出
 - `src/lib/mock-api.ts` - Mock API服务
 - `src/lib/mock-delay.ts` - 模拟网络延迟
 
 **Mock API特性**：
+
 - 模拟网络延迟（200-500ms）
 - 随机失败场景（可配置）
 - 分页支持
@@ -471,6 +514,7 @@ async function* streamResponse(message: string) {
 #### 5.2 数据完善（Day 22）
 
 **完善内容**：
+
 - 100+ 课程数据
 - 50+ 社区帖子
 - 200+ 评论数据
@@ -481,6 +525,7 @@ async function* streamResponse(message: string) {
 #### 5.3 集成测试（Day 23）
 
 **测试内容**：
+
 - 课程浏览流程
 - 搜索功能
 - 3D图谱交互
@@ -488,6 +533,7 @@ async function* streamResponse(message: string) {
 - 社区互动
 
 **创建文件**：
+
 - `e2e/course-flow.spec.ts` - 课程流程测试
 - `e2e/search.spec.ts` - 搜索测试
 - `e2e/ai-chat.spec.ts` - AI对话测试
@@ -499,11 +545,13 @@ async function* streamResponse(message: string) {
 #### 6.1 Vercel配置文件（Day 24）
 
 **创建文件**：
+
 - `vercel.json` - Vercel配置
 - `.env.production` - 生产环境变量
 - `next.config.production.js` - 生产配置
 
 **配置内容**：
+
 ```json
 {
   "buildCommand": "pnpm build",
@@ -533,6 +581,7 @@ async function* streamResponse(message: string) {
 #### 6.2 性能优化（Day 25）
 
 **优化项目**：
+
 - 启用 ISR（增量静态再生成）
 - 配置边缘缓存
 - 图片优化（Vercel Image Optimization）
@@ -540,29 +589,34 @@ async function* streamResponse(message: string) {
 - Bundle分析与优化
 
 **创建文件**：
+
 - `scripts/analyze-bundle.js` - Bundle分析脚本
 - `docs/PERFORMANCE.md` - 性能优化文档
 
 #### 6.3 监控与分析（Day 26）
 
 **集成服务**：
+
 - Vercel Analytics
 - Web Vitals监控
 - 错误追踪（Sentry）
 - 日志收集
 
 **创建文件**：
+
 - `src/lib/analytics.ts` - 分析工具
 - `src/lib/error-tracking.ts` - 错误追踪
 
 #### 6.4 CI/CD配置（Day 27）
 
 **创建文件**：
+
 - `.github/workflows/ci.yml` - CI工作流
 - `.github/workflows/deploy.yml` - 部署工作流
 - `docs/DEPLOYMENT.md` - 部署文档
 
 **工作流**：
+
 ```yaml
 name: CI/CD
 
@@ -582,7 +636,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm type-check
       - run: pnpm test
-      
+
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -596,6 +650,7 @@ jobs:
 #### 6.5 文档完善（Day 28）
 
 **创建/更新文件**：
+
 - `docs/FEATURES.md` - 功能清单
 - `docs/MOCK_DATA.md` - Mock数据说明
 - `docs/API.md` - API文档

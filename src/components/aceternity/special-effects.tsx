@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { specialEffects } from '@/lib/aceternity-animations';
 
 // 光束扫描效果组件
 interface BeamScanProps {
@@ -203,7 +202,6 @@ interface ParticleEffectProps {
 export function ParticleEffect({
   className,
   particleCount = 50,
-  particleColor = 'hsl(var(--primary))',
   particleSize = 2,
   speed = 20,
 }: ParticleEffectProps) {
@@ -274,7 +272,6 @@ export function Magnetic({
   ...props
 }: MagneticProps) {
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = React.useState(false);
   const elementRef = React.useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (event: React.MouseEvent) => {
@@ -291,7 +288,6 @@ export function Magnetic({
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
     setMousePosition({ x: 0, y: 0 });
   };
 
@@ -300,7 +296,6 @@ export function Magnetic({
       ref={elementRef}
       className={cn('aceternity-magnetic', className)}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       animate={{
         x: mousePosition.x,

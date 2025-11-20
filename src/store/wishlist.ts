@@ -99,7 +99,7 @@ export const useWishlistStore = create<WishlistState>()(
               items: [...items, mockCourseData],
               isLoading: false,
             });
-          } catch (error) {
+          } catch {
             set({
               error: '添加到收藏夹失败',
               isLoading: false,
@@ -170,7 +170,7 @@ export const useWishlistStore = create<WishlistState>()(
               items: [...items, ...newItems],
               isLoading: false,
             });
-          } catch (error) {
+          } catch {
             set({
               error: '批量添加到收藏夹失败',
               isLoading: false,

@@ -16,7 +16,11 @@ interface CourseCardProps {
   layout?: 'grid' | 'list';
 }
 
-export function CourseCard({ course, className, layout = 'grid' }: CourseCardProps) {
+export function CourseCard({
+  course,
+  className,
+  layout = 'grid',
+}: CourseCardProps) {
   const {
     id,
     title,
@@ -29,7 +33,6 @@ export function CourseCard({ course, className, layout = 'grid' }: CourseCardPro
     rating,
     studentCount,
     totalDuration,
-    totalLessons,
     isBestseller,
     isNew,
   } = course;
@@ -70,11 +73,16 @@ export function CourseCard({ course, className, layout = 'grid' }: CourseCardPro
         transition={{ duration: 0.2 }}
       >
         <Link href={`/courses/${id}`}>
-          <Card className={cn('overflow-hidden hover:shadow-lg transition-shadow', className)}>
+          <Card
+            className={cn(
+              'overflow-hidden transition-shadow hover:shadow-lg',
+              className
+            )}
+          >
             <CardContent className="p-0">
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 {/* 缩略图 */}
-                <div className="relative w-full sm:w-64 h-48 sm:h-auto flex-shrink-0">
+                <div className="relative h-48 w-full flex-shrink-0 sm:h-auto sm:w-64">
                   <Image
                     src={thumbnail}
                     alt={title}
@@ -83,34 +91,34 @@ export function CourseCard({ course, className, layout = 'grid' }: CourseCardPro
                     sizes="(max-width: 640px) 100vw, 256px"
                   />
                   {isBestseller && (
-                    <Badge className="absolute top-2 left-2 bg-amber-500 hover:bg-amber-600">
-                      <TrendingUp className="w-3 h-3 mr-1" />
+                    <Badge className="absolute left-2 top-2 bg-amber-500 hover:bg-amber-600">
+                      <TrendingUp className="mr-1 h-3 w-3" />
                       畅销
                     </Badge>
                   )}
                   {isNew && (
-                    <Badge className="absolute top-2 left-2 bg-emerald-500 hover:bg-emerald-600">
-                      <Sparkles className="w-3 h-3 mr-1" />
+                    <Badge className="absolute left-2 top-2 bg-emerald-500 hover:bg-emerald-600">
+                      <Sparkles className="mr-1 h-3 w-3" />
                       新课
                     </Badge>
                   )}
                 </div>
 
                 {/* 内容 */}
-                <div className="flex-1 p-4 space-y-3">
+                <div className="flex-1 space-y-3 p-4">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex flex-wrap items-center gap-2">
                       <Badge variant="outline">{categoryNames[category]}</Badge>
                       <Badge className={levelColors[level]} variant="secondary">
                         {levelNames[level]}
                       </Badge>
                     </div>
 
-                    <h3 className="text-xl font-semibold line-clamp-2 hover:text-primary transition-colors">
+                    <h3 className="hover:text-primary line-clamp-2 text-xl font-semibold transition-colors">
                       {title}
                     </h3>
 
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <div className="text-muted-foreground flex items-center gap-2 text-sm">
                       <Image
                         src={instructor.avatar}
                         alt={instructor.name}
@@ -122,27 +130,31 @@ export function CourseCard({ course, className, layout = 'grid' }: CourseCardPro
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="text-muted-foreground flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                      <span className="font-medium text-foreground">{rating.toFixed(1)}</span>
+                      <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                      <span className="text-foreground font-medium">
+                        {rating.toFixed(1)}
+                      </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Users className="w-4 h-4" />
+                      <Users className="h-4 w-4" />
                       <span>{studentCount.toLocaleString()}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
+                      <Clock className="h-4 w-4" />
                       <span>{Math.floor(totalDuration / 60)}小时</span>
                     </div>
                   </div>
 
                   <div className="flex items-center justify-between pt-2">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-bold text-primary">¥{price}</span>
+                      <span className="text-primary text-2xl font-bold">
+                        ¥{price}
+                      </span>
                       {originalPrice && (
                         <>
-                          <span className="text-sm text-muted-foreground line-through">
+                          <span className="text-muted-foreground text-sm line-through">
                             ¥{originalPrice}
                           </span>
                           <Badge variant="destructive" className="text-xs">
@@ -170,7 +182,12 @@ export function CourseCard({ course, className, layout = 'grid' }: CourseCardPro
       transition={{ duration: 0.2 }}
     >
       <Link href={`/courses/${id}`}>
-        <Card className={cn('overflow-hidden hover:shadow-xl transition-shadow group', className)}>
+        <Card
+          className={cn(
+            'group overflow-hidden transition-shadow hover:shadow-xl',
+            className
+          )}
+        >
           <CardContent className="p-0">
             {/* 缩略图 */}
             <div className="relative aspect-video overflow-hidden">
@@ -178,40 +195,43 @@ export function CourseCard({ course, className, layout = 'grid' }: CourseCardPro
                 src={thumbnail}
                 alt={title}
                 fill
-                className="object-cover transition-transform group-hover:scale-110 duration-300"
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
               {isBestseller && (
-                <Badge className="absolute top-3 left-3 bg-amber-500 hover:bg-amber-600 shadow-lg">
-                  <TrendingUp className="w-3 h-3 mr-1" />
+                <Badge className="absolute left-3 top-3 bg-amber-500 shadow-lg hover:bg-amber-600">
+                  <TrendingUp className="mr-1 h-3 w-3" />
                   畅销
                 </Badge>
               )}
               {isNew && (
-                <Badge className="absolute top-3 left-3 bg-emerald-500 hover:bg-emerald-600 shadow-lg">
-                  <Sparkles className="w-3 h-3 mr-1" />
+                <Badge className="absolute left-3 top-3 bg-emerald-500 shadow-lg hover:bg-emerald-600">
+                  <Sparkles className="mr-1 h-3 w-3" />
                   新课
                 </Badge>
               )}
             </div>
 
             {/* 内容 */}
-            <div className="p-4 space-y-3">
+            <div className="space-y-3 p-4">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Badge variant="outline" className="text-xs">
                     {categoryNames[category]}
                   </Badge>
-                  <Badge className={cn('text-xs', levelColors[level])} variant="secondary">
+                  <Badge
+                    className={cn('text-xs', levelColors[level])}
+                    variant="secondary"
+                  >
                     {levelNames[level]}
                   </Badge>
                 </div>
 
-                <h3 className="font-semibold line-clamp-2 group-hover:text-primary transition-colors min-h-[3rem]">
+                <h3 className="group-hover:text-primary line-clamp-2 min-h-[3rem] font-semibold transition-colors">
                   {title}
                 </h3>
 
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="text-muted-foreground flex items-center gap-2 text-sm">
                   <Image
                     src={instructor.avatar}
                     alt={instructor.name}
@@ -223,27 +243,31 @@ export function CourseCard({ course, className, layout = 'grid' }: CourseCardPro
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <div className="text-muted-foreground flex items-center gap-3 text-sm">
                 <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  <span className="font-medium text-foreground">{rating.toFixed(1)}</span>
+                  <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  <span className="text-foreground font-medium">
+                    {rating.toFixed(1)}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Users className="w-4 h-4" />
+                  <Users className="h-4 w-4" />
                   <span>{(studentCount / 1000).toFixed(1)}k</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
+                  <Clock className="h-4 w-4" />
                   <span>{Math.floor(totalDuration / 60)}h</span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-2 border-t">
+              <div className="flex items-center justify-between border-t pt-2">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-xl font-bold text-primary">¥{price}</span>
+                  <span className="text-primary text-xl font-bold">
+                    ¥{price}
+                  </span>
                   {originalPrice && (
                     <>
-                      <span className="text-sm text-muted-foreground line-through">
+                      <span className="text-muted-foreground text-sm line-through">
                         ¥{originalPrice}
                       </span>
                     </>

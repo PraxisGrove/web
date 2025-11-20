@@ -26,7 +26,6 @@ import {
   ChevronsUpDown,
   Search,
   Filter,
-  MoreHorizontal,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,

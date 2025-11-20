@@ -58,28 +58,28 @@ export function useCart(): UseCartReturn {
   const error: string | null = null;
 
   // TODO: 临时 mock 操作方法
-  const addToCart = async (courseId: string) => {
+  const addToCart = async () => {
     // Mock implementation
   };
-  const removeFromCart = (courseId: string) => {
+  const removeFromCart = () => {
     // Mock implementation
   };
   const clearCart = () => {
     // Mock implementation
   };
-  const updateQuantity = (courseId: string, quantity: number) => {
+  const updateQuantity = () => {
     // Mock implementation
   };
-  const isInCart = (courseId: string) => {
+  const isInCart = () => {
     return false;
   };
   const clearError = () => {
     // Mock implementation
   };
-  const addMultipleToCart = async (courseIds: string[]) => {
+  const addMultipleToCart = async () => {
     // Mock implementation
   };
-  const removeMultipleFromCart = (courseIds: string[]) => {
+  const removeMultipleFromCart = () => {
     // Mock implementation
   };
 

@@ -1,19 +1,16 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { ResetPassword } from '@/components/auth';
 
 /**
  * 忘记密码页面
  */
 export default function ForgotPasswordPage() {
-  const router = useRouter();
-
   const handleSuccess = () => {
     // 成功发送重置邮件后的处理
   };
 
-  const handleError = (error: string) => {
+  const handleError = () => {
     // 错误处理已在组件内部完成
   };
 

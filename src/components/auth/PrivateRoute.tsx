@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Shield, Lock, AlertTriangle, Loader2 } from 'lucide-react';
 
@@ -157,7 +157,6 @@ export function PrivateRoute({
 }: PrivateRouteProps) {
   const { isAuthenticated, isLoading, user, canAccess, checkAuth } = useAuth();
   const [isInitialized, setIsInitialized] = useState(false);
-  const pathname = usePathname();
 
   // 初始化认证检查
   useEffect(() => {

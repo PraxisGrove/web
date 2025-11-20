@@ -237,9 +237,6 @@ export function Achievements({
                       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                         {achievements.map((achievement, index) => {
                           const IconComponent = getIcon(achievement.icon);
-                          const isCompleted =
-                            achievement.progress >= achievement.maxProgress;
-
                           return (
                             <AnimatedContainer
                               key={achievement.id}

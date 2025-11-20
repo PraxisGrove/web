@@ -76,7 +76,7 @@ export function useInViewMultiple(
     setResults(newResults);
   }, [count]);
 
-  return results.map((_, index) => {
+  return results.map(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     return useInView(options);
   });

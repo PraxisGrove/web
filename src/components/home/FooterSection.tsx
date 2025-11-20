@@ -10,8 +10,6 @@ import {
   Twitter,
   Linkedin,
   Mail,
-  Phone,
-  MapPin,
   Heart,
   ExternalLink,
   BookOpen,

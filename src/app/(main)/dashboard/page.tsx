@@ -6,20 +6,10 @@ import {
   ProgressChart,
   LearningCalendar,
   Achievements,
-  LearningStats,
   RecentCourses,
   defaultLearningStats,
 } from '@/components/dashboard';
-import {
-  AnimatedContainer,
-  GradientText,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  EnhancedCard,
-  Badge,
-} from '@/components/unified';
+import { Card, CardContent, EnhancedCard, Badge } from '@/components/unified';
 import { FloatingNav } from '@/components/aceternity/floating-navbar';
 import { globalNavItems } from '@/lib/navigation';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
@@ -39,7 +29,7 @@ export default function DashboardPage() {
   );
 
   // 模拟数据
-  const [progressData, setProgressData] = useState([
+  const [progressData] = useState([
     { date: '2024-01-01', studyTime: 45, completedLessons: 2, progress: 15 },
     { date: '2024-01-02', studyTime: 60, completedLessons: 3, progress: 25 },
     { date: '2024-01-03', studyTime: 30, completedLessons: 1, progress: 30 },
@@ -458,7 +448,9 @@ export default function DashboardPage() {
                   <LearningCalendar
                     data={learningCalendarData}
                     currentDate={new Date()}
-                    onDateSelect={(date) => {/* TODO: 处理日期选择 */}}
+                    onDateSelect={() => {
+                      /* TODO: 处理日期选择 */
+                    }}
                   />
                 </CardContent>
               </Card>

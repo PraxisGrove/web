@@ -141,9 +141,9 @@ export function useDeviceType() {
 
 // 性能检测
 export function usePerformance() {
-  const [performanceLevel, setPerformanceLevel] = useState<'low' | 'medium' | 'high'>(
-    'medium'
-  );
+  const [performanceLevel, setPerformanceLevel] = useState<
+    'low' | 'medium' | 'high'
+  >('medium');
   const [reducedMotion, setReducedMotion] = useState(false);
 
   // 简单的性能检测函数
@@ -184,7 +184,7 @@ export function usePerformance() {
     if (score >= 5) newLevel = 'high';
     else if (score >= 3) newLevel = 'medium';
     else newLevel = 'low';
-    
+
     // 只在性能等级真正改变时才更新，避免不必要的重渲染
     setPerformanceLevel((prev) => {
       return prev !== newLevel ? newLevel : prev;

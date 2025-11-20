@@ -6,7 +6,6 @@ import { Loader2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useAuth } from '@/contexts/auth-provider';
 
 /**
  * 社交登录提供商类型
@@ -91,7 +90,6 @@ export function SocialLogin({
     null
   );
   const [error, setError] = useState<string | null>(null);
-  const { socialLogin } = useAuth();
 
   /**
    * 处理社交登录

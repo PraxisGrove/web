@@ -77,7 +77,7 @@ export function ScrollSpy({
         >
           <div className="rounded-full border border-gray-200 bg-white/90 p-2 shadow-lg backdrop-blur-sm dark:border-gray-700 dark:bg-slate-800/90">
             <ul className="space-y-2">
-              {sections.map((section, index) => (
+              {sections.map((section) => (
                 <li key={section.id}>
                   <button
                     onClick={() => scrollToSection(section.id)}

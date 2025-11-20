@@ -6,7 +6,7 @@
 export type CourseLevel = 'beginner' | 'intermediate' | 'advanced';
 
 // 课程分类
-export type CourseCategory = 
+export type CourseCategory =
   | 'frontend'
   | 'backend'
   | 'fullstack'
@@ -104,41 +104,41 @@ export interface Course {
   description: string;
   thumbnail: string;
   previewVideo?: string;
-  
+
   // 分类和难度
   category: CourseCategory;
   level: CourseLevel;
   tags: string[];
-  
+
   // 讲师
   instructor: Instructor;
-  
+
   // 内容
   chapters: Chapter[];
   totalDuration: number; // 总时长（分钟）
   totalLessons: number;
-  
+
   // 定价
   price: number;
   originalPrice?: number; // 原价（用于显示折扣）
   currency: string;
-  
+
   // 评价
   rating: number;
   reviewCount: number;
   stats: CourseStats;
-  
+
   // 学习目标和要求
   learningOutcomes: string[];
   requirements: string[];
   targetAudience: string[];
-  
+
   // 状态和时间
   status: CourseStatus;
   createdAt: string;
   updatedAt: string;
   publishedAt?: string;
-  
+
   // 其他
   language: string;
   subtitles: string[];
@@ -186,7 +186,7 @@ export interface CourseFilters {
 }
 
 // 课程排序选项
-export type CourseSortBy = 
+export type CourseSortBy =
   | 'newest'
   | 'popular'
   | 'rating'

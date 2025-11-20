@@ -33,7 +33,7 @@ export interface TokenData {
 /**
  * 内存存储（用于SSR或安全要求高的场景）
  */
-let memoryStorage: { [key: string]: string } = {};
+const memoryStorage: { [key: string]: string } = {};
 
 /**
  * Token存储管理类

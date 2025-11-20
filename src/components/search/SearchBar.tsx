@@ -81,7 +81,7 @@ export function SearchBar({
     // 保存到搜索历史
     const updated = [
       searchQuery,
-      ...searchHistory.filter(h => h !== searchQuery),
+      ...searchHistory.filter((h) => h !== searchQuery),
     ].slice(0, 10);
 
     setSearchHistory(updated);
@@ -114,7 +114,8 @@ export function SearchBar({
     localStorage.removeItem('search-history');
   };
 
-  const showDropdown = isFocused && showSuggestions && (query || searchHistory.length > 0);
+  const showDropdown =
+    isFocused && showSuggestions && (query || searchHistory.length > 0);
 
   const TRENDING_SEARCHES = [
     'React',
@@ -129,7 +130,7 @@ export function SearchBar({
     <div className={`relative ${className}`}>
       {/* 搜索输入框 */}
       <form onSubmit={handleSubmit} className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+        <Search className="text-muted-foreground pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2" />
         <Input
           ref={inputRef}
           type="search"
@@ -146,14 +147,14 @@ export function SearchBar({
               setQuery('');
               clear();
             }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            className="text-muted-foreground hover:text-foreground absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
           >
-            <X className="w-4 h-4" />
+            <X className="h-4 w-4" />
           </button>
         )}
         {loading && (
           <div className="absolute right-3 top-1/2 -translate-y-1/2">
-            <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
+            <Loader2 className="text-muted-foreground h-4 w-4 animate-spin" />
           </div>
         )}
       </form>
@@ -167,29 +168,31 @@ export function SearchBar({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full left-0 right-0 mt-2 bg-popover border rounded-lg shadow-lg z-50 max-h-[400px] overflow-y-auto"
+            className="bg-popover absolute left-0 right-0 top-full z-50 mt-2 max-h-[400px] overflow-y-auto rounded-lg border shadow-lg"
           >
             <div className="p-2">
               {/* 搜索结果 */}
               {query && results.length > 0 && (
                 <div className="space-y-1">
-                  <div className="px-3 py-2 text-xs font-medium text-muted-foreground">
+                  <div className="text-muted-foreground px-3 py-2 text-xs font-medium">
                     课程建议
                   </div>
-                  {results.map(course => (
+                  {results.map((course) => (
                     <button
                       key={course.id}
                       onClick={() => handleSuggestionClick(course)}
-                      className="w-full flex items-center gap-3 px-3 py-2 hover:bg-accent rounded-md transition-colors text-left"
+                      className="hover:bg-accent flex w-full items-center gap-3 rounded-md px-3 py-2 text-left transition-colors"
                     >
-                      <Search className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium truncate">{course.title}</div>
-                        <div className="text-xs text-muted-foreground">
+                      <Search className="text-muted-foreground h-4 w-4 flex-shrink-0" />
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate font-medium">
+                          {course.title}
+                        </div>
+                        <div className="text-muted-foreground text-xs">
                           {course.instructor.name}
                         </div>
                       </div>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground flex-shrink-0">
+                      <div className="text-muted-foreground flex flex-shrink-0 items-center gap-1 text-xs">
                         <span>⭐ {course.rating.toFixed(1)}</span>
                       </div>
                     </button>
@@ -199,7 +202,7 @@ export function SearchBar({
 
               {/* 无结果提示 */}
               {query && !loading && results.length === 0 && (
-                <div className="px-3 py-6 text-center text-sm text-muted-foreground">
+                <div className="text-muted-foreground px-3 py-6 text-center text-sm">
                   未找到相关课程
                 </div>
               )}
@@ -208,13 +211,13 @@ export function SearchBar({
               {!query && searchHistory.length > 0 && (
                 <div className="space-y-1">
                   <div className="flex items-center justify-between px-3 py-2">
-                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                      <Clock className="w-4 h-4" />
+                    <div className="text-muted-foreground flex items-center gap-2 text-xs font-medium">
+                      <Clock className="h-4 w-4" />
                       <span>最近搜索</span>
                     </div>
                     <button
                       onClick={handleClearHistory}
-                      className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-muted-foreground hover:text-foreground text-xs transition-colors"
                     >
                       清除
                     </button>
@@ -223,9 +226,9 @@ export function SearchBar({
                     <button
                       key={`${term}-${index}`}
                       onClick={() => handleHistoryClick(term)}
-                      className="w-full flex items-center gap-3 px-3 py-2 hover:bg-accent rounded-md transition-colors text-left"
+                      className="hover:bg-accent flex w-full items-center gap-3 rounded-md px-3 py-2 text-left transition-colors"
                     >
-                      <Clock className="w-4 h-4 text-muted-foreground" />
+                      <Clock className="text-muted-foreground h-4 w-4" />
                       <span className="flex-1">{term}</span>
                     </button>
                   ))}
@@ -234,17 +237,17 @@ export function SearchBar({
 
               {/* 热门搜索 */}
               {!query && (
-                <div className="space-y-2 mt-2 pt-2 border-t">
-                  <div className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-muted-foreground">
-                    <TrendingUp className="w-4 h-4" />
+                <div className="mt-2 space-y-2 border-t pt-2">
+                  <div className="text-muted-foreground flex items-center gap-2 px-3 py-2 text-xs font-medium">
+                    <TrendingUp className="h-4 w-4" />
                     <span>热门搜索</span>
                   </div>
-                  <div className="px-3 flex flex-wrap gap-2">
-                    {TRENDING_SEARCHES.map(term => (
+                  <div className="flex flex-wrap gap-2 px-3">
+                    {TRENDING_SEARCHES.map((term) => (
                       <Badge
                         key={term}
                         variant="secondary"
-                        className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                        className="hover:bg-primary hover:text-primary-foreground cursor-pointer transition-colors"
                         onClick={() => handleHistoryClick(term)}
                       >
                         {term}

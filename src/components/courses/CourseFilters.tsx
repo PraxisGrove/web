@@ -1,20 +1,29 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import type { CourseFilters as CourseFiltersType, CourseCategory, CourseLevel } from '@/types/course';
+import type {
+  CourseFilters as CourseFiltersType,
+  CourseCategory,
+  CourseLevel,
+} from '@/types/course';
 
 interface CourseFiltersProps {
   filters: CourseFiltersType;
@@ -22,7 +31,11 @@ interface CourseFiltersProps {
   onClear: () => void;
 }
 
-export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFiltersProps) {
+export function CourseFilters({
+  filters,
+  onFiltersChange,
+  onClear,
+}: CourseFiltersProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const categories: { id: CourseCategory; name: string }[] = [
@@ -42,26 +55,29 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
     { id: 'advanced', name: '高级' },
   ];
 
-  const features: { id: 'certificate' | 'lifetime' | 'subtitles'; name: string }[] = [
-    { id: 'certificate', name: '提供证书' },
-    { id: 'lifetime', name: '终身访问' },
-    { id: 'subtitles', name: '中文字幕' },
-  ];
-
-  const handleCategoryChange = (categoryId: CourseCategory, checked: boolean) => {
+  const handleCategoryChange = (
+    categoryId: CourseCategory,
+    checked: boolean
+  ) => {
     const newCategories = checked
       ? [...(filters.category || []), categoryId]
-      : (filters.category || []).filter(c => c !== categoryId);
-    
-    onFiltersChange({ ...filters, category: newCategories.length > 0 ? newCategories : undefined });
+      : (filters.category || []).filter((c) => c !== categoryId);
+
+    onFiltersChange({
+      ...filters,
+      category: newCategories.length > 0 ? newCategories : undefined,
+    });
   };
 
   const handleLevelChange = (levelId: CourseLevel, checked: boolean) => {
     const newLevels = checked
       ? [...(filters.level || []), levelId]
-      : (filters.level || []).filter(l => l !== levelId);
-    
-    onFiltersChange({ ...filters, level: newLevels.length > 0 ? newLevels : undefined });
+      : (filters.level || []).filter((l) => l !== levelId);
+
+    onFiltersChange({
+      ...filters,
+      level: newLevels.length > 0 ? newLevels : undefined,
+    });
   };
 
   const handlePriceChange = (values: number[]) => {
@@ -95,22 +111,24 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
     <div className="space-y-6">
       {/* 分类筛选 */}
       <Collapsible defaultOpen>
-        <CollapsibleTrigger className="flex items-center justify-between w-full py-2 font-semibold hover:text-primary transition-colors">
+        <CollapsibleTrigger className="hover:text-primary flex w-full items-center justify-between py-2 font-semibold transition-colors">
           <span>课程分类</span>
-          <ChevronDown className="w-4 h-4" />
+          <ChevronDown className="h-4 w-4" />
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="space-y-3 pt-3">
-            {categories.map(category => (
+            {categories.map((category) => (
               <div key={category.id} className="flex items-center space-x-2">
                 <Checkbox
                   id={`category-${category.id}`}
                   checked={filters.category?.includes(category.id) || false}
-                  onCheckedChange={checked => handleCategoryChange(category.id, checked as boolean)}
+                  onCheckedChange={(checked) =>
+                    handleCategoryChange(category.id, checked as boolean)
+                  }
                 />
                 <Label
                   htmlFor={`category-${category.id}`}
-                  className="text-sm font-normal cursor-pointer"
+                  className="cursor-pointer text-sm font-normal"
                 >
                   {category.name}
                 </Label>
@@ -122,22 +140,24 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
 
       {/* 难度筛选 */}
       <Collapsible defaultOpen>
-        <CollapsibleTrigger className="flex items-center justify-between w-full py-2 font-semibold hover:text-primary transition-colors">
+        <CollapsibleTrigger className="hover:text-primary flex w-full items-center justify-between py-2 font-semibold transition-colors">
           <span>课程难度</span>
-          <ChevronDown className="w-4 h-4" />
+          <ChevronDown className="h-4 w-4" />
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="space-y-3 pt-3">
-            {levels.map(level => (
+            {levels.map((level) => (
               <div key={level.id} className="flex items-center space-x-2">
                 <Checkbox
                   id={`level-${level.id}`}
                   checked={filters.level?.includes(level.id) || false}
-                  onCheckedChange={checked => handleLevelChange(level.id, checked as boolean)}
+                  onCheckedChange={(checked) =>
+                    handleLevelChange(level.id, checked as boolean)
+                  }
                 />
                 <Label
                   htmlFor={`level-${level.id}`}
-                  className="text-sm font-normal cursor-pointer"
+                  className="cursor-pointer text-sm font-normal"
                 >
                   {level.name}
                 </Label>
@@ -149,9 +169,9 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
 
       {/* 价格筛选 */}
       <Collapsible defaultOpen>
-        <CollapsibleTrigger className="flex items-center justify-between w-full py-2 font-semibold hover:text-primary transition-colors">
+        <CollapsibleTrigger className="hover:text-primary flex w-full items-center justify-between py-2 font-semibold transition-colors">
           <span>价格范围</span>
-          <ChevronDown className="w-4 h-4" />
+          <ChevronDown className="h-4 w-4" />
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="space-y-4 pt-3">
@@ -159,10 +179,13 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
               min={0}
               max={1000}
               step={50}
-              value={[filters.priceRange?.min || 0, filters.priceRange?.max || 1000]}
+              value={[
+                filters.priceRange?.min || 0,
+                filters.priceRange?.max || 1000,
+              ]}
               onValueChange={handlePriceChange}
             />
-            <div className="flex items-center justify-between text-sm text-muted-foreground">
+            <div className="text-muted-foreground flex items-center justify-between text-sm">
               <span>¥{filters.priceRange?.min || 0}</span>
               <span>¥{filters.priceRange?.max || 1000}</span>
             </div>
@@ -172,9 +195,9 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
 
       {/* 评分筛选 */}
       <Collapsible defaultOpen>
-        <CollapsibleTrigger className="flex items-center justify-between w-full py-2 font-semibold hover:text-primary transition-colors">
+        <CollapsibleTrigger className="hover:text-primary flex w-full items-center justify-between py-2 font-semibold transition-colors">
           <span>最低评分</span>
-          <ChevronDown className="w-4 h-4" />
+          <ChevronDown className="h-4 w-4" />
         </CollapsibleTrigger>
         <CollapsibleContent>
           <div className="space-y-4 pt-3">
@@ -185,7 +208,7 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
               value={[filters.rating || 0]}
               onValueChange={handleRatingChange}
             />
-            <div className="flex items-center justify-between text-sm text-muted-foreground">
+            <div className="text-muted-foreground flex items-center justify-between text-sm">
               <span>任意评分</span>
               <span>{filters.rating?.toFixed(1) || '0.0'}+ ⭐</span>
             </div>
@@ -195,12 +218,8 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
 
       {/* 清除筛选 */}
       {activeCount > 0 && (
-        <Button
-          variant="outline"
-          className="w-full"
-          onClick={onClear}
-        >
-          <X className="w-4 h-4 mr-2" />
+        <Button variant="outline" className="w-full" onClick={onClear}>
+          <X className="mr-2 h-4 w-4" />
           清除所有筛选 ({activeCount})
         </Button>
       )}
@@ -213,7 +232,7 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
       <div className="hidden lg:block">
         <div className="sticky top-24 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-semibold text-lg">筛选条件</h3>
+            <h3 className="text-lg font-semibold">筛选条件</h3>
             {activeCount > 0 && (
               <Badge variant="secondary">{activeCount}</Badge>
             )}
@@ -227,7 +246,7 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" className="w-full sm:w-auto">
-              <Filter className="w-4 h-4 mr-2" />
+              <Filter className="mr-2 h-4 w-4" />
               筛选
               {activeCount > 0 && (
                 <Badge variant="secondary" className="ml-2">
@@ -236,7 +255,10 @@ export function CourseFilters({ filters, onFiltersChange, onClear }: CourseFilte
               )}
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px] overflow-y-auto">
+          <SheetContent
+            side="left"
+            className="w-[300px] overflow-y-auto sm:w-[400px]"
+          >
             <SheetHeader>
               <SheetTitle className="flex items-center justify-between">
                 <span>筛选条件</span>

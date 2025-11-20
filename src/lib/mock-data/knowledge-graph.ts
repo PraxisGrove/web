@@ -18,13 +18,13 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       difficulty: 3,
       importance: 9,
       prerequisites: [],
-      learningTime: 40
+      learningTime: 40,
     },
     resources: {
       courses: [],
       articles: [],
-      videos: []
-    }
+      videos: [],
+    },
   },
   {
     id: '2',
@@ -39,13 +39,13 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       difficulty: 6,
       importance: 8,
       prerequisites: ['1'],
-      learningTime: 60
+      learningTime: 60,
     },
     resources: {
       courses: [],
       articles: [],
-      videos: []
-    }
+      videos: [],
+    },
   },
   {
     id: '3',
@@ -60,13 +60,13 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       difficulty: 5,
       importance: 7,
       prerequisites: ['1'],
-      learningTime: 30
+      learningTime: 30,
     },
     resources: {
       courses: [],
       articles: [],
-      videos: []
-    }
+      videos: [],
+    },
   },
   {
     id: '4',
@@ -81,13 +81,13 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       difficulty: 6,
       importance: 8,
       prerequisites: ['1'],
-      learningTime: 50
+      learningTime: 50,
     },
     resources: {
       courses: [],
       articles: [],
-      videos: []
-    }
+      videos: [],
+    },
   },
   {
     id: '5',
@@ -102,14 +102,14 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       difficulty: 7,
       importance: 9,
       prerequisites: ['2', '3', '4'],
-      learningTime: 40
+      learningTime: 40,
     },
     resources: {
       courses: [],
       articles: [],
-      videos: []
-    }
-  }
+      videos: [],
+    },
+  },
 ];
 
 export const mockKnowledgeConnections: KnowledgeConnection[] = [
@@ -118,34 +118,34 @@ export const mockKnowledgeConnections: KnowledgeConnection[] = [
     fromNodeId: '1',
     toNodeId: '2',
     type: 'prerequisite',
-    strength: 0.9
+    strength: 0.9,
   },
   {
     id: 'c2',
     fromNodeId: '1',
     toNodeId: '3',
     type: 'related',
-    strength: 0.8
+    strength: 0.8,
   },
   {
     id: 'c3',
     fromNodeId: '2',
     toNodeId: '5',
     type: 'prerequisite',
-    strength: 0.95
+    strength: 0.95,
   },
   {
     id: 'c4',
     fromNodeId: '3',
     toNodeId: '5',
     type: 'related',
-    strength: 0.85
+    strength: 0.85,
   },
   {
     id: 'c5',
     fromNodeId: '4',
     toNodeId: '5',
     type: 'prerequisite',
-    strength: 0.9
-  }
+    strength: 0.9,
+  },
 ];

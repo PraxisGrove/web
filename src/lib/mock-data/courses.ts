@@ -19,11 +19,11 @@ export const mockCourseCards: CourseCard[] = [
     totalLessons: 48,
     instructor: {
       name: '张伟',
-      avatar: '/images/instructors/zhang.jpg'
+      avatar: '/images/instructors/zhang.jpg',
     },
     updatedAt: '2024-01-15',
     isBestseller: true,
-    isNew: false
+    isNew: false,
   },
   {
     id: '2',
@@ -39,11 +39,11 @@ export const mockCourseCards: CourseCard[] = [
     totalLessons: 36,
     instructor: {
       name: '李娜',
-      avatar: '/images/instructors/li.jpg'
+      avatar: '/images/instructors/li.jpg',
     },
     updatedAt: '2024-01-20',
     isBestseller: true,
-    isNew: true
+    isNew: true,
   },
   {
     id: '3',
@@ -59,11 +59,11 @@ export const mockCourseCards: CourseCard[] = [
     totalLessons: 40,
     instructor: {
       name: '王强',
-      avatar: '/images/instructors/wang.jpg'
+      avatar: '/images/instructors/wang.jpg',
     },
     updatedAt: '2024-01-10',
     isBestseller: false,
-    isNew: false
+    isNew: false,
   },
   {
     id: '4',
@@ -79,11 +79,11 @@ export const mockCourseCards: CourseCard[] = [
     totalLessons: 56,
     instructor: {
       name: '张伟',
-      avatar: '/images/instructors/zhang.jpg'
+      avatar: '/images/instructors/zhang.jpg',
     },
     updatedAt: '2024-01-22',
     isBestseller: true,
-    isNew: true
+    isNew: true,
   },
   {
     id: '5',
@@ -99,11 +99,11 @@ export const mockCourseCards: CourseCard[] = [
     totalLessons: 32,
     instructor: {
       name: '赵敏',
-      avatar: '/images/instructors/zhao.jpg'
+      avatar: '/images/instructors/zhao.jpg',
     },
     updatedAt: '2024-01-12',
     isBestseller: false,
-    isNew: false
+    isNew: false,
   },
   {
     id: '6',
@@ -119,16 +119,16 @@ export const mockCourseCards: CourseCard[] = [
     totalLessons: 44,
     instructor: {
       name: '赵敏',
-      avatar: '/images/instructors/zhao.jpg'
+      avatar: '/images/instructors/zhao.jpg',
     },
     updatedAt: '2024-01-18',
     isBestseller: true,
-    isNew: false
-  }
+    isNew: false,
+  },
 ];
 
 // 将 CourseCard 扩展为完整的 Course 类型
-export const allMockCourses: Course[] = mockCourseCards.map(card => ({
+export const allMockCourses: Course[] = mockCourseCards.map((card) => ({
   ...card,
   subtitle: `${card.title}的副标题`,
   description: `这是关于${card.title}的详细描述。本课程将系统地教授相关知识和技能。`,
@@ -144,7 +144,7 @@ export const allMockCourses: Course[] = mockCourseCards.map(card => ({
     rating: 4.8,
     studentCount: 10000,
     courseCount: 15,
-    specialties: ['编程', '开发']
+    specialties: ['编程', '开发'],
   },
   chapters: [],
   totalLessons: card.totalLessons,
@@ -159,14 +159,10 @@ export const allMockCourses: Course[] = mockCourseCards.map(card => ({
       2: 20,
       3: 50,
       4: 150,
-      5: 300
-    }
+      5: 300,
+    },
   },
-  learningOutcomes: [
-    '掌握核心概念',
-    '完成实战项目',
-    '获得实践经验'
-  ],
+  learningOutcomes: ['掌握核心概念', '完成实战项目', '获得实践经验'],
   requirements: ['基础编程知识'],
   targetAudience: ['初学者', '开发者'],
   status: 'published' as const,
@@ -175,5 +171,5 @@ export const allMockCourses: Course[] = mockCourseCards.map(card => ({
   language: 'zh-CN',
   subtitles: ['中文'],
   certificate: true,
-  lifetime: true
+  lifetime: true,
 }));

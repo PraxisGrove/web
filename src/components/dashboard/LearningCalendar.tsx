@@ -14,7 +14,6 @@ import {
   CardHeader,
   CardTitle,
   Button,
-  Badge,
   Tooltip,
   TooltipContent,
   TooltipProvider,

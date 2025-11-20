@@ -4,7 +4,7 @@
  */
 
 import { reactBitConfig, getCurrentAnimationConfig } from './config';
-import type { ReactBitTheme, AnimationConfig } from './config';
+import type { ReactBitTheme } from './config';
 
 // 动画工具函数
 export const reactBitUtils = {
@@ -236,7 +236,6 @@ export const reactBitUtils = {
     getDevicePerformance(): 'low' | 'medium' | 'high' {
       if (typeof window === 'undefined') return 'medium';
 
-      const connection = (navigator as any).connection;
       const hardwareConcurrency = navigator.hardwareConcurrency || 4;
       const deviceMemory = (navigator as any).deviceMemory || 4;
 
@@ -301,7 +300,7 @@ export const reactBitUtils = {
     },
 
     // 获取对比色
-    getContrastColor(color: string): string {
+    getContrastColor(): string {
       // 简单的对比色计算，实际项目中可能需要更复杂的算法
       return this.isDarkMode() ? '#ffffff' : '#000000';
     },

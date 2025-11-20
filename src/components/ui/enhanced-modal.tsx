@@ -109,7 +109,6 @@ export function EnhancedModal({
   closeOnOverlayClick = true,
   closeOnEscape = true,
   className,
-  overlayClassName,
   children,
   trigger,
   footer,

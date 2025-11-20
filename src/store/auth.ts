@@ -120,6 +120,7 @@ export const useAuthStore = create<AuthState>()(
             );
 
             // 创建用户对象（排除密码）
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { password: _, ...userWithoutPassword } = user;
 
             set({

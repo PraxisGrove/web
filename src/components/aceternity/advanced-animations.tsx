@@ -1,12 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import {
-  motion,
-  useAnimation,
-  useInView,
-  AnimatePresence,
-} from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 // 文字打字机效果组件

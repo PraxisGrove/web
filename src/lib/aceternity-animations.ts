@@ -3,7 +3,7 @@
  * 基于 Framer Motion 的高性能动画系统
  */
 
-import { Variants, Transition } from 'framer-motion';
+import { Variants } from 'framer-motion';
 
 // 动画预设配置
 export const animationPresets = {

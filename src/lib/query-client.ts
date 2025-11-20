@@ -1,5 +1,4 @@
 import { QueryClient, DefaultOptions } from '@tanstack/react-query';
-import { notificationHelpers } from '@/store/ui';
 
 /**
  * 默认查询选项
@@ -160,7 +159,7 @@ export const queryOptions = {
 export const mutationOptions = {
   // 乐观更新
   optimistic: {
-    onMutate: async (variables: any) => {
+    onMutate: async () => {
       // 取消相关查询以避免冲突
       // 返回上下文用于回滚
       return { previousData: null };

@@ -6,7 +6,6 @@ import { motion, HTMLMotionProps, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import {
   BackgroundBeams,
-  FloatingNav,
   PulseGlow,
   GradientShift,
   AnimatedContainer,

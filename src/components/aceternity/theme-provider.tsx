@@ -68,7 +68,7 @@ export function AceternityThemeProvider({
       }
 
       // 更新 CSS 自定义属性
-      updateCSSVariables(isDark);
+      updateCSSVariables();
     };
 
     updateTheme();
@@ -86,7 +86,7 @@ export function AceternityThemeProvider({
   }, [currentTheme]);
 
   // 更新 CSS 自定义属性
-  const updateCSSVariables = (isDark: boolean) => {
+  const updateCSSVariables = () => {
     const root = document.documentElement;
 
     // Aceternity 特定的 CSS 变量

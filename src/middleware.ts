@@ -164,7 +164,7 @@ export async function middleware(request: NextRequest) {
       if (requiresAdmin && tokenData.role !== 'admin') {
         return NextResponse.redirect(new URL('/unauthorized', request.url));
       }
-    } catch (error) {
+    } catch {
       // 令牌无效，清除令牌并重定向到登录页面
       const response = NextResponse.redirect(new URL('/login', request.url));
       response.cookies.delete('auth-token');

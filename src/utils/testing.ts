@@ -47,9 +47,9 @@ export class TestingUtils {
       window.dispatchEvent(new Event('resize'));
 
       // 检查布局是否正确响应
-      const isMobile = width < 768;
-      const isTablet = width >= 768 && width < 1024;
-      const isDesktop = width >= 1024;
+      // const isMobile = width < 768;
+      // const isTablet = width >= 768 && width < 1024;
+      // const isDesktop = width >= 1024;
 
       results[name] = true; // 简化的测试，实际应该检查具体的布局变化
     });
@@ -97,7 +97,7 @@ export class TestingUtils {
 
     // 检查颜色对比度（简化版）
     const textElements = document.querySelectorAll('p, span, div, a, button');
-    textElements.forEach((element, index) => {
+    textElements.forEach((element) => {
       const styles = window.getComputedStyle(element);
       const color = styles.color;
       const backgroundColor = styles.backgroundColor;

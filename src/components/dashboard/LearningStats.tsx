@@ -17,8 +17,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CardTitle,
-  Badge,
   Progress,
   AnimatedContainer,
   GradientText,
@@ -72,7 +70,7 @@ export function LearningStats({ stats, className = '' }: LearningStatsProps) {
   };
 
   // 格式化数值
-  const formatValue = (value: string | number, unit?: string) => {
+  const formatValue = (value: string | number) => {
     if (typeof value === 'number') {
       // 如果是大数字，使用简化格式
       if (value >= 1000000) {

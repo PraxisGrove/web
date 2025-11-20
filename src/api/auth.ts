@@ -103,7 +103,7 @@ export const authApi = {
         skipErrorNotification: true,
       });
       return { isAuthenticated: true, user };
-    } catch (error) {
+    } catch {
       return { isAuthenticated: false };
     }
   },

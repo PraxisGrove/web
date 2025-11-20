@@ -5,8 +5,6 @@ import { motion } from 'framer-motion';
 import {
   Card,
   CardContent,
-  CardHeader,
-  CardTitle,
   Tabs,
   TabsContent,
   TabsList,
@@ -17,9 +15,7 @@ import {
   AvatarFallback,
   AvatarImage,
   Input,
-  Textarea,
   EnhancedCard,
-  AnimatedContainer,
   PageLayout,
 } from '@/components/unified';
 import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
@@ -266,8 +262,8 @@ export default function CommunityPage() {
         <AdaptiveParticles className="fixed inset-0 z-0">
           <div />
         </AdaptiveParticles>
-        
-        <div className="relative z-10 container mx-auto space-y-8 px-4 py-20">
+
+        <div className="container relative z-10 mx-auto space-y-8 px-4 py-20">
           <div className="h-8 w-48 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
             <div className="lg:col-span-1">
@@ -294,7 +290,7 @@ export default function CommunityPage() {
       <AdaptiveParticles className="fixed inset-0 z-0">
         <div />
       </AdaptiveParticles>
-      
+
       <main className="relative z-10">
         <PageLayout
           title="学习社区"
@@ -302,259 +298,261 @@ export default function CommunityPage() {
           backgroundClass=""
         >
           {/* 主要内容区域 */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
-        {/* 左侧边栏 - 分类和统计 */}
-        <div className="lg:col-span-1">
-          <div className="space-y-6">
-            {/* 快速操作 */}
-            <EnhancedCard variant="glow" className="p-6">
-              <h3 className="mb-4 text-lg font-semibold">快速操作</h3>
-              <div className="space-y-3">
-                <Button className="w-full justify-start" variant="default">
-                  <Plus className="mr-2 h-4 w-4" />
-                  发布帖子
-                </Button>
-                <Button className="w-full justify-start" variant="outline">
-                  <Search className="mr-2 h-4 w-4" />
-                  搜索内容
-                </Button>
-              </div>
-            </EnhancedCard>
-
-            {/* 社区分类 */}
-            <EnhancedCard variant="glow" className="p-6">
-              <h3 className="mb-4 text-lg font-semibold">社区分类</h3>
-              <div className="space-y-2">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`flex w-full items-center justify-between rounded-lg p-3 text-left transition-colors ${
-                      selectedCategory === category.id
-                        ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
-                        : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-                    }`}
-                  >
-                    <div className="flex items-center space-x-3">
-                      <div
-                        className={`rounded-lg p-1.5 text-white ${category.color}`}
-                      >
-                        {category.icon}
-                      </div>
-                      <div>
-                        <p className="font-medium">{category.name}</p>
-                        <p className="text-xs text-gray-500">
-                          {category.postCount} 帖子
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </EnhancedCard>
-          </div>
-        </div>
-
-        {/* 主要内容区域 */}
-        <div className="lg:col-span-3">
-          <div className="space-y-6">
-            {/* 搜索和筛选 */}
-            <EnhancedCard variant="glow" className="p-6">
-              <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-                <div className="max-w-md flex-1">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                    <Input
-                      placeholder="搜索帖子、用户或标签..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10"
-                    />
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
+            {/* 左侧边栏 - 分类和统计 */}
+            <div className="lg:col-span-1">
+              <div className="space-y-6">
+                {/* 快速操作 */}
+                <EnhancedCard variant="glow" className="p-6">
+                  <h3 className="mb-4 text-lg font-semibold">快速操作</h3>
+                  <div className="space-y-3">
+                    <Button className="w-full justify-start" variant="default">
+                      <Plus className="mr-2 h-4 w-4" />
+                      发布帖子
+                    </Button>
+                    <Button className="w-full justify-start" variant="outline">
+                      <Search className="mr-2 h-4 w-4" />
+                      搜索内容
+                    </Button>
                   </div>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Button variant="outline" size="sm">
-                    <Filter className="mr-2 h-4 w-4" />
-                    筛选
-                  </Button>
-                </div>
-              </div>
-            </EnhancedCard>
+                </EnhancedCard>
 
-            {/* 内容选项卡 */}
-            <EnhancedCard variant="glow" className="p-6">
-              <Tabs
-                value={activeTab}
-                onValueChange={setActiveTab}
-                className="w-full"
-              >
-                <TabsList className="grid w-full grid-cols-4 border border-white/20 bg-white/10 dark:bg-white/5">
-                  <TabsTrigger
-                    value="trending"
-                    className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
-                  >
-                    <TrendingUp className="mr-2 h-4 w-4" />
-                    热门
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="latest"
-                    className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
-                  >
-                    <Clock className="mr-2 h-4 w-4" />
-                    最新
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="following"
-                    className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
-                  >
-                    <Users className="mr-2 h-4 w-4" />
-                    关注
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="bookmarked"
-                    className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
-                  >
-                    <Star className="mr-2 h-4 w-4" />
-                    收藏
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value={activeTab} className="mt-6">
-                  <div className="space-y-6">
-                    {posts.map((post, index) => (
-                      <motion.div
-                        key={post.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                {/* 社区分类 */}
+                <EnhancedCard variant="glow" className="p-6">
+                  <h3 className="mb-4 text-lg font-semibold">社区分类</h3>
+                  <div className="space-y-2">
+                    {categories.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => setSelectedCategory(category.id)}
+                        className={`flex w-full items-center justify-between rounded-lg p-3 text-left transition-colors ${
+                          selectedCategory === category.id
+                            ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                        }`}
                       >
-                        <Card className="overflow-hidden transition-shadow hover:shadow-lg">
-                          <CardContent className="p-6">
-                            {/* 帖子头部 */}
-                            <div className="mb-4 flex items-start justify-between">
-                              <div className="flex items-center space-x-3">
-                                <Avatar className="h-10 w-10">
-                                  <AvatarImage
-                                    src={post.author.avatar}
-                                    alt={post.author.name}
-                                  />
-                                  <AvatarFallback>
-                                    {post.author.name.slice(0, 2)}
-                                  </AvatarFallback>
-                                </Avatar>
-                                <div>
-                                  <div className="flex items-center space-x-2">
-                                    <p className="font-medium">
-                                      {post.author.name}
-                                    </p>
-                                    <Badge
-                                      variant="secondary"
-                                      className="text-xs"
-                                    >
-                                      Lv.{post.author.level}
-                                    </Badge>
-                                  </div>
-                                  <p className="text-sm text-gray-500">
-                                    {post.author.role}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <p className="text-sm text-gray-500">
-                                  {new Date(post.createdAt).toLocaleDateString(
-                                    'zh-CN'
-                                  )}
-                                </p>
-                                <div className="mt-1 flex items-center space-x-2 text-xs text-gray-400">
-                                  <Eye className="h-3 w-3" />
-                                  <span>{post.views}</span>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* 帖子标题 */}
-                            <h3 className="mb-3 cursor-pointer text-xl font-semibold transition-colors hover:text-blue-600">
-                              {post.title}
-                            </h3>
-
-                            {/* 帖子内容预览 */}
-                            <p className="mb-4 line-clamp-3 text-gray-600 dark:text-gray-300">
-                              {post.content}
+                        <div className="flex items-center space-x-3">
+                          <div
+                            className={`rounded-lg p-1.5 text-white ${category.color}`}
+                          >
+                            {category.icon}
+                          </div>
+                          <div>
+                            <p className="font-medium">{category.name}</p>
+                            <p className="text-xs text-gray-500">
+                              {category.postCount} 帖子
                             </p>
-
-                            {/* 标签和难度 */}
-                            <div className="mb-4 flex flex-wrap items-center gap-2">
-                              {post.tags.map((tag) => (
-                                <Badge
-                                  key={tag}
-                                  variant="outline"
-                                  className="text-xs"
-                                >
-                                  #{tag}
-                                </Badge>
-                              ))}
-                              {post.difficulty && (
-                                <Badge
-                                  className={`text-xs ${getDifficultyColor(post.difficulty)}`}
-                                >
-                                  {getDifficultyText(post.difficulty)}
-                                </Badge>
-                              )}
-                            </div>
-
-                            {/* 帖子操作 */}
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-4">
-                                <button
-                                  onClick={() => handleLike(post.id)}
-                                  className={`flex items-center space-x-1 transition-colors ${
-                                    post.isLiked
-                                      ? 'text-red-500'
-                                      : 'text-gray-500 hover:text-red-500'
-                                  }`}
-                                >
-                                  <Heart
-                                    className={`h-4 w-4 ${post.isLiked ? 'fill-current' : ''}`}
-                                  />
-                                  <span className="text-sm">{post.likes}</span>
-                                </button>
-                                <button className="flex items-center space-x-1 text-gray-500 transition-colors hover:text-blue-500">
-                                  <MessageCircle className="h-4 w-4" />
-                                  <span className="text-sm">
-                                    {post.comments}
-                                  </span>
-                                </button>
-                                <button className="flex items-center space-x-1 text-gray-500 transition-colors hover:text-green-500">
-                                  <Share2 className="h-4 w-4" />
-                                  <span className="text-sm">分享</span>
-                                </button>
-                              </div>
-                              <button
-                                onClick={() => handleBookmark(post.id)}
-                                className={`transition-colors ${
-                                  post.isBookmarked
-                                    ? 'text-yellow-500'
-                                    : 'text-gray-500 hover:text-yellow-500'
-                                }`}
-                              >
-                                <Star
-                                  className={`h-4 w-4 ${post.isBookmarked ? 'fill-current' : ''}`}
-                                />
-                              </button>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
+                          </div>
+                        </div>
+                      </button>
                     ))}
                   </div>
-                </TabsContent>
-              </Tabs>
-            </EnhancedCard>
+                </EnhancedCard>
+              </div>
+            </div>
+
+            {/* 主要内容区域 */}
+            <div className="lg:col-span-3">
+              <div className="space-y-6">
+                {/* 搜索和筛选 */}
+                <EnhancedCard variant="glow" className="p-6">
+                  <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+                    <div className="max-w-md flex-1">
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                        <Input
+                          placeholder="搜索帖子、用户或标签..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          className="pl-10"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button variant="outline" size="sm">
+                        <Filter className="mr-2 h-4 w-4" />
+                        筛选
+                      </Button>
+                    </div>
+                  </div>
+                </EnhancedCard>
+
+                {/* 内容选项卡 */}
+                <EnhancedCard variant="glow" className="p-6">
+                  <Tabs
+                    value={activeTab}
+                    onValueChange={setActiveTab}
+                    className="w-full"
+                  >
+                    <TabsList className="grid w-full grid-cols-4 border border-white/20 bg-white/10 dark:bg-white/5">
+                      <TabsTrigger
+                        value="trending"
+                        className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
+                      >
+                        <TrendingUp className="mr-2 h-4 w-4" />
+                        热门
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="latest"
+                        className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
+                      >
+                        <Clock className="mr-2 h-4 w-4" />
+                        最新
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="following"
+                        className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
+                      >
+                        <Users className="mr-2 h-4 w-4" />
+                        关注
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="bookmarked"
+                        className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
+                      >
+                        <Star className="mr-2 h-4 w-4" />
+                        收藏
+                      </TabsTrigger>
+                    </TabsList>
+
+                    <TabsContent value={activeTab} className="mt-6">
+                      <div className="space-y-6">
+                        {posts.map((post, index) => (
+                          <motion.div
+                            key={post.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                          >
+                            <Card className="overflow-hidden transition-shadow hover:shadow-lg">
+                              <CardContent className="p-6">
+                                {/* 帖子头部 */}
+                                <div className="mb-4 flex items-start justify-between">
+                                  <div className="flex items-center space-x-3">
+                                    <Avatar className="h-10 w-10">
+                                      <AvatarImage
+                                        src={post.author.avatar}
+                                        alt={post.author.name}
+                                      />
+                                      <AvatarFallback>
+                                        {post.author.name.slice(0, 2)}
+                                      </AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                      <div className="flex items-center space-x-2">
+                                        <p className="font-medium">
+                                          {post.author.name}
+                                        </p>
+                                        <Badge
+                                          variant="secondary"
+                                          className="text-xs"
+                                        >
+                                          Lv.{post.author.level}
+                                        </Badge>
+                                      </div>
+                                      <p className="text-sm text-gray-500">
+                                        {post.author.role}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="text-right">
+                                    <p className="text-sm text-gray-500">
+                                      {new Date(
+                                        post.createdAt
+                                      ).toLocaleDateString('zh-CN')}
+                                    </p>
+                                    <div className="mt-1 flex items-center space-x-2 text-xs text-gray-400">
+                                      <Eye className="h-3 w-3" />
+                                      <span>{post.views}</span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* 帖子标题 */}
+                                <h3 className="mb-3 cursor-pointer text-xl font-semibold transition-colors hover:text-blue-600">
+                                  {post.title}
+                                </h3>
+
+                                {/* 帖子内容预览 */}
+                                <p className="mb-4 line-clamp-3 text-gray-600 dark:text-gray-300">
+                                  {post.content}
+                                </p>
+
+                                {/* 标签和难度 */}
+                                <div className="mb-4 flex flex-wrap items-center gap-2">
+                                  {post.tags.map((tag) => (
+                                    <Badge
+                                      key={tag}
+                                      variant="outline"
+                                      className="text-xs"
+                                    >
+                                      #{tag}
+                                    </Badge>
+                                  ))}
+                                  {post.difficulty && (
+                                    <Badge
+                                      className={`text-xs ${getDifficultyColor(post.difficulty)}`}
+                                    >
+                                      {getDifficultyText(post.difficulty)}
+                                    </Badge>
+                                  )}
+                                </div>
+
+                                {/* 帖子操作 */}
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-4">
+                                    <button
+                                      onClick={() => handleLike(post.id)}
+                                      className={`flex items-center space-x-1 transition-colors ${
+                                        post.isLiked
+                                          ? 'text-red-500'
+                                          : 'text-gray-500 hover:text-red-500'
+                                      }`}
+                                    >
+                                      <Heart
+                                        className={`h-4 w-4 ${post.isLiked ? 'fill-current' : ''}`}
+                                      />
+                                      <span className="text-sm">
+                                        {post.likes}
+                                      </span>
+                                    </button>
+                                    <button className="flex items-center space-x-1 text-gray-500 transition-colors hover:text-blue-500">
+                                      <MessageCircle className="h-4 w-4" />
+                                      <span className="text-sm">
+                                        {post.comments}
+                                      </span>
+                                    </button>
+                                    <button className="flex items-center space-x-1 text-gray-500 transition-colors hover:text-green-500">
+                                      <Share2 className="h-4 w-4" />
+                                      <span className="text-sm">分享</span>
+                                    </button>
+                                  </div>
+                                  <button
+                                    onClick={() => handleBookmark(post.id)}
+                                    className={`transition-colors ${
+                                      post.isBookmarked
+                                        ? 'text-yellow-500'
+                                        : 'text-gray-500 hover:text-yellow-500'
+                                    }`}
+                                  >
+                                    <Star
+                                      className={`h-4 w-4 ${post.isBookmarked ? 'fill-current' : ''}`}
+                                    />
+                                  </button>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </EnhancedCard>
+              </div>
+            </div>
           </div>
-          </div>
-        </div>
-      </PageLayout>
-    </main>
-  </div>
+        </PageLayout>
+      </main>
+    </div>
   );
 }

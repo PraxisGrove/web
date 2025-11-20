@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Grid, List, SlidersHorizontal } from 'lucide-react';
+import { Grid, List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -16,7 +16,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { CourseCard } from '@/components/courses/CourseCard';
 import { CourseFilters } from '@/components/courses/CourseFilters';
 import { useCourses } from '@/hooks/useCourses';
-import type { CourseFilters as CourseFiltersType, CourseSortBy } from '@/types/course';
+import type {
+  CourseFilters as CourseFiltersType,
+  CourseSortBy,
+} from '@/types/course';
 
 export default function CoursesPage() {
   const [layout, setLayout] = useState<'grid' | 'list'>('grid');
@@ -24,13 +27,14 @@ export default function CoursesPage() {
   const [filters, setFilters] = useState<CourseFiltersType>({});
   const [sortBy, setSortBy] = useState<CourseSortBy>('newest');
 
-  const { courses, loading, error, page, totalPages, updateParams } = useCourses({
-    page: 1,
-    limit: 12,
-    search: searchQuery,
-    filters,
-    sortBy,
-  });
+  const { courses, loading, error, page, totalPages, updateParams } =
+    useCourses({
+      page: 1,
+      limit: 12,
+      search: searchQuery,
+      filters,
+      sortBy,
+    });
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,23 +62,23 @@ export default function CoursesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-background border-b">
+      <div className="from-primary/10 via-primary/5 to-background border-b bg-gradient-to-r">
         <div className="container mx-auto px-4 py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto text-center space-y-4"
+            className="mx-auto max-w-3xl space-y-4 text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold">探索课程</h1>
-            <p className="text-lg text-muted-foreground">
+            <h1 className="text-4xl font-bold md:text-5xl">探索课程</h1>
+            <p className="text-muted-foreground text-lg">
               发现优质课程，开启学习之旅。我们提供50+门精选课程，覆盖前端、后端、AI、设计等多个领域。
             </p>
 
             {/* 搜索栏 */}
-            <form onSubmit={handleSearch} className="max-w-2xl mx-auto pt-4">
+            <form onSubmit={handleSearch} className="mx-auto max-w-2xl pt-4">
               <div className="flex gap-2">
                 <Input
                   type="search"
@@ -94,9 +98,9 @@ export default function CoursesPage() {
 
       {/* 主体内容 */}
       <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col gap-8 lg:flex-row">
           {/* 左侧筛选栏 */}
-          <aside className="lg:w-64 flex-shrink-0">
+          <aside className="flex-shrink-0 lg:w-64">
             <CourseFilters
               filters={filters}
               onFiltersChange={handleFiltersChange}
@@ -107,10 +111,14 @@ export default function CoursesPage() {
           {/* 右侧课程列表 */}
           <main className="flex-1 space-y-6">
             {/* 工具栏 */}
-            <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">
-                  找到 <span className="font-semibold text-foreground">{courses.length}</span> 门课程
+                <span className="text-muted-foreground text-sm">
+                  找到{' '}
+                  <span className="text-foreground font-semibold">
+                    {courses.length}
+                  </span>{' '}
+                  门课程
                 </span>
               </div>
 
@@ -130,20 +138,20 @@ export default function CoursesPage() {
                 </Select>
 
                 {/* 布局切换 */}
-                <div className="hidden md:flex items-center gap-1 border rounded-md p-1">
+                <div className="hidden items-center gap-1 rounded-md border p-1 md:flex">
                   <Button
                     variant={layout === 'grid' ? 'secondary' : 'ghost'}
                     size="sm"
                     onClick={() => setLayout('grid')}
                   >
-                    <Grid className="w-4 h-4" />
+                    <Grid className="h-4 w-4" />
                   </Button>
                   <Button
                     variant={layout === 'list' ? 'secondary' : 'ghost'}
                     size="sm"
                     onClick={() => setLayout('list')}
                   >
-                    <List className="w-4 h-4" />
+                    <List className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -151,13 +159,18 @@ export default function CoursesPage() {
 
             {/* 课程网格/列表 */}
             {loading ? (
-              <div className={layout === 'grid' 
-                ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'
-                : 'space-y-4'
-              }>
+              <div
+                className={
+                  layout === 'grid'
+                    ? 'grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'
+                    : 'space-y-4'
+                }
+              >
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="space-y-4">
-                    <Skeleton className={layout === 'grid' ? 'aspect-video' : 'h-48'} />
+                    <Skeleton
+                      className={layout === 'grid' ? 'aspect-video' : 'h-48'}
+                    />
                     <div className="space-y-2">
                       <Skeleton className="h-4 w-3/4" />
                       <Skeleton className="h-4 w-1/2" />
@@ -166,7 +179,7 @@ export default function CoursesPage() {
                 ))}
               </div>
             ) : error ? (
-              <div className="text-center py-12">
+              <div className="py-12 text-center">
                 <p className="text-destructive">加载失败：{error.message}</p>
                 <Button
                   variant="outline"
@@ -177,7 +190,7 @@ export default function CoursesPage() {
                 </Button>
               </div>
             ) : courses.length === 0 ? (
-              <div className="text-center py-12">
+              <div className="py-12 text-center">
                 <p className="text-muted-foreground">没有找到符合条件的课程</p>
                 <Button
                   variant="outline"
@@ -191,17 +204,14 @@ export default function CoursesPage() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className={layout === 'grid' 
-                  ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'
-                  : 'space-y-4'
+                className={
+                  layout === 'grid'
+                    ? 'grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3'
+                    : 'space-y-4'
                 }
               >
-                {courses.map(course => (
-                  <CourseCard
-                    key={course.id}
-                    course={course}
-                    layout={layout}
-                  />
+                {courses.map((course) => (
+                  <CourseCard key={course.id} course={course} layout={layout} />
                 ))}
               </motion.div>
             )}
@@ -216,7 +226,7 @@ export default function CoursesPage() {
                 >
                   上一页
                 </Button>
-                
+
                 <div className="flex items-center gap-1">
                   {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
                     let pageNum: number;

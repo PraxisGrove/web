@@ -12,6 +12,7 @@ export { AnimatedList } from './animated-list';
 
 // 背景效果组件
 export { AnimatedBackground } from './animated-background';
+export { GridScan } from './GridScan';
 export {
   GradientBackground,
   ParticleField,

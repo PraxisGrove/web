@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { TextGenerateEffect, AnimatedText } from '@/components/ui/AnimatedText';
 import { usePerformanceConfig } from '@/components/ui/PerformanceOptimizer';
+import { GridScan } from '@/components/reactbit';
 import { cn } from '@/lib/utils';
 
 interface HeroSectionProps {
@@ -48,6 +49,21 @@ export function HeroSection({ className }: HeroSectionProps) {
         className
       )}
     >
+      <div className="absolute inset-0 z-0">
+        <GridScan
+          sensitivity={0.55}
+          lineThickness={1}
+          linesColor="#392e4e"
+          gridScale={0.1}
+          scanColor="#FF9FFC"
+          scanOpacity={0.4}
+          enablePost
+          bloomIntensity={0.6}
+          chromaticAberration={0.002}
+          noiseIntensity={0.01}
+        />
+      </div>
+
       {/* 主要内容 */}
       <motion.div
         className="container relative z-10 mx-auto px-4 py-16 text-center"
@@ -119,32 +135,6 @@ export function HeroSection({ className }: HeroSectionProps) {
           </Button>
         </motion.div>
 
-        {/* 滚动指示器 */}
-        <motion.div
-          variants={itemVariants}
-          transition={itemTransition}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 transform"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            className="border-accent flex h-10 w-6 justify-center rounded-full border-2"
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="bg-accent mt-2 h-3 w-1 rounded-full"
-            />
-          </motion.div>
-        </motion.div>
       </motion.div>
     </div>
   );

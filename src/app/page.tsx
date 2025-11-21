@@ -33,7 +33,7 @@ export default function HomePage() {
       <OrganizationStructuredData />
       <EducationalOrganizationStructuredData />
 
-      <div className="bg-background min-h-screen">
+      <div className="dark min-h-screen bg-black">
         <FloatingNav navItems={globalNavItems} showLoginButton={true} />
 
         <main id="main-content" role="main" className="relative z-10">

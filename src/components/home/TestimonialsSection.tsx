@@ -93,12 +93,7 @@ const testimonials: Testimonial[] = [
 
 export function TestimonialsSection({ className }: TestimonialsSectionProps) {
   return (
-    <section
-      className={cn(
-        'bg-gradient-to-b from-slate-50 to-white py-20 dark:from-slate-900 dark:to-slate-800',
-        className
-      )}
-    >
+    <section className={cn('bg-transparent py-20', className)}>
       <div className="container mx-auto px-4">
         {/* 标题区域 */}
         <motion.div
@@ -108,10 +103,10 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
+          <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl lg:text-5xl">
             Real User Reviews
           </h2>
-          <p className="mx-auto max-w-3xl text-lg text-gray-600 md:text-xl dark:text-gray-300">
+          <p className="mx-auto max-w-3xl text-lg text-gray-300 md:text-xl">
             Hear what our users have to say about the PraxisGrove learning
             experience.
           </p>
@@ -131,32 +126,28 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
           viewport={{ once: true }}
         >
           <div className="text-center">
-            <div className="mb-2 text-3xl font-bold text-purple-600 md:text-4xl dark:text-purple-400">
+            <div className="mb-2 text-3xl font-bold text-purple-400 md:text-4xl">
               50K+
             </div>
-            <div className="text-gray-600 dark:text-gray-300">
-              Active Learners
-            </div>
+            <div className="text-gray-300">Active Learners</div>
           </div>
           <div className="text-center">
-            <div className="mb-2 text-3xl font-bold text-blue-600 md:text-4xl dark:text-blue-400">
+            <div className="mb-2 text-3xl font-bold text-blue-400 md:text-4xl">
               1000+
             </div>
-            <div className="text-gray-600 dark:text-gray-300">
-              Quality Courses
-            </div>
+            <div className="text-gray-300">Quality Courses</div>
           </div>
           <div className="text-center">
-            <div className="mb-2 text-3xl font-bold text-green-600 md:text-4xl dark:text-green-400">
+            <div className="mb-2 text-3xl font-bold text-green-400 md:text-4xl">
               98%
             </div>
-            <div className="text-gray-600 dark:text-gray-300">Satisfaction</div>
+            <div className="text-gray-300">Satisfaction</div>
           </div>
           <div className="text-center">
-            <div className="mb-2 text-3xl font-bold text-orange-600 md:text-4xl dark:text-orange-400">
+            <div className="mb-2 text-3xl font-bold text-orange-400 md:text-4xl">
               24/7
             </div>
-            <div className="text-gray-600 dark:text-gray-300">AI Support</div>
+            <div className="text-gray-300">AI Support</div>
           </div>
         </motion.div>
       </div>
@@ -207,12 +198,12 @@ function InfiniteMovingCards({
 // 推荐卡片组件
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <Card className="h-64 w-80 flex-shrink-0 border-0 bg-white/80 shadow-lg backdrop-blur-sm transition-shadow duration-300 hover:shadow-xl dark:bg-slate-800/80">
+    <Card className="h-64 w-80 flex-shrink-0 border-0 bg-white/10 shadow-lg backdrop-blur-sm transition-shadow duration-300 hover:shadow-xl">
       <CardContent className="flex h-full flex-col justify-between p-6">
         {/* 评分和内容 */}
         <div>
           <StarRating rating={testimonial.rating} />
-          <p className="mt-4 line-clamp-4 leading-relaxed text-gray-700 dark:text-gray-300">
+          <p className="mt-4 line-clamp-4 leading-relaxed text-gray-300">
             &ldquo;{testimonial.content}&rdquo;
           </p>
         </div>
@@ -226,10 +217,8 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             </AvatarFallback>
           </Avatar>
           <div>
-            <div className="font-semibold text-gray-900 dark:text-white">
-              {testimonial.name}
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="font-semibold text-white">{testimonial.name}</div>
+            <div className="text-sm text-gray-400">
               {testimonial.role} · {testimonial.company}
             </div>
           </div>

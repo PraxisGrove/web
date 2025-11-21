@@ -25,69 +25,69 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: '1',
-    name: '张明',
-    role: '软件工程师',
-    company: '腾讯',
+    name: 'Zhang Ming',
+    role: 'Software Engineer',
+    company: 'Tencent',
     avatar: '/avatars/zhang-ming.jpg',
     rating: 5,
     content:
-      'PraxisGrove 的 AI 学习助手真的很棒！它能够根据我的学习进度和偏好推荐最适合的内容，让我的学习效率提升了 300%。',
-    highlight: '学习效率提升了 300%',
+      "PraxisGrove's AI Learning Assistant is amazing! It recommends the most suitable content based on my learning progress and preferences, increasing my learning efficiency by 300%.",
+    highlight: 'Learning efficiency increased by 300%',
   },
   {
     id: '2',
-    name: '李小雨',
-    role: '产品经理',
-    company: '字节跳动',
+    name: 'Li Xiaoyu',
+    role: 'Product Manager',
+    company: 'ByteDance',
     avatar: '/avatars/li-xiaoyu.jpg',
     rating: 5,
     content:
-      '3D 知识宇宙的体验太震撼了！复杂的概念通过 3D 可视化变得非常容易理解，这种学习方式前所未有。',
-    highlight: '3D 可视化学习体验',
+      'The 3D Knowledge Universe experience is stunning! Complex concepts become very easy to understand through 3D visualization. This way of learning is unprecedented.',
+    highlight: '3D visualization learning experience',
   },
   {
     id: '3',
-    name: '王建华',
-    role: '数据科学家',
-    company: '阿里巴巴',
+    name: 'Wang Jianhua',
+    role: 'Data Scientist',
+    company: 'Alibaba',
     avatar: '/avatars/wang-jianhua.jpg',
     rating: 5,
     content:
-      '学习社区的质量很高，能够与全球的专家和学习者交流，获得了很多宝贵的见解和建议。',
-    highlight: '全球专家交流',
+      'The quality of the learning community is very high. Being able to communicate with global experts and learners has provided me with many valuable insights and suggestions.',
+    highlight: 'Global expert exchange',
   },
   {
     id: '4',
-    name: '陈思思',
-    role: '设计师',
-    company: '美团',
+    name: 'Chen Sisi',
+    role: 'Designer',
+    company: 'Meituan',
     avatar: '/avatars/chen-sisi.jpg',
     rating: 5,
     content:
-      '个性化的学习路径设计得很好，完全符合我的学习节奏和目标，每天都有新的收获。',
-    highlight: '个性化学习路径',
+      'The personalized learning path is well designed, perfectly matching my learning pace and goals. I gain something new every day.',
+    highlight: 'Personalized learning path',
   },
   {
     id: '5',
-    name: '刘强',
-    role: '创业者',
-    company: '独立创业',
+    name: 'Liu Qiang',
+    role: 'Entrepreneur',
+    company: 'Independent Startup',
     avatar: '/avatars/liu-qiang.jpg',
     rating: 5,
     content:
-      '作为创业者，时间很宝贵。PraxisGrove 的智能推荐帮我快速找到最需要的知识，节省了大量时间。',
-    highlight: '智能推荐节省时间',
+      "As an entrepreneur, time is precious. PraxisGrove's smart recommendations help me quickly find the knowledge I need most, saving a lot of time.",
+    highlight: 'Smart recommendations save time',
   },
   {
     id: '6',
-    name: '赵美丽',
-    role: '学生',
-    company: '清华大学',
+    name: 'Zhao Meili',
+    role: 'Student',
+    company: 'Tsinghua University',
     avatar: '/avatars/zhao-meili.jpg',
     rating: 5,
     content:
-      '平台的课程质量很高，老师讲解得很清楚，配合 AI 助手的答疑，学习效果比传统方式好太多了。',
-    highlight: 'AI 助手答疑',
+      'The course quality on the platform is very high. The teachers explain clearly, and with the AI assistant answering questions, the learning effect is much better than traditional methods.',
+    highlight: 'AI assistant Q&A',
   },
 ];
 
@@ -109,10 +109,11 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
           viewport={{ once: true }}
         >
           <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
-            用户真实评价
+            Real User Reviews
           </h2>
           <p className="mx-auto max-w-3xl text-lg text-gray-600 md:text-xl dark:text-gray-300">
-            听听我们的用户如何评价 PraxisGrove 的学习体验
+            Hear what our users have to say about the PraxisGrove learning
+            experience.
           </p>
         </motion.div>
 
@@ -133,25 +134,29 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
             <div className="mb-2 text-3xl font-bold text-purple-600 md:text-4xl dark:text-purple-400">
               50K+
             </div>
-            <div className="text-gray-600 dark:text-gray-300">活跃学习者</div>
+            <div className="text-gray-600 dark:text-gray-300">
+              Active Learners
+            </div>
           </div>
           <div className="text-center">
             <div className="mb-2 text-3xl font-bold text-blue-600 md:text-4xl dark:text-blue-400">
               1000+
             </div>
-            <div className="text-gray-600 dark:text-gray-300">优质课程</div>
+            <div className="text-gray-600 dark:text-gray-300">
+              Quality Courses
+            </div>
           </div>
           <div className="text-center">
             <div className="mb-2 text-3xl font-bold text-green-600 md:text-4xl dark:text-green-400">
               98%
             </div>
-            <div className="text-gray-600 dark:text-gray-300">满意度</div>
+            <div className="text-gray-600 dark:text-gray-300">Satisfaction</div>
           </div>
           <div className="text-center">
             <div className="mb-2 text-3xl font-bold text-orange-600 md:text-4xl dark:text-orange-400">
               24/7
             </div>
-            <div className="text-gray-600 dark:text-gray-300">AI 支持</div>
+            <div className="text-gray-600 dark:text-gray-300">AI Support</div>
           </div>
         </motion.div>
       </div>

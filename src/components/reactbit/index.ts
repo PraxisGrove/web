@@ -9,6 +9,8 @@ export { AnimatedCard } from './animated-card';
 export { AnimatedText } from './animated-text';
 export { AnimatedIcon } from './animated-icon';
 export { AnimatedList } from './animated-list';
+export { default as Shuffle } from './Shuffle';
+export { default as SplitText } from './SplitText';
 
 // 背景效果组件
 export { AnimatedBackground } from './animated-background';

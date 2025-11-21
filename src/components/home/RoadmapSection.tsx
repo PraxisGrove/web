@@ -41,13 +41,14 @@ const roadmapItems: RoadmapItem[] = [
   {
     id: 'q3-2025',
     quarter: '2025 Q1',
-    title: 'AI 学习助手 2.0',
-    description: '全面升级 AI 学习助手，提供更智能的个性化学习体验',
+    title: 'AI Learning Assistant 2.0',
+    description:
+      'Comprehensive upgrade of AI Learning Assistant, providing a smarter personalized learning experience.',
     features: [
-      '多模态学习内容理解',
-      '实时学习状态分析',
-      '智能学习计划生成',
-      '个性化难度调整',
+      'Multimodal Content Understanding',
+      'Real-time Learning State Analysis',
+      'Intelligent Learning Plan Generation',
+      'Personalized Difficulty Adjustment',
     ],
     status: 'completed',
     icon: Brain,
@@ -56,13 +57,14 @@ const roadmapItems: RoadmapItem[] = [
   {
     id: 'q4-2025',
     quarter: '2025 Q2',
-    title: '3D 知识宇宙增强',
-    description: '打造更加沉浸式的 3D 学习环境，支持 VR/AR 设备',
+    title: '3D Knowledge Universe Enhancement',
+    description:
+      'Create a more immersive 3D learning environment with VR/AR device support.',
     features: [
-      'VR/AR 设备支持',
-      '物理引擎集成',
-      '多人协作空间',
-      '知识图谱可视化',
+      'VR/AR Device Support',
+      'Physics Engine Integration',
+      'Multi-user Collaboration Space',
+      'Knowledge Graph Visualization',
     ],
     status: 'in-progress',
     icon: Globe,
@@ -71,13 +73,14 @@ const roadmapItems: RoadmapItem[] = [
   {
     id: 'q1-2026',
     quarter: '2025 Q3',
-    title: '智能学习社区',
-    description: '构建全球学习者社区，实现智能匹配和协作学习',
+    title: 'Intelligent Learning Community',
+    description:
+      'Build a global learner community enabling intelligent matching and collaborative learning.',
     features: [
-      '智能学习伙伴匹配',
-      '实时协作工具',
-      '知识分享平台',
-      '学习成就系统',
+      'Intelligent Partner Matching',
+      'Real-time Collaboration Tools',
+      'Knowledge Sharing Platform',
+      'Learning Achievement System',
     ],
     status: 'planned',
     icon: Users,
@@ -86,13 +89,14 @@ const roadmapItems: RoadmapItem[] = [
   {
     id: 'q2-2026',
     quarter: '2025 Q4',
-    title: '企业级解决方案',
-    description: '为企业和教育机构提供定制化的学习管理系统',
+    title: 'Enterprise Solutions',
+    description:
+      'Provide customized learning management systems for enterprises and educational institutions.',
     features: [
-      '企业级权限管理',
-      '学习数据分析',
-      '定制化课程体系',
-      'API 集成支持',
+      'Enterprise Permission Management',
+      'Learning Data Analysis',
+      'Customized Course System',
+      'API Integration Support',
     ],
     status: 'planned',
     icon: Target,
@@ -103,19 +107,19 @@ const roadmapItems: RoadmapItem[] = [
 const statusConfig = {
   completed: {
     icon: CheckCircle,
-    label: '已完成',
+    label: 'Completed',
     color: 'bg-green-500',
     textColor: 'text-green-600',
   },
   'in-progress': {
     icon: Zap,
-    label: '进行中',
+    label: 'In Progress',
     color: 'bg-blue-500',
     textColor: 'text-blue-600',
   },
   planned: {
     icon: Clock,
-    label: '计划中',
+    label: 'Planned',
     color: 'bg-muted',
     textColor: 'text-muted-foreground',
   },
@@ -168,11 +172,12 @@ export function RoadmapSection({ className }: RoadmapSectionProps) {
           <div className="mb-4 flex items-center justify-center">
             <Rocket className="text-primary mr-3 h-8 w-8" />
             <h2 className="text-foreground text-3xl font-bold md:text-4xl lg:text-5xl">
-              产品路线图
+              Product Roadmap
             </h2>
           </div>
           <p className="text-muted-foreground mx-auto max-w-3xl text-lg md:text-xl">
-            探索 PraxisGrove 的未来发展规划，见证教育科技的创新之路
+            Explore the future development plan of PraxisGrove and witness the
+            innovation of educational technology.
           </p>
         </motion.div>
 

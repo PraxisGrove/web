@@ -23,41 +23,42 @@ interface IntroItem {
 const introItems: IntroItem[] = [
   {
     id: 'ai-learning',
-    title: 'AI个性化学习',
+    title: 'AI Personalized Learning',
     description:
-      '基于先进的机器学习算法，为每位学习者量身定制学习路径和内容推荐。',
+      'Tailor learning paths and content recommendations for each learner based on advanced machine learning algorithms.',
     features: [
-      '智能学习路径规划',
-      '个性化内容推荐',
-      '实时学习进度分析',
-      '自适应难度调整',
+      'Intelligent Learning Path Planning',
+      'Personalized Content Recommendations',
+      'Real-time Progress Analysis',
+      'Adaptive Difficulty Adjustment',
     ],
     image: '/images/ai-learning-demo.jpg',
     video: '/videos/ai-learning-demo.mp4',
   },
   {
     id: '3d-universe',
-    title: '3D知识宇宙',
+    title: '3D Knowledge Universe',
     description:
-      '沉浸式3D环境让抽象概念变得具体可见，通过空间记忆增强学习效果。',
+      'Immersive 3D environments make abstract concepts visible and concrete, enhancing learning through spatial memory.',
     features: [
-      '3D知识图谱可视化',
-      '沉浸式学习体验',
-      '空间记忆增强',
-      '交互式知识探索',
+      '3D Knowledge Graph Visualization',
+      'Immersive Learning Experience',
+      'Spatial Memory Enhancement',
+      'Interactive Knowledge Exploration',
     ],
     image: '/images/3d-universe-demo.jpg',
     video: '/videos/3d-universe-demo.mp4',
   },
   {
     id: 'community',
-    title: '智能学习社区',
-    description: '连接全球学习者，通过协作学习和知识分享创造更好的学习体验。',
+    title: 'Intelligent Learning Community',
+    description:
+      'Connect global learners and create better learning experiences through collaborative learning and knowledge sharing.',
     features: [
-      '全球学习者网络',
-      '智能学习伙伴匹配',
-      '协作学习项目',
-      '知识分享平台',
+      'Global Learner Network',
+      'Intelligent Partner Matching',
+      'Collaborative Learning Projects',
+      'Knowledge Sharing Platform',
     ],
     image: '/images/community-demo.jpg',
   },
@@ -100,10 +101,10 @@ export function ProductIntro({ className }: ProductIntroProps) {
           viewport={{ once: true }}
         >
           <h2 className="text-foreground mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
-            产品核心功能
+            Core Product Features
           </h2>
           <p className="text-muted-foreground mx-auto max-w-3xl text-lg md:text-xl">
-            深入了解 PraxisGrove 如何革新您的学习体验
+            Learn how PraxisGrove revolutionizes your learning experience.
           </p>
         </motion.div>
 
@@ -214,7 +215,7 @@ export function ProductIntro({ className }: ProductIntroProps) {
                           <Play className="text-primary-foreground h-12 w-12" />
                         </div>
                         <p className="text-muted-foreground">
-                          {activeItem.title} 演示
+                          {activeItem.title} Demo
                         </p>
                       </div>
                     </div>

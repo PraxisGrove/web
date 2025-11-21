@@ -27,38 +27,44 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: Brain,
-    title: 'AI智能助手',
-    description: '个性化AI导师，实时解答问题，提供定制化学习建议和智能推荐',
+    title: 'AI Assistant',
+    description:
+      'Personalized AI tutor providing real-time answers, customized learning suggestions, and intelligent recommendations.',
     gradient: 'from-purple-500 to-pink-500',
   },
   {
     icon: Globe,
-    title: '3D知识宇宙',
-    description: '沉浸式3D环境，可视化知识结构，让学习更加直观有趣',
+    title: '3D Knowledge Universe',
+    description:
+      'Immersive 3D environment visualizing knowledge structures, making learning more intuitive and engaging.',
     gradient: 'from-blue-500 to-cyan-500',
   },
   {
     icon: Users,
-    title: '学习社区',
-    description: '与全球学习者交流互动，分享知识，共同成长进步',
+    title: 'Learning Community',
+    description:
+      'Interact with global learners, share knowledge, and grow together.',
     gradient: 'from-green-500 to-emerald-500',
   },
   {
     icon: Zap,
-    title: '智能推荐',
-    description: '基于学习行为和偏好，智能推荐最适合的学习内容和路径',
+    title: 'Smart Recommendations',
+    description:
+      'Intelligent recommendations for the most suitable learning content and paths based on learning behavior and preferences.',
     gradient: 'from-yellow-500 to-orange-500',
   },
   {
     icon: BookOpen,
-    title: '丰富课程',
-    description: '涵盖多个领域的高质量课程，满足不同学习需求和兴趣',
+    title: 'Rich Courses',
+    description:
+      'High-quality courses covering multiple fields to meet different learning needs and interests.',
     gradient: 'from-indigo-500 to-purple-500',
   },
   {
     icon: Target,
-    title: '学习追踪',
-    description: '详细的学习进度追踪和分析，帮助您更好地规划学习目标',
+    title: 'Progress Tracking',
+    description:
+      'Detailed learning progress tracking and analysis to help you better plan your learning goals.',
     gradient: 'from-red-500 to-pink-500',
   },
 ];
@@ -111,10 +117,11 @@ export function FeaturesSection({ className }: FeaturesSectionProps) {
             id="features-title"
             className="text-foreground mb-4 text-3xl font-bold md:text-4xl lg:text-5xl"
           >
-            强大功能特性
+            Powerful Features
           </h2>
           <p className="text-muted-foreground mx-auto max-w-3xl text-lg md:text-xl">
-            探索 PraxisGrove 的核心功能，体验前所未有的学习方式
+            Explore the core features of PraxisGrove and experience an
+            unprecedented way of learning.
           </p>
         </motion.div>
 

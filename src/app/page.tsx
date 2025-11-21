@@ -15,15 +15,15 @@ export default function HomePage() {
     <>
       {/* SEO 优化 */}
       <SEOHead
-        description="PraxisGrove - 通过人工智能技术和区块链技术，为您提供个性化学习体验。探索知识的无限可能，开启智慧学习新时代。"
+        description="PraxisGrove - Providing personalized learning experiences through AI and blockchain technology. Explore infinite possibilities of knowledge and unlock a new era of intelligent learning."
         keywords={[
-          '在线教育',
-          'AI学习',
+          'Online Education',
+          'AI Learning',
           'Roadmap',
-          '个性化学习',
-          '人工智能教育',
+          'Personalized Learning',
+          'AI Education',
           'PraxisGrove',
-          '沉浸式学习',
+          'Immersive Learning',
         ]}
         type="website"
       />

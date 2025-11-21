@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Space_Mono } from 'next/font/google';
+import { DM_Sans, Space_Mono, Press_Start_2P } from 'next/font/google';
 import '@/styles/globals.css';
 import '@/styles/swagger.css';
 import { AppProviders } from '@/contexts/providers';
@@ -16,6 +16,13 @@ const spaceMono = Space_Mono({
   subsets: ['latin'],
   weight: ['400', '700'],
   variable: '--font-mono',
+  display: 'swap',
+});
+
+const pressStart2P = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-press-start-2p',
   display: 'swap',
 });
 
@@ -57,7 +64,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${spaceMono.variable}`}>
+      <body
+        className={`${dmSans.variable} ${spaceMono.variable} ${pressStart2P.variable}`}
+      >
         <AppProviders>
           <div id="root">{children}</div>
         </AppProviders>

@@ -3,9 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { TextGenerateEffect, AnimatedText } from '@/components/ui/AnimatedText';
 import { usePerformanceConfig } from '@/components/ui/PerformanceOptimizer';
-import { GridScan } from '@/components/reactbit';
+import { GridScan, Shuffle, SplitText } from '@/components/reactbit';
 import { cn } from '@/lib/utils';
 
 interface HeroSectionProps {
@@ -85,17 +84,39 @@ export function HeroSection({ className }: HeroSectionProps) {
           <h1 id="hero-title" className="sr-only">
             PraxisGrove
           </h1>
-          <TextGenerateEffect
-            text="PraxisGrove"
-            className="mb-4 text-4xl font-bold text-white md:text-6xl lg:text-7xl"
-          />
-          <AnimatedText
-            text="一所无需许可的学校"
-            variant="typewriter"
-            className="text-2xl font-light text-indigo-400 md:text-4xl lg:text-5xl"
-            speed={100}
-            delay={1000}
-          />
+          <div className="mb-8 flex w-full flex-col items-center justify-center gap-4">
+            <div className="relative">
+              <Shuffle
+                text="PraxisGrove"
+                className="text-4xl font-bold leading-relaxed tracking-wider text-white md:text-6xl lg:text-7xl"
+                shuffleDirection="right"
+                duration={0.35}
+                animationMode="evenodd"
+                shuffleTimes={1}
+                ease="power3.out"
+                stagger={0.03}
+                threshold={0.1}
+                triggerOnce={true}
+                triggerOnHover={true}
+                respectReducedMotion={true}
+              />
+            </div>
+            <div className="relative">
+              <SplitText
+                text="A Permissionless School"
+                className="text-2xl font-light text-indigo-400 md:text-4xl lg:text-5xl"
+                delay={100}
+                duration={0.6}
+                ease="power3.out"
+                splitType="chars"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="center"
+              />
+            </div>
+          </div>
         </motion.div>
 
         {/* 副标题 */}
@@ -104,38 +125,29 @@ export function HeroSection({ className }: HeroSectionProps) {
           transition={itemTransition}
           className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-300 md:text-xl"
         >
-          通过人工智能和区块链技术，为您提供个性化学习体验。
-          探索知识的无限可能，开启智慧学习新时代。
+          Empowering personalized learning through AI and blockchain technology.
+          Explore infinite possibilities of knowledge and unlock a new era of
+          intelligent learning.
         </motion.p>
 
         {/* CTA 按钮组 */}
         <motion.div
           variants={itemVariants}
           transition={itemTransition}
-          className="mb-12 flex flex-col justify-center gap-4 sm:flex-row"
+          className="mb-12 flex justify-center"
         >
           <Button
             size="lg"
             className={cn(
-              'px-8 py-4 text-lg font-semibold',
+              'px-10 py-6 text-xl font-bold tracking-wide',
               'bg-primary text-primary-foreground',
               'hover:bg-primary/90',
-              'transform transition-all duration-200 hover:scale-105'
+              'transform transition-all duration-200 hover:scale-105',
+              'shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:shadow-[0_0_30px_rgba(99,102,241,0.7)]',
+              'rounded-full border border-white/10'
             )}
           >
-            开始学习之旅
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className={cn(
-              'px-8 py-4 text-lg font-semibold',
-              'border-secondary text-secondary',
-              'hover:bg-secondary/10 hover:border-secondary/80',
-              'transform transition-all duration-200 hover:scale-105'
-            )}
-          >
-            探索知识宇宙
+            Start Learning
           </Button>
         </motion.div>
       </motion.div>

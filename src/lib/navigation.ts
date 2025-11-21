@@ -14,15 +14,15 @@ export interface NavItem {
 // 顺序：logo, AI, 知识宇宙, 社区, 登录
 export const globalNavItems: NavItem[] = [
   {
-    name: 'AI 助手',
+    name: 'AI',
     link: '/ai',
   },
   {
-    name: '知识宇宙',
+    name: 'Roadmap',
     link: '/roadmap',
   },
   {
-    name: '社区',
+    name: 'Community',
     link: '/community',
   },
 ];

@@ -21,28 +21,28 @@ interface QuickAction {
 const quickActions: QuickAction[] = [
   {
     id: 'ai-chat',
-    label: 'AI 助手',
+    label: 'AI',
     icon: Brain,
     color: 'from-purple-500 to-pink-500',
     href: '/ai',
   },
   {
     id: 'search',
-    label: '课程搜索',
+    label: 'Search Courses',
     icon: Search,
     color: 'from-blue-500 to-cyan-500',
     href: '/search',
   },
   {
     id: 'login',
-    label: '快速登录',
+    label: 'Quick Login',
     icon: User,
     color: 'from-green-500 to-emerald-500',
     href: '/login',
   },
   {
     id: '3d-universe',
-    label: '3D 宇宙',
+    label: 'Roadmap',
     icon: Globe,
     color: 'from-orange-500 to-red-500',
     href: '/roadmap',

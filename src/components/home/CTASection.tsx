@@ -54,15 +54,16 @@ export function CTASection({ className }: CTASectionProps) {
             className="mb-8"
           >
             <h2 className="text-foreground mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
-              开启您的
+              Start Your
               <span className="from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent">
                 {' '}
-                智慧学习{' '}
+                Smart Learning{' '}
               </span>
-              之旅
+              Journey
             </h2>
             <p className="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
-              加入 50,000+ 学习者的行列，体验 AI 驱动的个性化教育平台
+              Join 50,000+ learners and experience an AI-driven personalized
+              education platform.
             </p>
           </motion.div>
 
@@ -80,10 +81,10 @@ export function CTASection({ className }: CTASectionProps) {
                 <div className="mb-6 text-center">
                   <Sparkles className="text-primary mx-auto mb-4 h-12 w-12" />
                   <h3 className="text-card-foreground mb-2 text-2xl font-bold">
-                    免费开始学习
+                    Start Learning for Free
                   </h3>
                   <p className="text-muted-foreground">
-                    立即注册，获得 7 天免费试用
+                    Register now and get a 7-day free trial.
                   </p>
                 </div>
 
@@ -93,14 +94,14 @@ export function CTASection({ className }: CTASectionProps) {
                       htmlFor="name"
                       className="text-foreground mb-2 block"
                     >
-                      姓名
+                      Name
                     </Label>
                     <div className="relative">
                       <User className="text-muted-foreground absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform" />
                       <Input
                         id="name"
                         type="text"
-                        placeholder="请输入您的姓名"
+                        placeholder="Enter your name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className="pl-10"
@@ -114,14 +115,14 @@ export function CTASection({ className }: CTASectionProps) {
                       htmlFor="email"
                       className="text-foreground mb-2 block"
                     >
-                      邮箱地址
+                      Email Address
                     </Label>
                     <div className="relative">
                       <Mail className="text-muted-foreground absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform" />
                       <Input
                         id="email"
                         type="email"
-                        placeholder="请输入您的邮箱"
+                        placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="pl-10"
@@ -144,11 +145,11 @@ export function CTASection({ className }: CTASectionProps) {
                     {isSubmitting ? (
                       <div className="flex items-center justify-center">
                         <div className="mr-2 h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                        注册中...
+                        Registering...
                       </div>
                     ) : (
                       <div className="flex items-center justify-center">
-                        免费开始学习
+                        Start Learning Free
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </div>
                     )}
@@ -156,7 +157,8 @@ export function CTASection({ className }: CTASectionProps) {
                 </form>
 
                 <p className="text-muted-foreground mt-4 text-center text-xs">
-                  注册即表示您同意我们的服务条款和隐私政策
+                  By registering, you agree to our Terms of Service and Privacy
+                  Policy.
                 </p>
               </CardContent>
             </Card>
@@ -176,7 +178,7 @@ export function CTASection({ className }: CTASectionProps) {
                   )}
                 >
                   <div className="flex items-center justify-center">
-                    探索 3D 知识宇宙
+                    Explore 3D Knowledge Universe
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </div>
                 </Button>
@@ -195,7 +197,7 @@ export function CTASection({ className }: CTASectionProps) {
                   )}
                 >
                   <div className="flex items-center justify-center">
-                    观看产品演示
+                    Watch Product Demo
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </div>
                 </Button>
@@ -214,7 +216,7 @@ export function CTASection({ className }: CTASectionProps) {
                   )}
                 >
                   <div className="flex items-center justify-center">
-                    联系销售团队
+                    Contact Sales Team
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </div>
                 </Button>
@@ -223,24 +225,24 @@ export function CTASection({ className }: CTASectionProps) {
               {/* 特色亮点 */}
               <div className="bg-card/40 rounded-lg border-none p-6 backdrop-blur-sm">
                 <h4 className="text-card-foreground mb-4 font-semibold">
-                  为什么选择我们？
+                  Why Choose Us?
                 </h4>
                 <ul className="text-muted-foreground space-y-2">
                   <li className="flex items-center">
                     <div className="from-primary to-secondary mr-3 h-2 w-2 rounded-full bg-gradient-to-r" />
-                    7 天免费试用，无需信用卡
+                    7-day free trial, no credit card required
                   </li>
                   <li className="flex items-center">
                     <div className="from-primary to-secondary mr-3 h-2 w-2 rounded-full bg-gradient-to-r" />
-                    24/7 AI 学习助手支持
+                    24/7 AI Learning Assistant Support
                   </li>
                   <li className="flex items-center">
                     <div className="from-primary to-secondary mr-3 h-2 w-2 rounded-full bg-gradient-to-r" />
-                    个性化学习路径定制
+                    Personalized Learning Path Customization
                   </li>
                   <li className="flex items-center">
                     <div className="from-primary to-secondary mr-3 h-2 w-2 rounded-full bg-gradient-to-r" />
-                    全球学习者社区
+                    Global Learner Community
                   </li>
                 </ul>
               </div>

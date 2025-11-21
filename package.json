@@ -1,5 +1,5 @@
 {
-  "name": "praxisgrove-frontend",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -23,6 +23,7 @@
   "dependencies": {
     "@elastic/elasticsearch": "^9.0.3",
     "@formatjs/intl-localematcher": "^0.6.1",
+    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",
@@ -69,6 +70,7 @@
     "encoding": "^0.1.13",
     "face-api.js": "^0.22.2",
     "framer-motion": "^12.23.6",
+    "gsap": "^3.13.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.344.0",
     "mini-svg-data-uri": "^1.4.4",

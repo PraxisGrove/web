@@ -25,28 +25,28 @@ interface FooterSectionProps {
 
 const footerLinks = {
   product: [
-    { name: 'AI 学习助手', href: '/features/ai-tutor' },
-    { name: '3D 知识宇宙', href: '/features/3d-universe' },
-    { name: '学习社区', href: '/features/community' },
-    { name: '智能推荐', href: '/features/recommendations' },
+    { name: 'AI Learning Assistant', href: '/features/ai-tutor' },
+    { name: '3D Knowledge Universe', href: '/features/3d-universe' },
+    { name: 'Learning Community', href: '/features/community' },
+    { name: 'Smart Recommendations', href: '/features/recommendations' },
   ],
   company: [
-    { name: '关于我们', href: '/about' },
-    { name: '团队介绍', href: '/team' },
-    { name: '职业机会', href: '/careers' },
-    { name: '新闻动态', href: '/news' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Team', href: '/team' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'News', href: '/news' },
   ],
   resources: [
-    { name: '帮助中心', href: '/help' },
-    { name: '开发者文档', href: '/docs' },
-    { name: 'API 参考', href: '/api' },
-    { name: '社区论坛', href: '/forum' },
+    { name: 'Help Center', href: '/help' },
+    { name: 'Developer Docs', href: '/docs' },
+    { name: 'API Reference', href: '/api' },
+    { name: 'Community Forum', href: '/forum' },
   ],
   legal: [
-    { name: '服务条款', href: '/terms' },
-    { name: '隐私政策', href: '/privacy' },
-    { name: 'Cookie 政策', href: '/cookies' },
-    { name: '版权声明', href: '/copyright' },
+    { name: 'Terms of Service', href: '/terms' },
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Cookie Policy', href: '/cookies' },
+    { name: 'Copyright', href: '/copyright' },
   ],
 };
 
@@ -61,10 +61,10 @@ const socialLinks = [
 ];
 
 const features = [
-  { icon: BookOpen, text: '丰富的学习资源' },
-  { icon: Users, text: '全球学习社区' },
-  { icon: Zap, text: 'AI 智能助手' },
-  { icon: Shield, text: '数据安全保护' },
+  { icon: BookOpen, text: 'Rich Learning Resources' },
+  { icon: Users, text: 'Global Learning Community' },
+  { icon: Zap, text: 'AI Intelligent Assistant' },
+  { icon: Shield, text: 'Data Security Protection' },
 ];
 
 export function FooterSection({ className }: FooterSectionProps) {
@@ -105,7 +105,7 @@ export function FooterSection({ className }: FooterSectionProps) {
                   PraxisGrove
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  AI 驱动的个性化学习平台
+                  AI-driven Personalized Learning Platform
                 </p>
               </div>
 
@@ -129,12 +129,12 @@ export function FooterSection({ className }: FooterSectionProps) {
               {/* 更紧凑的邮件订阅 */}
               <div>
                 <h4 className="text-foreground mb-2 text-sm font-medium">
-                  获取更新
+                  Get Updates
                 </h4>
                 <form onSubmit={handleNewsletterSubmit} className="space-y-2">
                   <Input
                     type="email"
-                    placeholder="邮箱地址"
+                    placeholder="Email Address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="bg-card/50 border-border h-8 text-xs"
@@ -145,7 +145,7 @@ export function FooterSection({ className }: FooterSectionProps) {
                     size="sm"
                     className="from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 w-full bg-gradient-to-r text-xs"
                   >
-                    订阅
+                    Subscribe
                   </Button>
                 </form>
               </div>
@@ -161,7 +161,7 @@ export function FooterSection({ className }: FooterSectionProps) {
                 viewport={{ once: true }}
               >
                 <h4 className="text-foreground mb-3 text-sm font-semibold">
-                  产品
+                  Product
                 </h4>
                 <ul className="space-y-2">
                   {footerLinks.product.map((link, index) => (
@@ -185,7 +185,7 @@ export function FooterSection({ className }: FooterSectionProps) {
                 viewport={{ once: true }}
               >
                 <h4 className="text-foreground mb-3 text-sm font-semibold">
-                  公司
+                  Company
                 </h4>
                 <ul className="space-y-2">
                   {footerLinks.company.map((link, index) => (
@@ -209,7 +209,7 @@ export function FooterSection({ className }: FooterSectionProps) {
                 viewport={{ once: true }}
               >
                 <h4 className="text-foreground mb-3 text-sm font-semibold">
-                  资源
+                  Resources
                 </h4>
                 <ul className="space-y-2">
                   {footerLinks.resources.map((link, index) => (
@@ -234,7 +234,7 @@ export function FooterSection({ className }: FooterSectionProps) {
                 viewport={{ once: true }}
               >
                 <h4 className="text-foreground mb-3 text-sm font-semibold">
-                  法律
+                  Legal
                 </h4>
                 <ul className="space-y-2">
                   {footerLinks.legal.map((link, index) => (
@@ -266,7 +266,7 @@ export function FooterSection({ className }: FooterSectionProps) {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <span>© 2025 PraxisGrove. 保留所有权利.</span>
+              <span>© 2025 PraxisGrove. All rights reserved.</span>
               <span className="mx-2">•</span>
               <span className="flex items-center">
                 Made with <Heart className="mx-1 h-3 w-3 text-red-400" /> in

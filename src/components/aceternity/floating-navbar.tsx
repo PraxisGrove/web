@@ -9,7 +9,7 @@ export const FloatingNav = ({
   navItems,
   className,
   showLoginButton = true,
-  loginText = '登录',
+  loginText = 'Login',
 }: {
   navItems: {
     name: string;
@@ -125,7 +125,13 @@ export const FloatingNav = ({
             )}
           >
             <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block">{navItem.name}</span>
+            <span className="hidden sm:block">
+              {navItem.name === 'AI Assistant'
+                ? 'AI'
+                : navItem.name === 'Knowledge Universe'
+                  ? 'Roadmap'
+                  : navItem.name}
+            </span>
           </button>
         ))}
 

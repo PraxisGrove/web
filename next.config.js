@@ -3,11 +3,16 @@ import path from 'path';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Turbopack 配置 (用于 next dev --turbo)
-  turbopack: {
-    rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js',
+  experimental: {
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+      resolveAlias: {
+        '@react-native-async-storage/async-storage': './src/mocks/async-storage.js',
       },
     },
   },
@@ -59,13 +64,14 @@ const nextConfig = {
         path: false,
         crypto: false,
       };
-      
-      // Fix for @metamask/sdk trying to import react-native-async-storage
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        '@react-native-async-storage/async-storage': path.resolve(process.cwd(), 'src/mocks/async-storage.js'),
-      };
     }
+
+    // Fix for @metamask/sdk trying to import react-native-async-storage
+    // Apply to both server and client to prevent SSR issues
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@react-native-async-storage/async-storage': path.resolve(process.cwd(), 'src/mocks/async-storage.js'),
+    };
 
     config.externals.push("pino-pretty", "lokijs", "encoding");
 

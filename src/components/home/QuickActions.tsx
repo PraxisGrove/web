@@ -31,7 +31,7 @@ const quickActions: QuickAction[] = [
     label: 'Search Courses',
     icon: Search,
     color: 'from-blue-500 to-cyan-500',
-    href: '/search',
+    href: '/courses',
   },
   {
     id: 'login',

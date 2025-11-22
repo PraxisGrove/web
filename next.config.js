@@ -1,3 +1,5 @@
+import path from 'path';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Turbopack 配置 (用于 next dev --turbo)
@@ -56,6 +58,12 @@ const nextConfig = {
         encoding: false,
         path: false,
         crypto: false,
+      };
+      
+      // Fix for @metamask/sdk trying to import react-native-async-storage
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@react-native-async-storage/async-storage': path.resolve(process.cwd(), 'src/mocks/async-storage.js'),
       };
     }
 

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
 import { HoverBorderGradient } from '@/components/ui/hover-border-gradient';
 import { Sparkles } from 'lucide-react';
 import { usePerformanceConfig } from '@/components/ui/PerformanceOptimizer';

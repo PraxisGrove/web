@@ -208,7 +208,7 @@ export function WebsiteStructuredData() {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://praxisgrove.com'}/search?q={search_term_string}`,
+        urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://praxisgrove.com'}/courses?search={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },

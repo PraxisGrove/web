@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
@@ -29,21 +29,24 @@ export const FloatingNav = ({
   const isHoveringNav = useRef(false);
   const autoHideTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const clearAutoHide = () => {
+  const clearAutoHide = useCallback(() => {
     if (autoHideTimer.current) {
       clearTimeout(autoHideTimer.current);
       autoHideTimer.current = null;
     }
-  };
+  }, []);
 
-  const startAutoHide = (delay: number) => {
-    clearAutoHide();
-    autoHideTimer.current = setTimeout(() => {
-      if (!isHoveringNav.current) {
-        setVisible(false);
-      }
-    }, delay);
-  };
+  const startAutoHide = useCallback(
+    (delay: number) => {
+      clearAutoHide();
+      autoHideTimer.current = setTimeout(() => {
+        if (!isHoveringNav.current) {
+          setVisible(false);
+        }
+      }, delay);
+    },
+    [clearAutoHide]
+  );
 
   // 滚动和鼠标检测
   useEffect(() => {
@@ -101,7 +104,7 @@ export const FloatingNav = ({
       window.removeEventListener('scroll', handleScroll);
       clearAutoHide();
     };
-  }, []);
+  }, [startAutoHide, clearAutoHide]);
 
   return (
     <AnimatePresence mode="wait">

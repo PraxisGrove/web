@@ -168,7 +168,7 @@ export function RecentCourses({
             最近学习
           </CardTitle>
           {showViewAll && (
-            <Link href="/dashboard/courses">
+            <Link href="/profile/courses">
               <Button variant="ghost" size="sm">
                 查看全部
               </Button>

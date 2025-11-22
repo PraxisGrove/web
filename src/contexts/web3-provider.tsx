@@ -18,7 +18,7 @@ if (!projectId) {
 const metadata = {
   name: 'PraxisGrove',
   description: '基于AI技术的创新在线教育平台',
-  url: 'https://praxisgrove.com', // origin must match your domain & subdomain
+  url: typeof window !== 'undefined' ? window.location.origin : 'https://praxisgrove.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/179229932']
 }
 

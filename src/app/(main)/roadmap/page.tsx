@@ -13,11 +13,11 @@ import {
   Badge,
 } from '@/components/unified';
 import { motion } from 'framer-motion';
-import { KnowledgeGraph } from '@/components/knowledge-graph/KnowledgeGraph';
-import {
-  mockKnowledgeNodes,
-  mockKnowledgeConnections,
-} from '@/lib/mock-data/knowledge-graph';
+// import { KnowledgeGraph } from '@/components/knowledge-graph/KnowledgeGraph';
+// import {
+//   mockKnowledgeNodes,
+//   mockKnowledgeConnections,
+// } from '@/lib/mock-data/knowledge-graph';
 import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
 import { WalletGuard } from '@/components/auth/WalletGuard';
 
@@ -116,10 +116,10 @@ export default function RoadmapPage() {
                 className="relative overflow-hidden bg-slate-50 dark:bg-slate-900"
                 style={{ height: '600px' }}
               >
-                <KnowledgeGraph
-                  initialNodes={mockKnowledgeNodes}
-                  initialConnections={mockKnowledgeConnections}
-                />
+                {/* KnowledgeGraph component removed */}
+                <div className="flex h-full items-center justify-center text-gray-500">
+                  Knowledge Graph Component Removed
+                </div>
               </div>
             </EnhancedCard>
 

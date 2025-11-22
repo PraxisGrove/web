@@ -36,7 +36,6 @@ function getLocale(request: NextRequest): string {
  * 需要认证的路由
  */
 const authRequiredPaths = [
-  '/dashboard',
   '/profile',
   '/settings',
   '/courses/my',

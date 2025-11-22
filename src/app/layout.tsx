@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Space_Mono, Press_Start_2P } from 'next/font/google';
 import '@/styles/globals.css';
-import '@/styles/swagger.css';
 import { AppProviders } from '@/contexts/providers';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Analytics } from '@vercel/analytics/react';

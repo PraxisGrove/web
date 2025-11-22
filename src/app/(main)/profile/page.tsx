@@ -8,7 +8,7 @@ import {
   Achievements,
   RecentCourses,
   defaultLearningStats,
-} from '@/components/dashboard';
+} from '@/components/profile';
 import { Card, CardContent, EnhancedCard, Badge } from '@/components/unified';
 import { FloatingNav } from '@/components/aceternity/floating-navbar';
 import { globalNavItems } from '@/lib/navigation';

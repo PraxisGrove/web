@@ -35,6 +35,12 @@ export const env = {
 export const isDevelopment = env.APP_ENV === 'development';
 export const isProduction = env.APP_ENV === 'production';
 export const isTest = env.APP_ENV === 'test';
+export const isLocal = env.APP_ENV === 'local';
+
+/**
+ * 检查是否应该绕过认证（用于开发和测试环境）
+ */
+export const shouldBypassAuth = isDevelopment || isTest || isLocal;
 
 // 环境变量验证
 export function validateEnv() {

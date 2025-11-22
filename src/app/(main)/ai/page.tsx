@@ -38,6 +38,7 @@ import {
   Clock,
   Star,
 } from 'lucide-react';
+import { WalletGuard } from '@/components/auth/WalletGuard';
 
 // AI 助手消息类型
 interface AIMessage {
@@ -311,13 +312,14 @@ export default function AIPage() {
       </AdaptiveParticles>
 
       <main className="relative z-10">
-        <PageLayout
-          title="AI 智能助手"
-          subtitle="让 AI 成为你学习和创作的最佳伙伴"
-          backgroundClass=""
-        >
-          {/* 主要内容区域 */}
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <WalletGuard>
+          <PageLayout
+            title="AI 智能助手"
+            subtitle="让 AI 成为你学习和创作的最佳伙伴"
+            backgroundClass=""
+          >
+            {/* 主要内容区域 */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* 主要内容区域 */}
             <div className="lg:col-span-2">
               <EnhancedCard variant="glow" className="h-[600px] p-6">
@@ -663,29 +665,30 @@ export default function AIPage() {
                       <div className="mb-1 flex justify-between text-sm">
                         <span>学习规划</span>
                         <span>72%</span>
+                        </div>
+                        <Progress value={72} className="h-2" />
                       </div>
-                      <Progress value={72} className="h-2" />
-                    </div>
-                    <div>
-                      <div className="mb-1 flex justify-between text-sm">
-                        <span>创意生成</span>
-                        <span>68%</span>
+                      <div>
+                        <div className="mb-1 flex justify-between text-sm">
+                          <span>创意生成</span>
+                          <span>68%</span>
+                        </div>
+                        <Progress value={68} className="h-2" />
                       </div>
-                      <Progress value={68} className="h-2" />
-                    </div>
-                    <div>
-                      <div className="mb-1 flex justify-between text-sm">
-                        <span>文档助手</span>
-                        <span>45%</span>
+                      <div>
+                        <div className="mb-1 flex justify-between text-sm">
+                          <span>文档助手</span>
+                          <span>45%</span>
+                        </div>
+                        <Progress value={45} className="h-2" />
                       </div>
-                      <Progress value={45} className="h-2" />
                     </div>
-                  </div>
-                </EnhancedCard>
+                  </EnhancedCard>
+                </div>
               </div>
             </div>
-          </div>
-        </PageLayout>
+          </PageLayout>
+        </WalletGuard>
       </main>
     </div>
   );

@@ -36,6 +36,7 @@ import {
   Lightbulb,
   HelpCircle,
 } from 'lucide-react';
+import { WalletGuard } from '@/components/auth/WalletGuard';
 
 // 社区帖子类型
 interface CommunityPost {
@@ -292,13 +293,14 @@ export default function CommunityPage() {
       </AdaptiveParticles>
 
       <main className="relative z-10">
-        <PageLayout
-          title="学习社区"
-          subtitle="与全球学习者一起交流、分享、成长"
-          backgroundClass=""
-        >
-          {/* 主要内容区域 */}
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
+        <WalletGuard>
+          <PageLayout
+            title="学习社区"
+            subtitle="与全球学习者一起交流、分享、成长"
+            backgroundClass=""
+          >
+            {/* 主要内容区域 */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
             {/* 左侧边栏 - 分类和统计 */}
             <div className="lg:col-span-1">
               <div className="space-y-6">
@@ -550,8 +552,9 @@ export default function CommunityPage() {
                 </EnhancedCard>
               </div>
             </div>
-          </div>
-        </PageLayout>
+            </div>
+          </PageLayout>
+        </WalletGuard>
       </main>
     </div>
   );

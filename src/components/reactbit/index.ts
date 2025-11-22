@@ -14,6 +14,7 @@ export { default as SplitText } from './SplitText';
 
 // 背景效果组件
 export { AnimatedBackground } from './animated-background';
+export { default as Aurora } from './Aurora';
 export { GridScan } from './GridScan';
 export {
   GradientBackground,

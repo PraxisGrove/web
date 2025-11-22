@@ -18,18 +18,23 @@ import { motion } from 'framer-motion';
 //   mockKnowledgeNodes,
 //   mockKnowledgeConnections,
 // } from '@/lib/mock-data/knowledge-graph';
-import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
 import { WalletGuard } from '@/components/auth/WalletGuard';
+import { Aurora } from '@/components/reactbit';
 
 /**
  * 知识宇宙页面
  */
 export default function RoadmapPage() {
   return (
-    <div className="bg-background min-h-screen">
-      <AdaptiveParticles className="fixed inset-0 z-0">
-        <div />
-      </AdaptiveParticles>
+    <div className="bg-background relative min-h-screen w-full overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Aurora
+          colorStops={['#6366f1', '#ef4444', '#FFE600']}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
+      </div>
 
       <main className="relative z-10">
         {/* 浮动导航栏 */}

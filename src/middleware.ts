@@ -38,7 +38,6 @@ function getLocale(request: NextRequest): string {
 const authRequiredPaths = [
   '/profile',
   '/settings',
-  '/courses/my',
 ];
 
 /**
@@ -60,7 +59,6 @@ const publicPaths = [
   '/contact',
   '/terms',
   '/privacy',
-  '/courses',
   '/api',
   '/roadmap',
   '/community',

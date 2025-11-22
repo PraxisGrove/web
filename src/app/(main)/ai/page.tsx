@@ -18,7 +18,7 @@ import {
   Progress,
   PageLayout,
 } from '@/components/unified';
-import { AdaptiveParticles } from '@/components/ui/PerformanceOptimizer';
+import { Aurora } from '@/components/reactbit';
 import {
   Bot,
   Send,
@@ -285,10 +285,15 @@ export default function AIPage() {
 
   if (loading) {
     return (
-      <div className="bg-background min-h-screen">
-        <AdaptiveParticles className="fixed inset-0 z-0">
-          <div />
-        </AdaptiveParticles>
+      <div className="bg-background relative min-h-screen w-full overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Aurora
+            colorStops={['#6366f1', '#ef4444', '#FFE600']}
+            blend={0.5}
+            amplitude={1.0}
+            speed={0.5}
+          />
+        </div>
 
         <div className="container relative z-10 mx-auto space-y-8 px-4 py-20">
           <div className="h-8 w-48 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
@@ -306,10 +311,15 @@ export default function AIPage() {
   }
 
   return (
-    <div className="bg-background min-h-screen">
-      <AdaptiveParticles className="fixed inset-0 z-0">
-        <div />
-      </AdaptiveParticles>
+    <div className="bg-background relative min-h-screen w-full overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Aurora
+          colorStops={['#6366f1', '#ef4444', '#FFE600']}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
+      </div>
 
       <main className="relative z-10">
         <WalletGuard>

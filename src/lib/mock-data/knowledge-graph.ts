@@ -21,7 +21,6 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       learningTime: 40,
     },
     resources: {
-      courses: [],
       articles: [],
       videos: [],
     },
@@ -42,7 +41,6 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       learningTime: 60,
     },
     resources: {
-      courses: [],
       articles: [],
       videos: [],
     },
@@ -63,7 +61,6 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       learningTime: 30,
     },
     resources: {
-      courses: [],
       articles: [],
       videos: [],
     },
@@ -84,7 +81,6 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       learningTime: 50,
     },
     resources: {
-      courses: [],
       articles: [],
       videos: [],
     },
@@ -105,7 +101,6 @@ export const mockKnowledgeNodes: KnowledgeNode[] = [
       learningTime: 40,
     },
     resources: {
-      courses: [],
       articles: [],
       videos: [],
     },

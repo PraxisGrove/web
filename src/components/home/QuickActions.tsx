@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, User, Plus, X, Globe, Brain } from 'lucide-react';
+import { User, Plus, X, Globe, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface QuickActionsProps {
@@ -25,13 +25,6 @@ const quickActions: QuickAction[] = [
     icon: Brain,
     color: 'from-purple-500 to-pink-500',
     href: '/ai',
-  },
-  {
-    id: 'search',
-    label: 'Search Courses',
-    icon: Search,
-    color: 'from-blue-500 to-cyan-500',
-    href: '/courses',
   },
   {
     id: 'login',

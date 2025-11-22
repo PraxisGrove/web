@@ -69,18 +69,6 @@ export const queryKeys = {
     profile: () => ['auth', 'profile'] as const,
   },
 
-  // 课程相关
-  courses: {
-    all: () => ['courses'] as const,
-    lists: () => ['courses', 'list'] as const,
-    list: (filters: Record<string, any>) =>
-      ['courses', 'list', filters] as const,
-    details: () => ['courses', 'detail'] as const,
-    detail: (id: string) => ['courses', 'detail', id] as const,
-    progress: (id: string) => ['courses', 'progress', id] as const,
-    enrollment: (id: string) => ['courses', 'enrollment', id] as const,
-  },
-
   // 知识图谱相关
   knowledgeGraph: {
     all: () => ['knowledge-graph'] as const,

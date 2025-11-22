@@ -3,17 +3,16 @@ import path from 'path';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Turbopack 配置 (用于 next dev --turbo)
-  experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  // Turbopack 配置 (用于 next dev --turbo)
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
-      resolveAlias: {
-        '@react-native-async-storage/async-storage': './src/mocks/async-storage.js',
-      },
+    },
+    resolveAlias: {
+      '@react-native-async-storage/async-storage': './src/mocks/async-storage.js',
     },
   },
   images: {

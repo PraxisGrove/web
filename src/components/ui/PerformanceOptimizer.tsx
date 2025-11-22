@@ -248,55 +248,6 @@ export function ConditionalRender({
   return shouldRender ? <>{children}</> : <>{fallback}</>;
 }
 
-// 自适应粒子组件
-export function AdaptiveParticles({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const { config, isLowPerformance } = usePerformanceConfig();
-  // 动态导入粒子组件以避免不必要的加载
-  const [ParticleComponent, setParticleComponent] =
-    useState<React.ComponentType<any> | null>(null);
-
-  // 稳定配置值以避免无限循环
-  const shouldEnableAnimations = React.useMemo(
-    () => config.enableAnimations,
-    [config.enableAnimations]
-  );
-  const particleCount = React.useMemo(
-    () => config.particleCount,
-    [config.particleCount]
-  );
-
-  useEffect(() => {
-    if (shouldEnableAnimations && particleCount > 0) {
-      import('@/components/ui/ParticleBackground').then((module) => {
-        setParticleComponent(() => module.ParticleBackground);
-      });
-    }
-  }, [shouldEnableAnimations, particleCount]);
-
-  if (!config.enableAnimations || config.particleCount === 0) {
-    return <div className={className}>{children}</div>;
-  }
-
-  if (!ParticleComponent) {
-    return <div className={className}>{children}</div>;
-  }
-
-  return (
-    <ParticleComponent
-      className={className}
-      particleCount={config.particleCount}
-      interactive={!isLowPerformance}
-    >
-      {children}
-    </ParticleComponent>
-  );
-}
 
 // 自适应动画包装器
 export function AdaptiveMotion({

@@ -6,7 +6,6 @@ import {
   ProgressChart,
   LearningCalendar,
   Achievements,
-  RecentCourses,
   defaultLearningStats,
 } from '@/components/profile';
 import { Card, CardContent, EnhancedCard, Badge } from '@/components/unified';
@@ -15,6 +14,7 @@ import { globalNavItems } from '@/lib/navigation';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/hooks/useAuth';
+import { Aurora } from '@/components/reactbit';
 
 /**
  * 用户学习仪表板页面
@@ -96,43 +96,6 @@ export default function DashboardPage() {
     },
   ]);
 
-  const [recentCourses] = useState([
-    {
-      id: '1',
-      title: 'JavaScript 高级编程',
-      instructor: '张老师',
-      progress: 75,
-      totalLessons: 20,
-      completedLessons: 15,
-      lastAccessedAt: '2024-01-07T10:30:00Z',
-      nextLesson: {
-        id: '16',
-        title: '异步编程进阶',
-        duration: 25,
-      },
-      rating: 4.8,
-      category: '前端开发',
-      difficulty: 'intermediate' as const,
-    },
-    {
-      id: '2',
-      title: '机器学习基础',
-      instructor: '李博士',
-      progress: 45,
-      totalLessons: 30,
-      completedLessons: 13,
-      lastAccessedAt: '2024-01-06T15:20:00Z',
-      nextLesson: {
-        id: '14',
-        title: '神经网络入门',
-        duration: 35,
-      },
-      rating: 4.9,
-      category: '人工智能',
-      difficulty: 'beginner' as const,
-    },
-  ]);
-
   const [stats, setStats] = useState(defaultLearningStats);
 
   useEffect(() => {
@@ -189,7 +152,16 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-pink-100 dark:from-gray-900 dark:via-purple-900 dark:to-pink-900">
+    <div className="bg-background relative min-h-screen w-full overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Aurora
+          colorStops={['#6366f1', '#ef4444', '#FFE600']}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.5}
+        />
+      </div>
+
       {/* 浮动导航栏 */}
       <FloatingNav navItems={globalNavItems} />
 
@@ -376,7 +348,7 @@ export default function DashboardPage() {
         {/* 主要内容选项卡 */}
         <EnhancedCard variant="glow" className="p-8">
           <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-5 border border-white/20 bg-white/10 dark:bg-white/5">
+            <TabsList className="grid w-full grid-cols-4 border border-white/20 bg-white/10 dark:bg-white/5">
               <TabsTrigger
                 value="overview"
                 className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
@@ -401,21 +373,10 @@ export default function DashboardPage() {
               >
                 成就
               </TabsTrigger>
-              <TabsTrigger
-                value="courses"
-                className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
-              >
-                我的课程
-              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="mt-6">
-              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                <Card>
-                  <CardContent className="p-6">
-                    <RecentCourses courses={recentCourses} />
-                  </CardContent>
-                </Card>
+              <div className="grid grid-cols-1 gap-8">
                 <Card>
                   <CardContent className="p-6">
                     <ProgressChart
@@ -469,17 +430,6 @@ export default function DashboardPage() {
               </Card>
             </TabsContent>
 
-            <TabsContent value="courses" className="mt-6">
-              <Card>
-                <CardContent className="p-6">
-                  <RecentCourses
-                    courses={recentCourses}
-                    maxItems={10}
-                    showViewAll={false}
-                  />
-                </CardContent>
-              </Card>
-            </TabsContent>
           </Tabs>
         </EnhancedCard>
       </div>

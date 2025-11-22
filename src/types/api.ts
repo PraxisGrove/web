@@ -118,147 +118,6 @@ export interface RegisterRequest {
  */
 export interface RegisterResponse extends LoginResponse {}
 
-// ============= 课程相关类型 =============
-
-/**
- * 课程信息
- */
-export interface Course {
-  id: string;
-  title: string;
-  description: string;
-  shortDescription?: string;
-  instructor: Instructor;
-  category: CourseCategory;
-  level: CourseLevel;
-  duration: number; // 分钟
-  price: number;
-  originalPrice?: number;
-  currency: string;
-  rating: number;
-  reviewsCount: number;
-  studentsCount: number;
-  lessonsCount: number;
-  language: string;
-  lastUpdated: string;
-  isPublished: boolean;
-  isFeatured: boolean;
-  isPopular: boolean;
-  tags: string[];
-  thumbnail: string;
-  previewVideo?: string;
-  certificate: boolean;
-  requirements: string[];
-  whatYouWillLearn: string[];
-  curriculum: CourseChapter[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-/**
- * 讲师信息
- */
-export interface Instructor {
-  id: string;
-  name: string;
-  avatar?: string;
-  bio: string;
-  rating: number;
-  studentsCount: number;
-  coursesCount: number;
-  specialties: string[];
-}
-
-/**
- * 课程分类
- */
-export interface CourseCategory {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  icon?: string;
-  parentId?: string;
-}
-
-/**
- * 课程级别
- */
-export type CourseLevel = 'beginner' | 'intermediate' | 'advanced';
-
-/**
- * 课程章节
- */
-export interface CourseChapter {
-  id: string;
-  title: string;
-  description?: string;
-  order: number;
-  lessons: CourseLesson[];
-}
-
-/**
- * 课程课时
- */
-export interface CourseLesson {
-  id: string;
-  title: string;
-  description?: string;
-  type: 'video' | 'text' | 'quiz' | 'assignment';
-  duration: number; // 分钟
-  order: number;
-  isPreview: boolean;
-  content?: string;
-  videoUrl?: string;
-  resources?: LessonResource[];
-}
-
-/**
- * 课时资源
- */
-export interface LessonResource {
-  id: string;
-  name: string;
-  type: 'pdf' | 'doc' | 'image' | 'code' | 'link';
-  url: string;
-  size?: number;
-}
-
-/**
- * 课程查询参数
- */
-export interface CoursesQueryParams extends PaginationParams {
-  search?: string;
-  category?: string;
-  level?: CourseLevel;
-  minPrice?: number;
-  maxPrice?: number;
-  rating?: number;
-  language?: string;
-  instructor?: string;
-  tags?: string[];
-  featured?: boolean;
-  popular?: boolean;
-}
-
-/**
- * 课程进度
- */
-export interface CourseProgress {
-  courseId: string;
-  userId: string;
-  completedLessons: string[];
-  currentLesson?: string;
-  progressPercentage: number;
-  timeSpent: number; // 分钟
-  lastAccessedAt: string;
-  completedAt?: string;
-  certificate?: {
-    id: string;
-    issuedAt: string;
-    certificateUrl: string;
-  };
-}
 
 // ============= 知识图谱相关类型 =============
 
@@ -269,9 +128,9 @@ export interface KnowledgeNode {
   id: string;
   title: string;
   description: string;
-  type: 'concept' | 'skill' | 'topic' | 'course';
+  type: 'concept' | 'skill' | 'topic';
   category: string;
-  level: CourseLevel;
+  level: 'beginner' | 'intermediate' | 'advanced';
   position: {
     x: number;
     y: number;
@@ -285,7 +144,6 @@ export interface KnowledgeNode {
     learningTime: number;
   };
   resources: {
-    courses: string[];
     articles: string[];
     videos: string[];
   };
@@ -316,7 +174,7 @@ export interface KnowledgeConnection {
  */
 export interface KnowledgeGraphParams {
   category?: string;
-  level?: CourseLevel;
+  level?: 'beginner' | 'intermediate' | 'advanced';
   center?: string; // 中心节点ID
   radius?: number; // 显示半径
   includeUserProgress?: boolean;
@@ -349,7 +207,7 @@ export interface ChatConversation {
   context: {
     courseId?: string;
     topicId?: string;
-    userLevel?: CourseLevel;
+    userLevel?: 'beginner' | 'intermediate' | 'advanced';
   };
   createdAt: string;
   updatedAt: string;

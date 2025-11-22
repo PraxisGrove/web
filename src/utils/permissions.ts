@@ -10,8 +10,6 @@ export type Permission =
   // 用户权限
   | 'user:profile:read'
   | 'user:profile:update'
-  | 'user:courses:enroll'
-  | 'user:courses:view'
   | 'user:progress:view'
 
   // 管理员权限
@@ -19,10 +17,6 @@ export type Permission =
   | 'admin:users:read'
   | 'admin:users:update'
   | 'admin:users:delete'
-  | 'admin:courses:create'
-  | 'admin:courses:update'
-  | 'admin:courses:delete'
-  | 'admin:courses:manage'
   | 'admin:students:view'
   | 'admin:system:config'
   | 'admin:analytics:view'
@@ -35,26 +29,18 @@ export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
   user: [
     'user:profile:read',
     'user:profile:update',
-    'user:courses:enroll',
-    'user:courses:view',
     'user:progress:view',
   ],
   admin: [
     // 继承用户权限
     'user:profile:read',
     'user:profile:update',
-    'user:courses:enroll',
-    'user:courses:view',
     'user:progress:view',
     // 管理员权限
     'admin:users:create',
     'admin:users:read',
     'admin:users:update',
     'admin:users:delete',
-    'admin:courses:create',
-    'admin:courses:update',
-    'admin:courses:delete',
-    'admin:courses:manage',
     'admin:students:view',
     'admin:system:config',
     'admin:analytics:view',
@@ -263,8 +249,6 @@ export const PERMISSIONS = {
   USER: {
     PROFILE_READ: 'user:profile:read' as const,
     PROFILE_UPDATE: 'user:profile:update' as const,
-    COURSES_ENROLL: 'user:courses:enroll' as const,
-    COURSES_VIEW: 'user:courses:view' as const,
     PROGRESS_VIEW: 'user:progress:view' as const,
   },
   ADMIN: {
@@ -272,10 +256,6 @@ export const PERMISSIONS = {
     USERS_READ: 'admin:users:read' as const,
     USERS_UPDATE: 'admin:users:update' as const,
     USERS_DELETE: 'admin:users:delete' as const,
-    COURSES_CREATE: 'admin:courses:create' as const,
-    COURSES_UPDATE: 'admin:courses:update' as const,
-    COURSES_DELETE: 'admin:courses:delete' as const,
-    COURSES_MANAGE: 'admin:courses:manage' as const,
     STUDENTS_VIEW: 'admin:students:view' as const,
     SYSTEM_CONFIG: 'admin:system:config' as const,
     ANALYTICS_VIEW: 'admin:analytics:view' as const,

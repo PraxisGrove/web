@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
 
 import Image from 'next/image';
 
@@ -9,7 +10,7 @@ export const FloatingNav = ({
   navItems,
   className,
   showLoginButton = true,
-  loginText = 'Login',
+  loginText = 'Connect Wallet',
 }: {
   navItems: {
     name: string;
@@ -20,6 +21,8 @@ export const FloatingNav = ({
   showLoginButton?: boolean;
   loginText?: string;
 }) => {
+  const { open } = useAppKit();
+  const { address, isConnected } = useAppKitAccount();
   const [visible, setVisible] = useState(false);
   const lastScrollY = useRef(0);
   const isMouseInTopZone = useRef(false);
@@ -203,23 +206,23 @@ export const FloatingNav = ({
         <div className="flex items-center justify-end">
           {showLoginButton && (
             <button
-              onClick={(e) => {
-                e.preventDefault();
-
-                if (typeof window !== 'undefined') {
-                  window.location.href = '/login';
-                }
-              }}
+              onClick={() => open()}
               className={cn(
-                'relative rounded-full px-5 py-2 text-sm font-medium transition-all duration-200',
+                'relative flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
                 'text-foreground/80 hover:text-foreground',
-                'backdrop-blur-sm hover:bg-black/5 dark:hover:bg-white/5',
-                'hover:shadow-sm dark:hover:shadow-none',
-                'inline-flex items-center justify-center border-0 bg-transparent',
-                'cursor-pointer'
+                'bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10',
+                'border border-black/5 dark:border-white/5',
+                'focus:outline-none focus:ring-2 focus:ring-foreground/20',
+                'active:scale-95'
               )}
             >
-              {loginText}
+              {isConnected ? (
+                <span className="font-mono text-xs">
+                  {address?.slice(0, 4)}...{address?.slice(-4)}
+                </span>
+              ) : (
+                <span>{loginText}</span>
+              )}
             </button>
           )}
         </div>

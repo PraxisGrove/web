@@ -5,6 +5,8 @@ import '@/styles/swagger.css';
 import { AppProviders } from '@/contexts/providers';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Analytics } from '@vercel/analytics/react';
+import { headers } from 'next/headers';
+import Web3Provider from '@/contexts/web3-provider';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -57,19 +59,24 @@ export const metadata: Metadata = {
   manifest: '/logo/site.webmanifest',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersObj = await headers();
+  const cookies = headersObj.get('cookie');
+
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body
         className={`${dmSans.variable} ${spaceMono.variable} ${pressStart2P.variable}`}
       >
-        <AppProviders>
-          <div id="root">{children}</div>
-        </AppProviders>
+        <Web3Provider cookies={cookies}>
+          <AppProviders>
+            <div id="root">{children}</div>
+          </AppProviders>
+        </Web3Provider>
         <SpeedInsights />
         <Analytics />
       </body>

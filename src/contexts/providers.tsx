@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createQueryClient } from '@/lib/query-client';
 import { ThemeProvider } from './theme-provider';
-import { AuthProvider } from './auth-provider';
 import { NotificationProvider } from './notification-provider';
 import { PerformanceProvider } from '@/components/ui/PerformanceOptimizer';
 // import { PerformanceInitializer } from '@/components/providers/PerformanceInitializer';
@@ -41,16 +40,14 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
         <AceternityThemeProvider>
           <PerformanceProvider>
             <ToastProvider>
-              <AuthProvider>
-                <NotificationProvider>
-                  {children}
-                  {/* 性能监控暂时禁用以解决 SSR 问题 */}
-                  {/* {process.env.NODE_ENV === 'development' && <PerformanceInitializer />} */}
-                  {/* {process.env.NODE_ENV === 'development' && <PerformanceMonitor />} */}
-                  {/* Toast 初始化器 */}
-                  <ToastInitializer />
-                </NotificationProvider>
-              </AuthProvider>
+              <NotificationProvider>
+                {children}
+                {/* 性能监控暂时禁用以解决 SSR 问题 */}
+                {/* {process.env.NODE_ENV === 'development' && <PerformanceInitializer />} */}
+                {/* {process.env.NODE_ENV === 'development' && <PerformanceMonitor />} */}
+                {/* Toast 初始化器 */}
+                <ToastInitializer />
+              </NotificationProvider>
             </ToastProvider>
           </PerformanceProvider>
         </AceternityThemeProvider>

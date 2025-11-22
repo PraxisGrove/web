@@ -3,6 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { HoverBorderGradient } from '@/components/ui/hover-border-gradient';
+import { Sparkles } from 'lucide-react';
 import { usePerformanceConfig } from '@/components/ui/PerformanceOptimizer';
 import { GridScan, Shuffle, SplitText } from '@/components/reactbit';
 import { cn } from '@/lib/utils';
@@ -88,7 +90,7 @@ export function HeroSection({ className }: HeroSectionProps) {
             <div className="relative">
               <Shuffle
                 text="PraxisGrove"
-                className="text-4xl font-bold leading-relaxed tracking-wider text-white md:text-6xl lg:text-7xl"
+                className="text-5xl font-black tracking-tight text-white md:text-7xl lg:text-8xl"
                 shuffleDirection="right"
                 duration={0.35}
                 animationMode="evenodd"
@@ -101,10 +103,10 @@ export function HeroSection({ className }: HeroSectionProps) {
                 respectReducedMotion={true}
               />
             </div>
-            <div className="relative">
+            <div className="relative mt-2">
               <SplitText
                 text="A Permissionless School"
-                className="text-2xl font-light text-indigo-400 md:text-4xl lg:text-5xl"
+                className="text-2xl font-medium tracking-wide text-gray-200 md:text-3xl lg:text-4xl"
                 delay={100}
                 duration={0.6}
                 ease="power3.out"
@@ -123,7 +125,7 @@ export function HeroSection({ className }: HeroSectionProps) {
         <motion.p
           variants={itemVariants}
           transition={itemTransition}
-          className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-300 md:text-xl"
+          className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-gray-400 md:text-lg"
         >
           Empowering personalized learning through AI and blockchain technology.
           Explore infinite possibilities of knowledge and unlock a new era of
@@ -136,19 +138,14 @@ export function HeroSection({ className }: HeroSectionProps) {
           transition={itemTransition}
           className="mb-12 flex justify-center"
         >
-          <Button
-            size="lg"
-            className={cn(
-              'px-10 py-6 text-xl font-bold tracking-wide',
-              'bg-primary text-primary-foreground',
-              'hover:bg-primary/90',
-              'transform transition-all duration-200 hover:scale-105',
-              'shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:shadow-[0_0_30px_rgba(99,102,241,0.7)]',
-              'rounded-full border border-white/10'
-            )}
+          <HoverBorderGradient
+            containerClassName="rounded-full"
+            as="button"
+            className="flex items-center space-x-2 bg-white/5 px-8 py-3 text-white backdrop-blur-sm transition-colors hover:bg-white/10"
           >
-            Start Learning
-          </Button>
+            <Sparkles className="h-5 w-5" />
+            <span className="text-lg font-semibold">Start Learning</span>
+          </HoverBorderGradient>
         </motion.div>
       </motion.div>
     </div>

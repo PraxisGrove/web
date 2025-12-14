@@ -27,12 +27,14 @@ import {
   HelpCircle,
   ChevronLeft,
   X,
+  MessageSquare,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 
-import { ConceptNode, ContextMenu } from './components';
+import { ConceptNode, ContextMenu, AIChatPanel } from './components';
 import { useRoadmapStore, useVisibleNodes, useVisibleEdges } from './store';
+import { useUIStore, uiSelectors } from '@/store/ui';
 import { applyDagreLayout } from './hooks';
 import type { RoadmapNode, LayoutDirection } from './types';
 
@@ -97,6 +99,9 @@ function FloatingToolbar() {
   const edges = useRoadmapStore((s) => s.edges);
   const resetToMockData = useRoadmapStore((s) => s.resetToMockData);
   
+  const aiChatConfig = useUIStore(uiSelectors.aiChatConfig);
+  const toggleAIChatVisibility = useUIStore((state) => state.toggleAIChatVisibility);
+
   const [showHelp, setShowHelp] = useState(false);
 
   /**
@@ -243,6 +248,21 @@ function FloatingToolbar() {
           >
             <RotateCcw className="h-4 w-4" />
           </button>
+
+          {/* AI Chat Toggle */}
+          {aiChatConfig.enabled && (
+            <button
+              onClick={toggleAIChatVisibility}
+              className={`rounded-lg p-2 transition-colors ${
+                aiChatConfig.visible
+                  ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400'
+                  : 'text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700'
+              }`}
+              title="Toggle AI Assistant"
+            >
+              <MessageSquare className="h-4 w-4" />
+            </button>
+          )}
 
           {/* Help */}
           <button
@@ -504,6 +524,9 @@ function RoadmapFlow() {
         <FloatingToolbar />
         <StatsPanel />
       </ReactFlow>
+
+      {/* AI Chat Panel */}
+      <AIChatPanel />
 
       {/* Context Menu */}
       <ContextMenu

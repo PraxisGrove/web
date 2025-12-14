@@ -12,6 +12,15 @@ export type Theme = 'light' | 'dark' | 'system';
 export type Language = 'zh-CN' | 'en-US';
 
 /**
+ * AI Chat Configuration
+ */
+export interface AIChatConfig {
+  enabled: boolean;
+  position: 'sidebar' | 'bottom' | 'float';
+  visible: boolean;
+}
+
+/**
  * 通知类型
  */
 export interface Notification {
@@ -76,6 +85,9 @@ export interface UIState {
   // 加载状态
   globalLoading: boolean;
 
+  // AI Chat Config
+  aiChatConfig: AIChatConfig;
+
   // 操作
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
@@ -90,6 +102,8 @@ export interface UIState {
   closeModal: (id: string) => void;
   closeAllModals: () => void;
   setGlobalLoading: (loading: boolean) => void;
+  setAIChatConfig: (config: Partial<AIChatConfig>) => void;
+  toggleAIChatVisibility: () => void;
 }
 
 /**
@@ -108,6 +122,11 @@ export const useUIStore = create<UIState>()(
         notifications: [],
         modals: [],
         globalLoading: false,
+        aiChatConfig: {
+          enabled: true,
+          position: 'sidebar',
+          visible: true,
+        },
 
         // 设置主题
         setTheme: (theme: Theme) => {
@@ -250,6 +269,23 @@ export const useUIStore = create<UIState>()(
         setGlobalLoading: (loading: boolean) => {
           set({ globalLoading: loading });
         },
+
+        // Set AI Chat Config
+        setAIChatConfig: (config: Partial<AIChatConfig>) => {
+          set((state) => ({
+            aiChatConfig: { ...state.aiChatConfig, ...config },
+          }));
+        },
+
+        // Toggle AI Chat Visibility
+        toggleAIChatVisibility: () => {
+          set((state) => ({
+            aiChatConfig: {
+              ...state.aiChatConfig,
+              visible: !state.aiChatConfig.visible,
+            },
+          }));
+        },
       }),
       {
         name: 'ui-storage',
@@ -258,6 +294,7 @@ export const useUIStore = create<UIState>()(
           theme: state.theme,
           language: state.language,
           sidebarCollapsed: state.sidebarCollapsed,
+          aiChatConfig: state.aiChatConfig,
         }),
         version: 1,
       }
@@ -294,6 +331,9 @@ export const uiSelectors = {
 
   // 加载状态
   globalLoading: (state: UIState) => state.globalLoading,
+
+  // AI Chat
+  aiChatConfig: (state: UIState) => state.aiChatConfig,
 };
 
 /**

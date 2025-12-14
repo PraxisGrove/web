@@ -20,13 +20,6 @@ interface QuickAction {
 
 const quickActions: QuickAction[] = [
   {
-    id: 'ai-chat',
-    label: 'AI',
-    icon: Brain,
-    color: 'from-purple-500 to-pink-500',
-    href: '/ai',
-  },
-  {
     id: 'login',
     label: 'Quick Login',
     icon: User,

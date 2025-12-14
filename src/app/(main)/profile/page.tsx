@@ -6,6 +6,7 @@ import {
   ProgressChart,
   LearningCalendar,
   Achievements,
+  Settings,
   defaultLearningStats,
 } from '@/components/profile';
 import { Card, CardContent, EnhancedCard, Badge } from '@/components/unified';
@@ -348,7 +349,7 @@ export default function DashboardPage() {
         {/* 主要内容选项卡 */}
         <EnhancedCard variant="glow" className="p-8">
           <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 border border-white/20 bg-white/10 dark:bg-white/5">
+            <TabsList className="grid w-full grid-cols-5 border border-white/20 bg-white/10 dark:bg-white/5">
               <TabsTrigger
                 value="overview"
                 className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
@@ -372,6 +373,12 @@ export default function DashboardPage() {
                 className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
               >
                 成就
+              </TabsTrigger>
+              <TabsTrigger
+                value="settings"
+                className="data-[state=active]:bg-white/20 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white"
+              >
+                设置
               </TabsTrigger>
             </TabsList>
 
@@ -428,6 +435,10 @@ export default function DashboardPage() {
                   />
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="settings" className="mt-6">
+              <Settings />
             </TabsContent>
 
           </Tabs>

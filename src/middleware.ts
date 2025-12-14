@@ -62,7 +62,6 @@ const publicPaths = [
   '/api',
   '/roadmap',
   '/community',
-  '/ai',
 ];
 
 /**

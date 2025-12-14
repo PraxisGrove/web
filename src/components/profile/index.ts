@@ -6,3 +6,4 @@ export { ProgressChart } from './ProgressChart';
 export { LearningCalendar } from './LearningCalendar';
 export { Achievements } from './Achievements';
 export { LearningStats, defaultLearningStats } from './LearningStats';
+export { Settings } from './Settings';

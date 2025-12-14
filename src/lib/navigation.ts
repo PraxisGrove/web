@@ -11,12 +11,8 @@ export interface NavItem {
 }
 
 // 统一的浮动导航栏配置
-// 顺序：logo, AI, 知识宇宙, 社区, 登录
+// 顺序：logo, 知识宇宙, 社区, 登录
 export const globalNavItems: NavItem[] = [
-  {
-    name: 'AI',
-    link: '/ai',
-  },
   {
     name: 'Roadmap',
     link: '/roadmap',

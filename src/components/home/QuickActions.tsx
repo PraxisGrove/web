@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Plus, X, Globe, Brain } from 'lucide-react';
+import { User, Plus, X, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface QuickActionsProps {

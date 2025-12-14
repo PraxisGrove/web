@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, Send, Mic, Sparkles, BrainCircuit, ArrowRight, X, Minimize2, Maximize2 } from 'lucide-react';
+import { Bot, Send, Mic, Sparkles, BrainCircuit, ArrowRight, X } from 'lucide-react';
 import { Button, Textarea, Avatar, AvatarFallback } from '@/components/unified';
 import { Typewriter } from '@/components/aceternity';
 import { cn } from '@/lib/utils';

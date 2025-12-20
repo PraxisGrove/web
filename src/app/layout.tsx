@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Analytics } from '@vercel/analytics/react';
 import { headers } from 'next/headers';
 import Web3Provider from '@/contexts/web3-provider';
+import { TopBanner } from '@/components/layout/TopBanner';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -77,6 +78,7 @@ export default async function RootLayout({
       <body
         className={`${dmSans.variable} ${spaceMono.variable} ${pressStart2P.variable}`}
       >
+        <TopBanner />
         <Web3Provider cookies={cookies}>
           <AppProviders>
             <div id="root">{children}</div>

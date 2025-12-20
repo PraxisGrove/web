@@ -200,6 +200,8 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Noto Sans", sans-serif;
 
   /* 边框圆角 */
   --radius-sm: calc(var(--radius) - 4px);

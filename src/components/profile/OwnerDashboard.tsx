@@ -2,10 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import SettingsModal from './SettingsModal';
+import ShareModal from './ShareModal';
 
 export default function OwnerDashboard() {
   const [mounted, setMounted] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -125,7 +127,10 @@ export default function OwnerDashboard() {
               </a>
             </div>
             <div className="flex items-center gap-3 w-full md:w-auto justify-end">
-              <button className="flex-shrink-0 h-10 bg-profile-primary hover:bg-blue-600 text-white rounded-lg font-bold text-sm transition-all shadow-[0_4px_14px_0_rgba(19,127,236,0.39)] hover:shadow-[0_6px_20px_rgba(19,127,236,0.23)] hover:-translate-y-0.5 flex items-center justify-center gap-2 px-4 cursor-pointer">
+              <button 
+                onClick={() => setIsShareModalOpen(true)}
+                className="flex-shrink-0 h-10 bg-profile-primary hover:bg-blue-600 text-white rounded-lg font-bold text-sm transition-all shadow-[0_4px_14px_0_rgba(19,127,236,0.39)] hover:shadow-[0_6px_20px_rgba(19,127,236,0.23)] hover:-translate-y-0.5 flex items-center justify-center gap-2 px-4 cursor-pointer"
+              >
                 <span className="material-symbols-outlined text-[18px]">
                   ios_share
                 </span>
@@ -671,6 +676,7 @@ export default function OwnerDashboard() {
         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-900/5 rounded-full blur-[120px]"></div>
       </div>
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+      <ShareModal isOpen={isShareModalOpen} onClose={() => setIsShareModalOpen(false)} />
     </div>
   );
 }

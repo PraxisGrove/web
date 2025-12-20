@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
+import { useRouter } from 'next/navigation';
 
 import Image from 'next/image';
 
@@ -22,12 +23,21 @@ export const FloatingNav = ({
   loginText?: string;
 }) => {
   const { open } = useAppKit();
-  const { address, isConnected } = useAppKitAccount();
+  const { isConnected } = useAppKitAccount();
   const [visible, setVisible] = useState(false);
   const lastScrollY = useRef(0);
   const isMouseInTopZone = useRef(false);
   const isHoveringNav = useRef(false);
   const autoHideTimer = useRef<NodeJS.Timeout | null>(null);
+  const router = useRouter();
+  const prevConnected = useRef(isConnected);
+
+  useEffect(() => {
+    if (!prevConnected.current && isConnected) {
+      router.push('/profile');
+    }
+    prevConnected.current = isConnected;
+  }, [isConnected, router]);
 
   const clearAutoHide = useCallback(() => {
     if (autoHideTimer.current) {
@@ -209,9 +219,16 @@ export const FloatingNav = ({
         <div className="flex items-center justify-end">
           {showLoginButton && (
             <button
-              onClick={() => open()}
+              onClick={() => {
+                if (isConnected) {
+                  router.push('/profile');
+                } else {
+                  open();
+                }
+              }}
               className={cn(
-                'relative flex items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
+                'relative flex items-center justify-center rounded-full transition-all duration-200',
+                isConnected ? 'p-1' : 'px-4 py-2',
                 'text-foreground/80 hover:text-foreground',
                 'bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10',
                 'border border-black/5 dark:border-white/5',
@@ -220,11 +237,16 @@ export const FloatingNav = ({
               )}
             >
               {isConnected ? (
-                <span className="font-mono text-xs">
-                  {address?.slice(0, 4)}...{address?.slice(-4)}
-                </span>
+                <div className="relative h-8 w-8 overflow-hidden rounded-full">
+                  <Image
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeWjwnyDPeuEl7vZXtMrOplVF3nXzmJ24JarYLEos-ei-ot-x8o_8drs9n6hsqu0fSk3VsYtpKZBggg6DbrmQbyj8nvXOxbDKZ-CLtOw9iW1fABtFTKA-YXxE2m8lhH3WhzAxwurudW1JQwIIa-PR2ZbpKR9E0ramhNV1tcjqOP9W6Dw81A8TvS6bv68U_Stu2zC8IHYqPGRcy9ppPgzudo4CrFNjUCWNOfT1khzGgAPuqAj3d39iJEDFRgN0C5mLzus5CMEbaerLF"
+                    alt="User Avatar"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               ) : (
-                <span>{loginText}</span>
+                <span className="text-sm font-medium">{loginText}</span>
               )}
             </button>
           )}

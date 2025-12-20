@@ -3,7 +3,6 @@
 import React, { memo, useCallback } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import type { NodeProps, Node } from '@xyflow/react';
-import { motion } from 'framer-motion';
 import {
   Check,
   CheckCircle2,
@@ -15,32 +14,23 @@ import {
   Circle
 } from 'lucide-react';
 import type { RoadmapNodeData } from '../types';
-import { useRoadmapStore } from '../store';
 import { useUIStore } from '@/store/ui';
 
 type ConceptNodeProps = NodeProps<Node<RoadmapNodeData, 'concept'>>;
 
-function ConceptNodeComponent({ id, data, selected }: ConceptNodeProps) {
-  const toggleNodeExpanded = useRoadmapStore((s) => s.toggleNodeExpanded);
+function ConceptNodeComponent({ data }: ConceptNodeProps) {
   const setAIChatConfig = useUIStore((state) => state.setAIChatConfig);
   
   const {
     label,
     status,
     objectives,
-    description,
-    isExpanded
   } = data;
 
   const handleStartWithAI = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     setAIChatConfig({ visible: true });
   }, [setAIChatConfig]);
-
-  const handleToggleExpand = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    toggleNodeExpanded(id);
-  }, [id, toggleNodeExpanded]);
 
   // --- Variant: Completed ---
   if (status === 'completed') {

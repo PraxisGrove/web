@@ -3,30 +3,23 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ReactFlow,
-  Background,
-  Controls,
   MiniMap,
   useReactFlow,
   ReactFlowProvider,
-  BackgroundVariant,
   type NodeTypes,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { motion } from 'framer-motion';
 import {
   ZoomIn,
   ZoomOut,
-  Maximize2,
   MousePointer2,
   Hand,
-  Maximize
 } from 'lucide-react';
-import { useTheme } from 'next-themes';
 
 import { ConceptNode, ContextMenu, AIChatPanel } from './components';
 import { useRoadmapStore, useVisibleNodes, useVisibleEdges } from './store';
 import { applyDagreLayout } from './hooks';
-import type { RoadmapNode, LayoutDirection } from './types';
+import type { RoadmapNode } from './types';
 
 interface ContextMenuState {
   nodeId: string | null;

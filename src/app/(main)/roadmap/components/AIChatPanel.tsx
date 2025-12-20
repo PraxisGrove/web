@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, Send, Mic, Sparkles, BrainCircuit, ArrowRight, MoreVertical, History, ArrowUp } from 'lucide-react';
+import { MoreVertical, History, ArrowUp } from 'lucide-react';
 import { Typewriter } from '@/components/aceternity';
 import { cn } from '@/lib/utils';
 

@@ -234,6 +234,15 @@
   --animate-pulse-glow: pulse-glow var(--aceternity-pulse-duration, 2s)
     ease-in-out infinite;
 
+  /* Profile Page Custom Theme */
+  --color-profile-primary: #137fec;
+  --color-profile-bg-light: #f6f7f8;
+  --color-profile-bg-dark: #101922;
+  --color-profile-card: #161b22;
+  --color-profile-border: rgba(255, 255, 255, 0.08);
+  --shadow-glow: 0 0 20px rgba(19, 127, 236, 0.15);
+  --shadow-glow-sm: 0 0 10px rgba(19, 127, 236, 0.1);
+
   @keyframes gradient-shift {
     0%,
     100% {

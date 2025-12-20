@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 import Image from 'next/image';
 
@@ -24,7 +24,10 @@ export const FloatingNav = ({
 }) => {
   const { open } = useAppKit();
   const { isConnected } = useAppKitAccount();
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
+  const [bannerHeight, setBannerHeight] = useState(0);
+  const bannerRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
   const isMouseInTopZone = useRef(false);
   const isHoveringNav = useRef(false);
@@ -38,6 +41,32 @@ export const FloatingNav = ({
     }
     prevConnected.current = isConnected;
   }, [isConnected, router]);
+
+  useEffect(() => {
+    if (pathname === '/') {
+      setVisible(true);
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    const element = bannerRef.current;
+    if (!element) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        let height = 0;
+        if (entry.borderBoxSize && entry.borderBoxSize.length > 0) {
+          height = entry.borderBoxSize[0].blockSize;
+        } else {
+          height = entry.contentRect.height;
+        }
+        setBannerHeight(height);
+      }
+    });
+
+    observer.observe(element, { box: 'border-box' });
+    return () => observer.disconnect();
+  }, []);
 
   const clearAutoHide = useCallback(() => {
     if (autoHideTimer.current) {
@@ -117,16 +146,24 @@ export const FloatingNav = ({
   }, [startAutoHide, clearAutoHide]);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        initial={{
-          opacity: 1,
-          y: -100,
-        }}
-        animate={{
-          y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0,
-        }}
+    <>
+      {pathname !== '/roadmap' && (
+        <div
+          style={{ height: bannerHeight ? bannerHeight + 40 : 0 }}
+          className="w-full transition-all duration-200 ease-in-out"
+        />
+      )}
+      <AnimatePresence mode="wait">
+        <motion.div
+          ref={bannerRef}
+          initial={{
+            opacity: 1,
+            y: -100,
+          }}
+          animate={{
+            y: visible ? 0 : -100,
+            opacity: visible ? 1 : 0,
+          }}
         transition={{
           duration: 0.2,
         }}
@@ -253,5 +290,6 @@ export const FloatingNav = ({
         </div>
       </motion.div>
     </AnimatePresence>
+    </>
   );
 };

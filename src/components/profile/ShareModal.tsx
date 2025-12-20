@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -298,7 +298,7 @@ function CardShareContent({ theme, setTheme }: { theme: 'cyberpunk' | 'academic'
             </div>
             <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 border-l-2 border-[#137fec]">
               <p className="text-gray-300 text-xs leading-relaxed italic">
-                "Velocity in backend logic increased by 40%. Unlocking 'Smart Contracts' bridges frontend skills to chain architecture."
+                &quot;Velocity in backend logic increased by 40%. Unlocking &apos;Smart Contracts&apos; bridges frontend skills to chain architecture.&quot;
               </p>
             </div>
             <div className="flex items-end justify-between border-t border-white/10 pt-4 mt-2">
@@ -306,8 +306,8 @@ function CardShareContent({ theme, setTheme }: { theme: 'cyberpunk' | 'academic'
                 <span className="text-white text-xs font-bold font-display tracking-wide uppercase">PraxisGrove</span>
                 <span className="text-gray-500 text-[10px]">A Permissionless School</span>
               </div>
-              <div className="h-24 w-24 bg-white rounded">
-                <img alt="QR Code" className="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ZWvAyBrHZc0E7-3xBG89D30v81V13va7VWYVLB0k4t6d7iMicOX2dBlOVczLV_j1sEIgPKS-XTCNG6AjYYHTB8xb5rdXp9D5rUMSyQu2P6efFj26DpxFLq7K_VnSZsjbc8C5-mNUlQEBBgWPU5rVkx6MprQ1G0enhqEsFxR79u9cTrUR9C8uTSI3yq2Ny_LVdx4vRenDNP25IV5eHyp4OvK7VeE6xBEKHtHE7Onv-g6eDJ7MqPRLVKQrAP0IDxtgZ1LDnNPwHqCb" />
+              <div className="h-24 w-24 bg-white rounded relative">
+                <Image alt="QR Code" className="object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ZWvAyBrHZc0E7-3xBG89D30v81V13va7VWYVLB0k4t6d7iMicOX2dBlOVczLV_j1sEIgPKS-XTCNG6AjYYHTB8xb5rdXp9D5rUMSyQu2P6efFj26DpxFLq7K_VnSZsjbc8C5-mNUlQEBBgWPU5rVkx6MprQ1G0enhqEsFxR79u9cTrUR9C8uTSI3yq2Ny_LVdx4vRenDNP25IV5eHyp4OvK7VeE6xBEKHtHE7Onv-g6eDJ7MqPRLVKQrAP0IDxtgZ1LDnNPwHqCb" fill unoptimized />
               </div>
             </div>
           </div>
@@ -391,7 +391,7 @@ function CardShareContent({ theme, setTheme }: { theme: 'cyberpunk' | 'academic'
           <div className="p-4 rounded-xl bg-[#1c2127] border border-[#283039] relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#137fec] to-transparent"></div>
             <p className="text-gray-300 text-sm leading-relaxed font-normal">
-              <span className="text-[#137fec] font-bold">Insight:</span> Your velocity in backend logic has increased by <span className="text-white font-bold">40%</span> this week. Unlocking <span className="text-white font-bold">'Smart Contracts'</span> effectively bridges the gap between your established frontend skills and decentralized blockchain architecture.
+              <span className="text-[#137fec] font-bold">Insight:</span> Your velocity in backend logic has increased by <span className="text-white font-bold">40%</span> this week. Unlocking <span className="text-white font-bold">&apos;Smart Contracts&apos;</span> effectively bridges the gap between your established frontend skills and decentralized blockchain architecture.
             </p>
           </div>
         </div>

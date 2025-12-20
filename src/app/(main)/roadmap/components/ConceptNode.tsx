@@ -3,445 +3,199 @@
 import React, { memo, useCallback } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import type { NodeProps, Node } from '@xyflow/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
-  ChevronDown,
-  ChevronRight,
-  Clock,
+  Check,
   CheckCircle2,
-  Circle,
   Lock,
-  Play,
-  ExternalLink,
-  BookOpen,
-  Video,
-  FileText,
+  MoreVertical,
+  ArrowRight,
   Code,
+  ChevronRight,
+  Circle
 } from 'lucide-react';
-import type { RoadmapNodeData, NodeStatus, NodeCategory } from '../types';
+import type { RoadmapNodeData } from '../types';
 import { useRoadmapStore } from '../store';
+import { useUIStore } from '@/store/ui';
 
-/**
- * Type for ConceptNode props
- */
 type ConceptNodeProps = NodeProps<Node<RoadmapNodeData, 'concept'>>;
 
-/**
- * Status icon mapping
- */
-const StatusIcon = {
-  pending: Circle,
-  'in-progress': Play,
-  completed: CheckCircle2,
-  locked: Lock,
-} as const;
-
-/**
- * Status color mapping (Tailwind classes)
- */
-const statusColors = {
-  pending: {
-    bg: 'bg-slate-500/20 dark:bg-slate-400/20',
-    border: 'border-slate-500/50 dark:border-slate-400/50',
-    text: 'text-slate-600 dark:text-slate-300',
-    icon: 'text-slate-500 dark:text-slate-400',
-  },
-  'in-progress': {
-    bg: 'bg-blue-500/20 dark:bg-blue-400/20',
-    border: 'border-blue-500/50 dark:border-blue-400/50',
-    text: 'text-blue-600 dark:text-blue-300',
-    icon: 'text-blue-500 dark:text-blue-400',
-  },
-  completed: {
-    bg: 'bg-green-500/20 dark:bg-green-400/20',
-    border: 'border-green-500/50 dark:border-green-400/50',
-    text: 'text-green-600 dark:text-green-300',
-    icon: 'text-green-500 dark:text-green-400',
-  },
-  locked: {
-    bg: 'bg-gray-500/20 dark:bg-gray-400/20',
-    border: 'border-gray-500/50 dark:border-gray-400/50',
-    text: 'text-gray-500 dark:text-gray-400',
-    icon: 'text-gray-400 dark:text-gray-500',
-  },
-} as const;
-
-/**
- * Category color mapping
- */
-const categoryColors = {
-  foundation: 'from-amber-500/20 to-orange-500/20 dark:from-amber-500/30 dark:to-orange-500/30',
-  core: 'from-blue-500/20 to-indigo-500/20 dark:from-blue-500/30 dark:to-indigo-500/30',
-  advanced: 'from-purple-500/20 to-pink-500/20 dark:from-purple-500/30 dark:to-pink-500/30',
-  practice: 'from-green-500/20 to-teal-500/20 dark:from-green-500/30 dark:to-teal-500/30',
-  project: 'from-rose-500/20 to-red-500/20 dark:from-rose-500/30 dark:to-red-500/30',
-} as const;
-
-/**
- * Resource type icon mapping
- */
-const resourceIcons = {
-  video: Video,
-  article: FileText,
-  documentation: BookOpen,
-  exercise: Code,
-} as const;
-
-/**
- * Simple Markdown-like renderer
- */
-const renderMarkdown = (content: string): React.ReactNode => {
-  const lines = content.split('\n');
-  const elements: React.ReactNode[] = [];
-  let inCodeBlock = false;
-  let codeContent = '';
-
-  lines.forEach((line, index) => {
-    // Code block start/end
-    if (line.startsWith('```')) {
-      if (inCodeBlock) {
-        elements.push(
-          <pre
-            key={`code-${index}`}
-            className="my-2 overflow-x-auto rounded-md bg-slate-900/50 p-3 text-xs dark:bg-slate-800/50"
-          >
-            <code className="text-green-400">{codeContent.trim()}</code>
-          </pre>
-        );
-        codeContent = '';
-        inCodeBlock = false;
-      } else {
-        inCodeBlock = true;
-        // Language hint is available via line.slice(3).trim() if needed
-      }
-      return;
-    }
-
-    if (inCodeBlock) {
-      codeContent += line + '\n';
-      return;
-    }
-
-    // Headers
-    if (line.startsWith('# ')) {
-      elements.push(
-        <h1 key={index} className="mb-2 text-lg font-bold text-slate-900 dark:text-white">
-          {line.slice(2)}
-        </h1>
-      );
-      return;
-    }
-    if (line.startsWith('## ')) {
-      elements.push(
-        <h2 key={index} className="mb-2 mt-3 text-base font-semibold text-slate-800 dark:text-slate-100">
-          {line.slice(3)}
-        </h2>
-      );
-      return;
-    }
-    if (line.startsWith('### ')) {
-      elements.push(
-        <h3 key={index} className="mb-1 mt-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
-          {line.slice(4)}
-        </h3>
-      );
-      return;
-    }
-
-    // Blockquote
-    if (line.startsWith('> ')) {
-      elements.push(
-        <blockquote
-          key={index}
-          className="my-2 border-l-2 border-blue-500 pl-3 text-sm italic text-slate-600 dark:text-slate-400"
-        >
-          {line.slice(2)}
-        </blockquote>
-      );
-      return;
-    }
-
-    // List items
-    if (line.match(/^[-*] /)) {
-      elements.push(
-        <li key={index} className="ml-4 list-disc text-sm text-slate-700 dark:text-slate-300">
-          {renderInlineMarkdown(line.slice(2))}
-        </li>
-      );
-      return;
-    }
-
-    // Numbered list
-    if (line.match(/^\d+\. /)) {
-      elements.push(
-        <li key={index} className="ml-4 list-decimal text-sm text-slate-700 dark:text-slate-300">
-          {renderInlineMarkdown(line.replace(/^\d+\. /, ''))}
-        </li>
-      );
-      return;
-    }
-
-    // Table handling (simple)
-    if (line.startsWith('|')) {
-      if (line.includes('---')) return; // Skip separator line
-      const cells = line.split('|').filter(Boolean).map((cell) => cell.trim());
-      elements.push(
-        <div key={index} className="flex gap-2 text-xs">
-          {cells.map((cell, i) => (
-            <span
-              key={i}
-              className="flex-1 rounded bg-slate-100 px-2 py-1 dark:bg-slate-800"
-            >
-              {cell}
-            </span>
-          ))}
-        </div>
-      );
-      return;
-    }
-
-    // Empty line
-    if (line.trim() === '') {
-      elements.push(<div key={index} className="h-2" />);
-      return;
-    }
-
-    // Regular paragraph
-    elements.push(
-      <p key={index} className="text-sm text-slate-700 dark:text-slate-300">
-        {renderInlineMarkdown(line)}
-      </p>
-    );
-  });
-
-  return elements;
-};
-
-/**
- * Render inline markdown (bold, italic, code, links)
- */
-const renderInlineMarkdown = (text: string): React.ReactNode => {
-  // Replace inline code
-  const parts = text.split(/(`[^`]+`)/g);
-  return parts.map((part, i) => {
-    if (part.startsWith('`') && part.endsWith('`')) {
-      return (
-        <code
-          key={i}
-          className="rounded-sm bg-slate-200 px-1 py-0.5 font-mono text-xs dark:bg-slate-700"
-        >
-          {part.slice(1, -1)}
-        </code>
-      );
-    }
-    // Bold
-    const boldParts = part.split(/(\*\*[^*]+\*\*)/g);
-    return boldParts.map((bp, j) => {
-      if (bp.startsWith('**') && bp.endsWith('**')) {
-        return (
-          <strong key={`${i}-${j}`} className="font-semibold">
-            {bp.slice(2, -2)}
-          </strong>
-        );
-      }
-      return bp;
-    });
-  });
-};
-
-/**
- * ConceptNode Component
- */
 function ConceptNodeComponent({ id, data, selected }: ConceptNodeProps) {
   const toggleNodeExpanded = useRoadmapStore((s) => s.toggleNodeExpanded);
-  const toggleNodeCollapse = useRoadmapStore((s) => s.toggleNodeCollapse);
-
-  const nodeData = data as RoadmapNodeData;
+  const setAIChatConfig = useUIStore((state) => state.setAIChatConfig);
+  
   const {
     label,
-    description,
     status,
-    category,
-    duration,
-    tags,
-    isExpanded,
-    isCollapsed,
-    childIds,
-    resources,
-  } = nodeData;
+    objectives,
+    description,
+    isExpanded
+  } = data;
 
-  const colors = statusColors[status as NodeStatus];
-  const categoryGradient = categoryColors[category as NodeCategory];
-  const StatusIconComponent = StatusIcon[status as NodeStatus];
-  const hasChildren = childIds && childIds.length > 0;
+  const handleStartWithAI = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setAIChatConfig({ visible: true });
+  }, [setAIChatConfig]);
 
-  /**
-   * Handle expand/collapse details
-   */
-  const handleToggleExpand = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      toggleNodeExpanded(id);
-    },
-    [id, toggleNodeExpanded]
-  );
+  const handleToggleExpand = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleNodeExpanded(id);
+  }, [id, toggleNodeExpanded]);
 
-  /**
-   * Handle collapse/expand children
-   */
-  const handleToggleCollapse = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      toggleNodeCollapse(id);
-    },
-    [id, toggleNodeCollapse]
-  );
-
-  return (
-    <motion.div
-      className={`
-        relative min-w-[260px] max-w-[320px] overflow-hidden rounded-xl
-        border-2 bg-white/90 shadow-lg backdrop-blur-sm
-        transition-all duration-200
-        dark:bg-slate-900/90
-        ${colors.border}
-        ${selected ? 'ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-slate-900' : ''}
-      `}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.2 }}
-    >
-      {/* Category gradient bar */}
-      <div className={`h-1 w-full bg-gradient-to-r ${categoryGradient}`} />
-
-      {/* Header */}
-      <div
-        className={`flex items-center gap-3 p-3 ${colors.bg} cursor-pointer`}
-        onClick={handleToggleExpand}
-      >
-        {/* Status icon */}
-        <div className={`rounded-full p-1.5 ${colors.bg}`}>
-          <StatusIconComponent className={`h-4 w-4 ${colors.icon}`} />
-        </div>
-
-        {/* Title */}
-        <div className="flex-1 min-w-0">
-          <h3
-            className={`font-semibold truncate ${status === 'locked' ? 'text-gray-400 dark:text-gray-500' : 'text-slate-900 dark:text-white'}`}
-          >
-            {label}
-          </h3>
-          {duration && (
-            <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
-              <Clock className="h-3 w-3" />
-              <span>{duration} min</span>
+  // --- Variant: Completed ---
+  if (status === 'completed') {
+    return (
+      <div className="relative w-[320px] group transition-all duration-300 hover:scale-[1.02]">
+        <div className="relative w-full bg-[#161b22] border border-green-900/40 rounded-2xl shadow-2xl overflow-hidden group-hover:border-green-500/50 transition-colors duration-300">
+          {/* Header */}
+          <div className="px-5 py-4 border-b border-white/5 bg-gradient-to-r from-green-500/10 to-transparent flex justify-between items-start">
+            <div>
+              <h3 className="text-white font-bold text-lg leading-tight">{label}</h3>
+              <p className="text-slate-400 text-xs mt-1">Core syntax and logic</p>
             </div>
-          )}
+            <div className="bg-green-500/20 text-green-400 p-1.5 rounded-lg shadow-[0_0_10px_rgba(34,197,94,0.2)]">
+              <Check size={18} />
+            </div>
+          </div>
+          
+          {/* Body */}
+          <div className="p-2 space-y-1">
+            {(objectives || ['Variables & Data Types', 'Control Flow & Loops', 'Functions & Modules']).slice(0, 3).map((obj, i) => (
+              <div key={i} className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group/item opacity-60">
+                <CheckCircle2 className="text-green-500" size={18} />
+                <span className="text-sm text-slate-400 line-through">{obj}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer */}
+          <div className="px-4 py-3 bg-black/20 border-t border-white/5 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="h-1.5 w-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]"></div>
+              <span className="text-xs font-medium text-green-400">Completed</span>
+            </div>
+            <button className="text-xs text-slate-400 hover:text-white font-medium px-3 py-1.5 rounded hover:bg-white/5 transition-colors">
+              Review
+            </button>
+          </div>
+        </div>
+        
+        <Handle type="target" position={Position.Top} className="!h-3 !w-3 !border-2 !border-[#161b22] !bg-slate-600 opacity-0" />
+        <Handle type="source" position={Position.Bottom} className="!h-3 !w-3 !border-2 !border-[#161b22] !bg-green-500 opacity-0" />
+      </div>
+    );
+  }
+
+  // --- Variant: In Progress ---
+  if (status === 'in-progress') {
+    return (
+      <div className="relative w-[360px] group z-20">
+        {/* Glow Effect */}
+        <div className="absolute -inset-[1px] bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-40 group-hover:opacity-75 transition-opacity duration-500"></div>
+        
+        <div className="relative w-full bg-[#161b22] rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 flex flex-col">
+          {/* Header */}
+          <div className="relative px-5 py-5 border-b border-white/5 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/5 to-transparent"></div>
+            <div className="relative z-10 flex justify-between items-start">
+              <div>
+                <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 mb-2 border border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]">
+                  CURRENT MODULE
+                </span>
+                <h3 className="text-xl font-bold text-white tracking-tight">{label}</h3>
+              </div>
+              <div className="bg-blue-500/20 text-blue-400 p-2 rounded-xl border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                <Code size={24} />
+              </div>
+            </div>
+          </div>
+
+          {/* Body */}
+          <div className="p-2 space-y-1 bg-[#161b22]">
+            {(objectives || ['NumPy Arrays', 'Pandas DataFrames', 'Data Cleaning']).slice(0, 3).map((obj, i) => (
+              <button key={i} className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/5 transition-all group/item text-left">
+                <div className="flex items-center gap-3">
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center border transition-colors ${i === 0 ? 'bg-blue-500/20 text-blue-400 border-blue-500/20 group-hover/item:bg-blue-500 group-hover/item:text-white' : i === 1 ? 'bg-purple-500/20 text-purple-400 border-purple-500/20 group-hover/item:bg-purple-500 group-hover/item:text-white' : 'bg-white/5 text-slate-500 border-white/5 group-hover/item:border-white/20'}`}>
+                    <span className="text-[10px] font-bold">{i + 1}</span>
+                  </div>
+                  <span className={`text-sm font-medium transition-colors ${i < 2 ? 'text-slate-200 group-hover/item:text-white' : 'text-slate-400 group-hover/item:text-slate-200'}`}>
+                    {obj}
+                  </span>
+                </div>
+                <ChevronRight size={16} className={`text-slate-500 transition-all group-hover/item:translate-x-0.5 ${i === 0 ? 'group-hover/item:text-blue-400' : i === 1 ? 'group-hover/item:text-purple-400' : 'group-hover/item:text-slate-400'}`} />
+              </button>
+            ))}
+          </div>
+
+          {/* Footer */}
+          <div className="px-5 py-4 bg-black/20 border-t border-white/5 flex items-center justify-between gap-4">
+            <div className="flex flex-col gap-1 min-w-[80px]">
+              <div className="flex items-center gap-2">
+                <div className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></span>
+                </div>
+                <span className="text-[11px] font-bold text-blue-400 uppercase tracking-wide">In Progress</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={handleStartWithAI}
+                className="h-9 px-4 bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold rounded-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all flex items-center gap-2 hover:-translate-y-0.5"
+              >
+                <span>Start with AI</span>
+                <ArrowRight size={16} className="font-bold" />
+              </button>
+              <button className="h-9 w-9 flex items-center justify-center rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors">
+                <MoreVertical size={20} />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Expand indicator */}
-        <motion.div
-          animate={{ rotate: isExpanded ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <ChevronDown className="h-5 w-5 text-slate-400" />
-        </motion.div>
+        <Handle type="target" position={Position.Top} className="!h-3 !w-3 !border-2 !border-[#161b22] !bg-slate-600 opacity-0" />
+        <Handle type="source" position={Position.Bottom} className="!h-3 !w-3 !border-2 !border-[#161b22] !bg-blue-500 opacity-0" />
       </div>
+    );
+  }
 
-      {/* Tags */}
-      {tags && tags.length > 0 && (
-        <div className="flex flex-wrap gap-1 px-3 pb-2">
-          {tags.slice(0, 3).map((tag: string) => (
-            <span
-              key={tag}
-              className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-400"
-            >
-              {tag}
-            </span>
+  // --- Variant: Locked (Default) ---
+  return (
+    <div className="relative w-[320px] z-10">
+      <div className="relative w-full bg-[#161b22] border border-white/5 rounded-2xl shadow-xl overflow-hidden opacity-60 hover:opacity-100 transition-opacity duration-300 group">
+        {/* Header */}
+        <div className="px-5 py-4 border-b border-white/5 bg-white/[0.02] flex justify-between items-start">
+          <div>
+            <h3 className="text-slate-300 font-bold text-lg leading-tight group-hover:text-white transition-colors">{label}</h3>
+            <p className="text-slate-500 text-xs mt-1">Supervised Learning</p>
+          </div>
+          <div className="bg-white/5 text-slate-500 p-1.5 rounded-lg border border-white/5">
+            <Lock size={18} />
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="p-2 space-y-1 pointer-events-none grayscale opacity-60 blur-[1px] group-hover:blur-0 transition-all">
+          {(objectives || ['Linear Regression', 'Classification Models', 'Model Evaluation']).slice(0, 3).map((obj, i) => (
+            <div key={i} className="flex items-center gap-3 p-2 rounded-lg">
+              <Circle size={18} className="text-slate-600" />
+              <span className="text-sm text-slate-500">{obj}</span>
+            </div>
           ))}
         </div>
-      )}
 
-      {/* Expanded content */}
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="max-h-[300px] overflow-y-auto border-t border-slate-200 p-3 dark:border-slate-700">
-              {/* Description */}
-              <div className="prose prose-sm dark:prose-invert">
-                {renderMarkdown(description)}
-              </div>
+        {/* Footer */}
+        <div className="px-4 py-3 bg-black/20 border-t border-white/5 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="h-1.5 w-1.5 rounded-full bg-slate-600"></div>
+            <span className="text-xs font-medium text-slate-500">Locked</span>
+          </div>
+        </div>
+      </div>
 
-              {/* Resources */}
-              {resources && resources.length > 0 && (
-                <div className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-700">
-                  <h4 className="mb-2 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400">
-                    Resources
-                  </h4>
-                  <div className="space-y-1.5">
-                    {resources.map((resource: { title: string; url: string; type: 'video' | 'article' | 'documentation' | 'exercise' }, index: number) => {
-                      const IconComp = resourceIcons[resource.type];
-                      return (
-                        <a
-                          key={index}
-                          href={resource.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 rounded-md p-1.5 text-sm text-blue-600 transition-colors hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/30"
-                        >
-                          <IconComp className="h-4 w-4" />
-                          <span className="flex-1 truncate">{resource.title}</span>
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Collapse children button */}
-      {hasChildren && (
-        <button
-          onClick={handleToggleCollapse}
-          className={`
-            absolute -bottom-3 left-1/2 z-10 -translate-x-1/2
-            flex items-center gap-1 rounded-full border-2
-            bg-white px-2 py-0.5 text-xs font-medium shadow-md
-            transition-all hover:scale-105
-            dark:bg-slate-800
-            ${isCollapsed ? 'border-orange-400 text-orange-600 dark:text-orange-400' : 'border-slate-300 text-slate-600 dark:border-slate-600 dark:text-slate-400'}
-          `}
-        >
-          <ChevronRight
-            className={`h-3 w-3 transition-transform ${isCollapsed ? '' : 'rotate-90'}`}
-          />
-          {isCollapsed ? `Expand ${childIds.length}` : 'Collapse'}
-        </button>
-      )}
-
-      {/* Handles for connections */}
-      <Handle
-        type="target"
-        position={Position.Top}
-        className="!h-3 !w-3 !border-2 !border-white !bg-slate-400 dark:!bg-slate-500"
-      />
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        className="!h-3 !w-3 !border-2 !border-white !bg-blue-500"
-        style={{ bottom: hasChildren ? 12 : -6 }}
-      />
-    </motion.div>
+      <Handle type="target" position={Position.Top} className="!h-3 !w-3 !border-2 !border-[#161b22] !bg-slate-600 opacity-0" />
+      <Handle type="source" position={Position.Bottom} className="!h-3 !w-3 !border-2 !border-[#161b22] !bg-slate-600 opacity-0" />
+    </div>
   );
 }
 

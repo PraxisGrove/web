@@ -42,6 +42,13 @@ export const mockRoadmapNodes: RoadmapNode[] = [
       category: 'foundation',
       duration: 720,
       tags: ['全栈', 'Web开发', '学习路线'],
+      objectives: [
+        '掌握前端三大件：HTML、CSS、JavaScript',
+        '精通现代前端框架 React/Vue',
+        '掌握后端开发 Node.js/Python',
+        '理解数据库设计与优化',
+        '部署与运维基础'
+      ],
       childIds: ['frontend', 'backend', 'devops'],
     }),
   },
@@ -72,6 +79,11 @@ export const mockRoadmapNodes: RoadmapNode[] = [
       category: 'core',
       duration: 240,
       tags: ['前端', 'UI', '交互'],
+      objectives: [
+        '理解前端开发在 Web 应用中的角色',
+        '掌握 HTML/CSS/JS 核心技术栈',
+        '熟悉现代前端工程化流程'
+      ],
       parentId: 'root',
       childIds: ['html-css', 'javascript', 'react', 'state-management'],
     }),
@@ -248,6 +260,12 @@ function Counter() {
       category: 'core',
       duration: 80,
       tags: ['React', '框架', '组件化'],
+      objectives: [
+        '理解 React 组件化思想',
+        '掌握 JSX 语法与规则',
+        '熟练使用 useState 和 useEffect',
+        '理解 Props 和 State 数据流'
+      ],
       parentId: 'frontend',
       childIds: ['react-hooks', 'react-patterns'],
       resources: [
@@ -434,6 +452,12 @@ app.listen(3000);
       category: 'core',
       duration: 50,
       tags: ['Node.js', 'JavaScript', '服务器'],
+      objectives: [
+        '理解 Node.js 事件循环机制',
+        '掌握 CommonJS 与 ES Modules',
+        '使用 Express 构建 REST API',
+        '文件系统操作与流处理'
+      ],
       parentId: 'backend',
       childIds: [],
     }),

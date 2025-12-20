@@ -31,6 +31,8 @@ export interface RoadmapNodeData extends Record<string, unknown> {
   duration?: number;
   /** Tags for filtering/searching */
   tags?: string[];
+  /** Learning objectives for this node */
+  objectives?: string[];
   /** Whether the detail panel is expanded */
   isExpanded: boolean;
   /** Whether child nodes are collapsed (hidden) */
